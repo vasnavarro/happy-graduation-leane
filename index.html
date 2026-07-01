@@ -56,15 +56,14 @@
             width: 100%; height: 100%;
             background-image: url('kin.png'); 
             background-size: 400% 300%; 
-            background-position: 0% 100%; /* Side Idle row */
+            background-position: 0% 100%; 
             background-repeat: no-repeat;
             image-rendering: pixelated;
-            transform: scaleX(1); /* Facing right, towards Kayii */
+            transform: scaleX(1); 
             transition: transform 0.1s;
         }
 
         /* --- FISHING BACKGROUNDS --- */
-        /* These will be applied dynamically to the minigame UI */
         .bg-fishing {
             background-image: url('fishing.png');
             background-size: cover;
@@ -161,13 +160,13 @@
                 
                 <!-- Explicit Mobile Action Button -->
                 <button id="mobile-action-btn" class="no-select md:hidden bg-pastel-dark text-white font-bold py-4 px-12 rounded-xl shadow-md active:translate-y-[4px] active:shadow-none text-lg">
-                    Action Button
+                    Action
                 </button>
 
-                <!-- Instructions/Prompt area for Desktop (reusing existing prompt style) -->
+                <!-- Instructions/Prompt area for Desktop -->
                 <p class="hidden md:block text-slate-400 font-bold text-sm">Keyboard: WASD / Arrow Keys. Near Kero/Water, press 'SPACE' or Click Action.</p>
 
-                <!-- Existing Action Button (for desktop/original flow, works with Spacebar) -->
+                <!-- Existing Action Button (for desktop/original flow) -->
                 <button id="rpg-action-btn" class="hidden md:block bg-slate-300 text-slate-500 font-bold py-4 px-12 rounded-xl shadow-md transition-all text-lg opacity-50 cursor-not-allowed">
                     Action
                 </button>
@@ -175,7 +174,6 @@
 
             <!-- FISHING MINIGAME UI (Applied Backgrounds) -->
             <div id="game-ui" class="w-full h-full flex-col items-center justify-center z-10 hidden py-10 transition-all duration-300 bg-fishing border-4 border-white rounded-xl shadow-inner relative">
-                <!-- Background layer explicitly for the dynamic swap (to cover entire container) -->
                 <div class="absolute inset-0 game-bg-layer bg-fishing transition-opacity duration-1000 rounded-xl" id="game-bg-layer"></div>
 
                 <div class="relative z-20 w-full h-full flex flex-col items-center">
@@ -228,16 +226,115 @@
             <!-- Hero Section -->
             <section id="hero-section" class="min-h-screen flex flex-col items-center justify-center text-center p-6 relative w-full pt-20">
                 <div class="bg-white/70 backdrop-blur-md rounded-[3rem] p-10 md:p-16 shadow-2xl border border-white flex flex-col items-center">
+                    <div class="animate-float mb-8">
+                        <svg width="250" height="300" viewBox="0 0 300 350" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M150 200 Q150 280 130 340" stroke="#86efac" stroke-width="8" stroke-linecap="round"/>
+                            <path d="M150 200 Q180 260 185 335" stroke="#86efac" stroke-width="8" stroke-linecap="round"/>
+                            <path d="M150 200 Q110 250 100 330" stroke="#86efac" stroke-width="8" stroke-linecap="round"/>
+                            <path d="M90 270 Q150 300 210 270 Q150 240 90 270 Z" fill="#fbcfe8"/>
+                            <path d="M150 270 L120 330 M150 270 L180 330" stroke="#fbcfe8" stroke-width="10" stroke-linecap="round"/>
+                            <circle cx="150" cy="130" r="65" fill="#a855f7" opacity="0.8"/>
+                            <circle cx="80" cy="150" r="55" fill="#60a5fa" opacity="0.8"/>
+                            <circle cx="220" cy="150" r="55" fill="#8b5cf6" opacity="0.8"/>
+                            <circle cx="110" cy="90" r="50" fill="#c084fc" opacity="0.9"/>
+                            <circle cx="190" cy="90" r="50" fill="#3b82f6" opacity="0.9"/>
+                            <circle cx="150" cy="180" r="45" fill="#d8b4fe" opacity="0.9"/>
+                            <circle cx="85" cy="200" r="35" fill="#93c5fd" opacity="0.9"/>
+                            <circle cx="215" cy="200" r="35" fill="#a78bfa" opacity="0.9"/>
+                            <circle cx="150" cy="50" r="40" fill="#e9d5ff" opacity="0.95"/>
+                            <circle cx="90" cy="120" r="30" fill="#bfdbfe" opacity="0.95"/>
+                            <circle cx="210" cy="120" r="30" fill="#c4b5fd" opacity="0.95"/>
+                            <circle cx="150" cy="120" r="30" fill="#60a5fa" opacity="0.95"/>
+                            <circle cx="60" cy="90" r="20" fill="#d8b4fe" opacity="0.8"/>
+                            <circle cx="240" cy="90" r="20" fill="#93c5fd" opacity="0.8"/>
+                            <circle cx="190" cy="40" r="22" fill="#a855f7" opacity="0.8"/>
+                            <circle cx="110" cy="40" r="22" fill="#3b82f6" opacity="0.8"/>
+                            <circle cx="150" cy="130" r="8" fill="#fef08a"/>
+                            <circle cx="110" cy="90" r="7" fill="#fef08a"/>
+                            <circle cx="190" cy="90" r="7" fill="#fef08a"/>
+                            <circle cx="150" cy="50" r="6" fill="#fef08a"/>
+                            <circle cx="80" cy="150" r="7" fill="#fef08a"/>
+                            <circle cx="220" cy="150" r="7" fill="#fef08a"/>
+                            <circle cx="150" cy="180" r="6" fill="#fef08a"/>
+                            <circle cx="90" cy="120" r="5" fill="#fef08a"/>
+                            <circle cx="210" cy="120" r="5" fill="#fef08a"/>
+                            <circle cx="85" cy="200" r="5" fill="#fef08a"/>
+                            <circle cx="215" cy="200" r="5" fill="#fef08a"/>
+                            <path d="M40 120 L45 105 L50 120 L45 135 Z" fill="#fef08a"/>
+                            <path d="M260 140 L265 125 L270 140 L265 155 Z" fill="#fef08a"/>
+                            <path d="M150 5 L155 -10 L160 5 L155 20 Z" fill="#fef08a"/>
+                        </svg>
+                    </div>
                     <h1 class="font-heading text-5xl md:text-7xl font-bold text-pastel-dark mb-4 drop-shadow-sm">Congratulations!</h1>
                     <h2 class="text-2xl md:text-3xl text-slate-500 font-semibold">You did it, Kayii! 🎓</h2>
                 </div>
             </section>
-            <!-- Rest of content from previous version... -->
+
+            <!-- The Interactive Letter -->
+            <section id="letter-section" class="py-16 px-6 max-w-2xl mx-auto flex flex-col items-center w-full">
+                <div class="bg-white/80 backdrop-blur-md rounded-3xl p-8 w-full shadow-xl border border-white flex flex-col items-center">
+                    <h3 class="font-heading text-3xl font-semibold text-center mb-10 text-pastel-dark">A Letter For You</h3>
+                    <div id="envelope-container" class="envelope-container relative w-full max-w-md cursor-pointer group z-20">
+                        <div class="bg-blue-300 w-full h-48 rounded-t-xl absolute top-0 left-0 z-0"></div>
+                        <div class="letter-content absolute top-10 left-0 w-full px-4 z-10 drop-shadow-xl">
+                            <div class="letter-inner bg-white p-6 rounded-xl shadow-inner border border-blue-50 text-sm md:text-base">
+                                <p class="mb-4">Dear Kayii,</p>
+                                <p class="mb-4">I am so incredibly proud of you! All those late nights, stressful practicals, and hard work have finally paid off. You are officially a dentist! 🦷</p>
+                                <p class="mb-4">While I am still debugging code and surviving my IT classes, it is so inspiring to watch you clear this massive milestone. Whether we are gaming, watching our favorite shows, or just hanging out, you are the best Player 2 I could ask for. I can't wait to see what amazing things you do next!</p>
+                                <p class="font-semibold text-pastel-dark text-right">- Kero</p>
+                            </div>
+                        </div>
+                        <div class="bg-blue-200 w-full h-48 rounded-xl relative z-20 flex items-center justify-center shadow-lg transition-transform group-hover:scale-[1.02]">
+                            <span class="text-blue-500 font-bold tracking-widest uppercase opacity-50 select-none">Tap to open</span>
+                            <svg class="envelope-flap absolute top-0 left-0 w-full h-full drop-shadow-md pointer-events-none" preserveAspectRatio="none" viewBox="0 0 100 100"><polygon points="0,0 100,0 50,55" fill="#93C5FD" stroke="#60A5FA" stroke-width="1" stroke-linejoin="round"/></svg>
+                            <svg class="absolute bottom-0 left-0 w-full h-full pointer-events-none" preserveAspectRatio="none" viewBox="0 0 100 100">
+                                <polygon points="0,100 50,45 100,100" fill="#BFDBFE" stroke="#93C5FD" stroke-width="1" stroke-linejoin="round"/>
+                                <polygon points="0,0 0,100 50,45" fill="#DBEAFE" stroke="#93C5FD" stroke-width="1" stroke-linejoin="round"/>
+                                <polygon points="100,0 100,100 50,45" fill="#DBEAFE" stroke="#93C5FD" stroke-width="1" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="h-96 hidden md:block"></div>
+                    <div class="h-[28rem] block md:hidden"></div>
+                </div>
+            </section>
+
+            <!-- Our Co-op Team Section -->
+            <section id="coop-section" class="py-16 px-6 max-w-5xl mx-auto text-center relative z-10 w-full">
+                <div class="bg-white/80 backdrop-blur-md rounded-[3rem] p-10 shadow-xl border border-white">
+                    <h3 class="font-heading text-3xl font-semibold mb-4 text-pastel-dark tracking-wide">Our Co-op Team</h3>
+                    <p class="text-slate-500 mb-10 max-w-lg mx-auto">Like May and Cody (but with way less arguing and definitely no Book of Love), we make the ultimate team.</p>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="bg-white rounded-3xl shadow-lg border-2 border-white overflow-hidden transform transition hover:-translate-y-2"><div class="w-full aspect-square bg-slate-200 relative"><img src="us-1.jpg" alt="Us" class="w-full h-full object-cover"></div></div>
+                        <div class="bg-white rounded-3xl shadow-lg border-2 border-white overflow-hidden transform transition hover:-translate-y-2"><div class="w-full aspect-square bg-slate-200 relative"><img src="us-2.jpg" alt="Us" class="w-full h-full object-cover"></div></div>
+                        <div class="bg-white rounded-3xl shadow-lg border-2 border-white overflow-hidden transform transition hover:-translate-y-2"><div class="w-full aspect-square bg-slate-200 relative"><img src="us-3.jpg" alt="Us" class="w-full h-full object-cover"></div></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Our Memories Section -->
+            <section id="memories-section" class="py-16 px-6 max-w-5xl mx-auto text-center my-8 w-full">
+                <div class="bg-white/80 backdrop-blur-md rounded-[3rem] p-10 shadow-xl border border-white">
+                    <h3 class="font-heading text-3xl font-semibold mb-2 text-pastel-dark">Our Memories</h3>
+                    <p class="text-slate-500 mb-8">From epic boss fights to our favorite gaming and movie nights.</p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="aspect-video bg-slate-900 rounded-xl overflow-hidden shadow-md relative group flex items-center justify-center border-2 border-white"><video src="boss-fight.mp4" controls class="w-full h-full object-cover" poster="https://via.placeholder.com/640x360/1e293b/ffffff?text=Hit+Play!"></video></div>
+                        <div class="aspect-video bg-slate-200 rounded-xl overflow-hidden shadow-md relative group border-2 border-white"><img src="stardew-fishing.png" alt="Stardew Valley" class="w-full h-full object-cover group-hover:scale-105 transition duration-300"></div>
+                        <div class="aspect-video bg-slate-200 rounded-xl overflow-hidden shadow-md relative group border-2 border-white"><img src="https://via.placeholder.com/640x360?text=Upload+Memory" alt="Memory" class="w-full h-full object-cover group-hover:scale-105 transition duration-300"></div>
+                        <div class="aspect-video bg-slate-200 rounded-xl overflow-hidden shadow-md relative group border-2 border-white"><img src="https://via.placeholder.com/640x360?text=Upload+Memory" alt="Memory" class="w-full h-full object-cover group-hover:scale-105 transition duration-300"></div>
+                    </div>
+                </div>
+            </section>
+
+            <footer class="text-center py-10 text-slate-500 font-bold text-sm w-full backdrop-blur-sm">Designed by Angelo.</footer>
         </div>
     </div>
 
     <!-- Interactive Logic -->
     <script>
+        const envelopeContainer = document.getElementById('envelope-container');
+        envelopeContainer.addEventListener('click', () => { envelopeContainer.classList.toggle('open'); });
+
         // --- RPG & NPC VARIABLES ---
         const rpgContainer = document.getElementById('rpg-container');
         const rpgPlayer = document.getElementById('rpg-player');
@@ -272,13 +369,18 @@
         let rpgActive = true;
         let pX = 60; let pY = 120; // Initialize correctly based on CSS
         const speed = 3.5;
-        const keys = { w: false, a: false, s: false, d: false, ArrowUp: false, ArrowLeft: false, ArrowDown: false, ArrowRight: false, " ": false };
+        // NOTE: Keys are all lowercase now to ignore Caps Lock!
+        const keys = { w: false, a: false, s: false, d: false, arrowup: false, arrowleft: false, arrowdown: false, arrowright: false, " ": false };
 
         window.addEventListener('keydown', (e) => { 
-            if(rpgActive && keys.hasOwnProperty(e.key)) keys[e.key] = true; 
-            if(rpgActive && dialogueActive && e.key === " ") triggerAction();
+            const key = e.key.toLowerCase();
+            if(rpgActive && keys.hasOwnProperty(key)) keys[key] = true; 
+            if(dialogueActive && key === " ") triggerAction();
         });
-        window.addEventListener('keyup', (e) => { if(keys.hasOwnProperty(e.key)) keys[e.key] = false; });
+        window.addEventListener('keyup', (e) => { 
+            const key = e.key.toLowerCase();
+            if(keys.hasOwnProperty(key)) keys[key] = false; 
+        });
 
         // Bind mobile D-Pad buttons
         const bindBtn = (id, k) => {
@@ -289,8 +391,17 @@
         };
         bindBtn('btn-up', 'w'); bindBtn('btn-left', 'a'); bindBtn('btn-down', 's'); bindBtn('btn-right', 'd');
         
-        // Mobile Action Button logic
-        mobileActionBtn.addEventListener('touchstart', (e) => { e.preventDefault(); if(rpgActive) triggerAction(); });
+        // --- MOBILE FIX: Button listener checks both states! ---
+        mobileActionBtn.addEventListener('touchstart', (e) => { 
+            e.preventDefault(); 
+            if(rpgActive || dialogueActive) triggerAction(); 
+        });
+        
+        // --- MOBILE FIX: Tap dialogue box directly to advance! ---
+        dialogueBox.addEventListener('touchstart', (e) => {
+            e.preventDefault();
+            if(dialogueActive) triggerAction();
+        });
 
         // Player Animation Vars
         let frameCount = 0; let animIndex = 0; let currentFacing = 0; 
@@ -315,10 +426,11 @@
                 let isMoving = false;
                 let moveX = 0; let moveY = 0;
 
-                if (keys.s || keys.ArrowDown) { moveY += speed; isMoving = true; currentFacing = 0; playerSprite.style.transform = 'scaleX(1)'; }
-                else if (keys.w || keys.ArrowUp) { moveY -= speed; isMoving = true; currentFacing = 50; playerSprite.style.transform = 'scaleX(1)'; }
-                else if (keys.a || keys.ArrowLeft) { moveX -= speed; isMoving = true; currentFacing = 100; playerSprite.style.transform = 'scaleX(-1)'; }
-                else if (keys.d || keys.ArrowRight) { moveX += speed; isMoving = true; currentFacing = 100; playerSprite.style.transform = 'scaleX(1)'; }
+                // Check lowercase keys for movement
+                if (keys.s || keys.arrowdown) { moveY += speed; isMoving = true; currentFacing = 0; playerSprite.style.transform = 'scaleX(1)'; }
+                else if (keys.w || keys.arrowup) { moveY -= speed; isMoving = true; currentFacing = 50; playerSprite.style.transform = 'scaleX(1)'; }
+                else if (keys.a || keys.arrowleft) { moveX -= speed; isMoving = true; currentFacing = 100; playerSprite.style.transform = 'scaleX(-1)'; }
+                else if (keys.d || keys.arrowright) { moveX += speed; isMoving = true; currentFacing = 100; playerSprite.style.transform = 'scaleX(1)'; }
 
                 pX += moveX; pY += moveY;
 
@@ -369,13 +481,13 @@
         
         function enableActionBtn(text) {
             actionBtnUI.innerText = text; actionBtnUI.classList.remove('bg-slate-300', 'text-slate-500', 'opacity-50', 'cursor-not-allowed'); actionBtnUI.classList.add('bg-pastel-dark', 'text-white', 'hover:bg-blue-500');
-            mobileActionBtn.innerText = text; mobileActionBtn.classList.remove('opacity-50');
+            mobileActionBtn.innerText = text; mobileActionBtn.classList.remove('opacity-50', 'bg-pastel-dark'); mobileActionBtn.classList.add('bg-blue-500');
             actionPrompt.classList.remove('opacity-0');
         }
         
         function disableActionBtn() {
             actionBtnUI.innerText = "Action"; actionBtnUI.classList.add('bg-slate-300', 'text-slate-500', 'opacity-50', 'cursor-not-allowed'); actionBtnUI.classList.remove('bg-pastel-dark', 'text-white', 'hover:bg-blue-500');
-            mobileActionBtn.innerText = "Action"; mobileActionBtn.classList.add('opacity-50');
+            mobileActionBtn.innerText = "Action"; mobileActionBtn.classList.add('opacity-50', 'bg-pastel-dark'); mobileActionBtn.classList.remove('bg-blue-500');
             actionPrompt.classList.add('opacity-0');
         }
 
@@ -432,10 +544,7 @@
         let barPos = 0; let barVelocity = 0; let fishPos = 10; let fishTarget = 20; let progress = 15;    
 
         function startFishingMinigame() {
-            // cinematicSuccess is hidden, ensure its layer starts right
             cinematicBgLayer.classList.remove('bg-fishing'); cinematicBgLayer.classList.add('bg-caught');
-            
-            // gameUI Layer must be bg-fishing
             gameBgLayer.classList.remove('bg-caught'); gameBgLayer.classList.add('bg-fishing');
 
             fishingActive = true; isHolding = false; barPos = 0; barVelocity = 0; fishPos = 10; progress = 15;
@@ -474,11 +583,9 @@
             document.getElementById('game-ui').classList.remove('flex'); document.getElementById('game-ui').classList.add('hidden');
             
             if (won) {
-                // CINEMATIC SUCCESS flow
                 cinematicSuccess.classList.remove('hidden'); 
                 cinematicSuccess.classList.remove('opacity-0'); cinematicSuccess.classList.add('opacity-100');
                 
-                // Countdown and Reveal
                 let countdown = 10;
                 cinematicTimerDisplay.innerText = countdown;
                 let cinematicTimerId = setInterval(() => {
@@ -493,22 +600,17 @@
         }
 
         function revealCongratulations() {
-            // Final Unlock: Colour transition happens previously on Dialogue end
             document.getElementById('secret-content').classList.add('revealed');
             const scrollHint = document.getElementById('scroll-hint');
             scrollHint.classList.remove('hidden');
             setTimeout(() => scrollHint.classList.remove('opacity-0'), 100);
             
-            // 2s after cinematic ends, fade it out and scroll
             setTimeout(() => {
                 cinematicSuccess.classList.remove('opacity-100'); cinematicSuccess.classList.add('opacity-0');
                 setTimeout(() => cinematicSuccess.classList.add('hidden'), 1000); 
 
-                // Scroll to secret inner content instead of just hero
                 const secretInner = document.querySelector('.secret-inner');
-                secretInner.style.overflow = 'visible'; // Force visibility for smooth scroll
-                
-                // Scroll specifically to the top of the newly revealed content inner wrapper
+                secretInner.style.overflow = 'visible'; 
                 secretInner.scrollIntoView({ behavior: 'smooth', block: 'start' });
             }, 2000); 
         }
