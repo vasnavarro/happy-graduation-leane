@@ -6,7 +6,7 @@
     <title>Congratulations Kayii!</title>
     <!-- Tailwind CSS for rapid styling -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts for a cozy, modern aesthetic -->
+    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
     
     <script>
@@ -39,16 +39,38 @@
         }
     </script>
     <style>
-        /* Smooth scrolling for anchor links */
         html { scroll-behavior: smooth; }
         
         /* The "Once We Were Us" Cinematic Black & White Theme */
         body {
             transition: filter 3s ease-in-out, background-color 3s ease-in-out;
+            background-color: #f8fafc;
         }
         .bw-theme {
             filter: grayscale(100%) contrast(1.1);
-            background-color: #f8fafc; /* Slightly muted background for B&W */
+        }
+
+        /* --- THE FLOWER BOMBARDMENT BACKGROUNDS --- */
+        @keyframes pan-bg {
+            0% { background-position: 0px 0px; }
+            100% { background-position: 300px 300px; }
+        }
+        @keyframes pan-bg-reverse {
+            0% { background-position: 0px 0px; }
+            100% { background-position: -450px -450px; }
+        }
+        
+        .floral-bg-1 {
+            background-image: url("data:image/svg+xml,%3Csvg width='300' height='300' xmlns='http://www.w3.org/2000/svg'%3E%3Cg opacity='0.5'%3E%3C!-- Blue --%3E%3Ccircle cx='50' cy='30' r='15' fill='%2360a5fa'/%3E%3Ccircle cx='70' cy='30' r='15' fill='%2360a5fa'/%3E%3Ccircle cx='40' cy='50' r='15' fill='%2360a5fa'/%3E%3Ccircle cx='80' cy='50' r='15' fill='%2360a5fa'/%3E%3Ccircle cx='50' cy='70' r='15' fill='%2360a5fa'/%3E%3Ccircle cx='70' cy='70' r='15' fill='%2360a5fa'/%3E%3Ccircle cx='60' cy='50' r='12' fill='%23fef08a'/%3E%3C!-- Purple --%3E%3Ccircle cx='200' cy='180' r='20' fill='%23a855f7'/%3E%3Ccircle cx='230' cy='180' r='20' fill='%23a855f7'/%3E%3Ccircle cx='185' cy='210' r='20' fill='%23a855f7'/%3E%3Ccircle cx='245' cy='210' r='20' fill='%23a855f7'/%3E%3Ccircle cx='200' cy='240' r='20' fill='%23a855f7'/%3E%3Ccircle cx='230' cy='240' r='20' fill='%23a855f7'/%3E%3Ccircle cx='215' cy='210' r='15' fill='%23fef08a'/%3E%3C!-- Lilac --%3E%3Ccircle cx='260' cy='40' r='12' fill='%23d8b4fe'/%3E%3Ccircle cx='280' cy='40' r='12' fill='%23d8b4fe'/%3E%3Ccircle cx='250' cy='60' r='12' fill='%23d8b4fe'/%3E%3Ccircle cx='290' cy='60' r='12' fill='%23d8b4fe'/%3E%3Ccircle cx='260' cy='80' r='12' fill='%23d8b4fe'/%3E%3Ccircle cx='280' cy='80' r='12' fill='%23d8b4fe'/%3E%3Ccircle cx='270' cy='60' r='8' fill='%23fef08a'/%3E%3C!-- Cyan --%3E%3Ccircle cx='80' cy='200' r='18' fill='%2393c5fd'/%3E%3Ccircle cx='110' cy='200' r='18' fill='%2393c5fd'/%3E%3Ccircle cx='65' cy='230' r='18' fill='%2393c5fd'/%3E%3Ccircle cx='125' cy='230' r='18' fill='%2393c5fd'/%3E%3Ccircle cx='80' cy='260' r='18' fill='%2393c5fd'/%3E%3Ccircle cx='110' cy='260' r='18' fill='%2393c5fd'/%3E%3Ccircle cx='95' cy='230' r='12' fill='%23fef08a'/%3E%3C/g%3E%3C/svg%3E");
+            background-size: 300px 300px;
+            animation: pan-bg 25s linear infinite;
+        }
+        
+        .floral-bg-2 {
+            background-image: url("data:image/svg+xml,%3Csvg width='300' height='300' xmlns='http://www.w3.org/2000/svg'%3E%3Cg opacity='0.35'%3E%3C!-- Blue --%3E%3Ccircle cx='50' cy='30' r='15' fill='%2360a5fa'/%3E%3Ccircle cx='70' cy='30' r='15' fill='%2360a5fa'/%3E%3Ccircle cx='40' cy='50' r='15' fill='%2360a5fa'/%3E%3Ccircle cx='80' cy='50' r='15' fill='%2360a5fa'/%3E%3Ccircle cx='50' cy='70' r='15' fill='%2360a5fa'/%3E%3Ccircle cx='70' cy='70' r='15' fill='%2360a5fa'/%3E%3Ccircle cx='60' cy='50' r='12' fill='%23fef08a'/%3E%3C!-- Purple --%3E%3Ccircle cx='200' cy='180' r='20' fill='%23a855f7'/%3E%3Ccircle cx='230' cy='180' r='20' fill='%23a855f7'/%3E%3Ccircle cx='185' cy='210' r='20' fill='%23a855f7'/%3E%3Ccircle cx='245' cy='210' r='20' fill='%23a855f7'/%3E%3Ccircle cx='200' cy='240' r='20' fill='%23a855f7'/%3E%3Ccircle cx='230' cy='240' r='20' fill='%23a855f7'/%3E%3Ccircle cx='215' cy='210' r='15' fill='%23fef08a'/%3E%3C!-- Lilac --%3E%3Ccircle cx='260' cy='40' r='12' fill='%23d8b4fe'/%3E%3Ccircle cx='280' cy='40' r='12' fill='%23d8b4fe'/%3E%3Ccircle cx='250' cy='60' r='12' fill='%23d8b4fe'/%3E%3Ccircle cx='290' cy='60' r='12' fill='%23d8b4fe'/%3E%3Ccircle cx='260' cy='80' r='12' fill='%23d8b4fe'/%3E%3Ccircle cx='280' cy='80' r='12' fill='%23d8b4fe'/%3E%3Ccircle cx='270' cy='60' r='8' fill='%23fef08a'/%3E%3C!-- Cyan --%3E%3Ccircle cx='80' cy='200' r='18' fill='%2393c5fd'/%3E%3Ccircle cx='110' cy='200' r='18' fill='%2393c5fd'/%3E%3Ccircle cx='65' cy='230' r='18' fill='%2393c5fd'/%3E%3Ccircle cx='125' cy='230' r='18' fill='%2393c5fd'/%3E%3Ccircle cx='80' cy='260' r='18' fill='%2393c5fd'/%3E%3Ccircle cx='110' cy='260' r='18' fill='%2393c5fd'/%3E%3Ccircle cx='95' cy='230' r='12' fill='%23fef08a'/%3E%3C/g%3E%3C/svg%3E");
+            background-size: 450px 450px;
+            transform: rotate(180deg);
+            animation: pan-bg-reverse 35s linear infinite;
         }
 
         /* The Secret Expansion Trick */
@@ -63,7 +85,7 @@
             opacity: 1;
         }
         .secret-inner {
-            overflow: hidden; /* Keeps content contained while expanding */
+            overflow: hidden; 
         }
 
         /* Envelope Animations */
@@ -75,8 +97,6 @@
             transform: rotateX(180deg);
             z-index: 0;
         }
-        
-        /* Letter Slide Animation */
         .letter-content {
             display: grid;
             grid-template-rows: 0fr;
@@ -89,18 +109,11 @@
             opacity: 1;
             transform: translateY(150px); 
         }
-        .letter-inner { 
-            overflow: hidden; 
-        }
-
-        /* Prevent text selection while furiously tapping the fishing button */
-        .no-select {
-            user-select: none;
-            -webkit-user-select: none;
-        }
+        .letter-inner { overflow: hidden; }
+        .no-select { user-select: none; -webkit-user-select: none; }
     </style>
 </head>
-<body class="bg-pastel-light font-body text-slate-700 overflow-x-hidden bw-theme" id="main-body">
+<body class="font-body text-slate-700 overflow-x-hidden bw-theme" id="main-body">
 
     <!-- 1. The Gatekeeper: REAL Stardew Valley Fishing Minigame -->
     <section id="gatekeeper-section" class="min-h-screen flex flex-col items-center justify-center px-6 relative z-20">
@@ -108,37 +121,25 @@
         <p id="fishing-instructions" class="text-slate-500 mb-8 text-center">Tap & Hold the button to raise the green bar. Keep the fish inside to prove you're ready!</p>
 
         <div class="bg-blue-100 rounded-3xl p-8 border-4 border-blue-200 shadow-xl relative h-96 w-full max-w-lg flex flex-col items-center justify-center">
-            
-            <!-- Minigame UI -->
             <div id="game-ui" class="w-full h-full flex flex-col items-center justify-center z-10 hidden">
-                
                 <div class="flex flex-row h-48 w-full justify-center gap-4 mb-8">
-                    <!-- The Main Fishing Track -->
                     <div class="relative w-12 h-full bg-blue-900 rounded-lg overflow-hidden border-2 border-slate-300 shadow-inner">
-                        <!-- The Catch Bar (Green) -->
                         <div id="catch-bar" class="absolute w-full h-[30%] bg-green-400/80 transition-colors duration-150" style="bottom: 0%;"></div>
-                        <!-- The Fish -->
                         <div id="fish-icon" class="absolute w-full h-8 text-3xl flex items-center justify-center select-none" style="bottom: 10%;">🐟</div>
                     </div>
-
-                    <!-- The Progress Bar (Right side) -->
                     <div class="relative w-5 h-full bg-slate-800 rounded-full overflow-hidden border-2 border-slate-600">
                         <div id="progress-fill" class="absolute bottom-0 w-full bg-green-500 transition-all duration-100" style="height: 15%;"></div>
                     </div>
                 </div>
-
-                <!-- Hold Button -->
                 <button id="reel-action-btn" class="no-select bg-green-500 text-white font-bold py-4 px-12 rounded-full shadow-[0_6px_0_#166534] active:shadow-[0_0px_0_#166534] active:translate-y-[6px] transform transition-all cursor-pointer text-lg">
                     🎣 HOLD TO REEL
                 </button>
             </div>
 
-            <!-- Start Button -->
             <button id="cast-btn" class="bg-pastel-dark hover:bg-blue-500 text-white font-bold py-4 px-10 rounded-full shadow-lg transform transition hover:-translate-y-1 z-10 text-lg">
                 Cast Line
             </button>
 
-            <!-- Result Messages -->
             <div id="fish-result" class="hidden flex-col items-center z-10 bg-white/95 p-6 rounded-2xl shadow-xl border-2 border-green-300">
                 <div class="text-5xl mb-2">✨</div>
                 <h4 class="font-heading font-bold text-2xl text-green-600 mb-1">Perfect Catch!</h4>
@@ -151,12 +152,9 @@
                 <p class="text-slate-600 text-sm">Just seaweed this time.</p>
                 <button onclick="resetFishing()" class="mt-4 text-sm text-pastel-dark underline font-bold">Cast again?</button>
             </div>
-
-            <!-- Decorative Water -->
             <div class="absolute bottom-0 left-0 w-full h-1/3 bg-blue-200/50 rounded-t-[100%] animate-pulse-slow z-0 pointer-events-none"></div>
         </div>
         
-        <!-- Down Arrow (Hidden initially) -->
         <div id="scroll-hint" class="mt-12 text-pastel-dark animate-bounce opacity-0 transition-opacity duration-1000 hidden">
             <svg class="w-10 h-10 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
@@ -165,163 +163,170 @@
     </section>
 
     <!-- 2. The Hidden Reward: Expands upon winning -->
-    <div id="secret-content" class="secret-wrapper w-full bg-pastel-light">
-        <div class="secret-inner w-full flex flex-col items-center">
+    <div id="secret-content" class="secret-wrapper w-full relative">
+        
+        <!-- THE FLOWER BOMBARDMENT LAYERS -->
+        <div class="absolute inset-0 floral-bg-1 z-0 pointer-events-none"></div>
+        <div class="absolute inset-0 floral-bg-2 z-0 pointer-events-none"></div>
+        
+        <div class="secret-inner w-full flex flex-col items-center relative z-10">
             
-            <!-- Hero Section with New Lush Bouquet -->
+            <!-- Hero Section with Frosted Glass -->
             <section id="hero-section" class="min-h-screen flex flex-col items-center justify-center text-center p-6 relative w-full pt-20">
-                <div class="animate-float mb-8">
-                    <!-- Grand Blue/Purple Bouquet SVG -->
-                    <svg width="250" height="300" viewBox="0 0 300 350" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <!-- Stems -->
-                        <path d="M150 200 Q150 280 130 340" stroke="#86efac" stroke-width="8" stroke-linecap="round"/>
-                        <path d="M150 200 Q180 260 185 335" stroke="#86efac" stroke-width="8" stroke-linecap="round"/>
-                        <path d="M150 200 Q110 250 100 330" stroke="#86efac" stroke-width="8" stroke-linecap="round"/>
-
-                        <!-- Ribbon/Wrapper -->
-                        <path d="M90 270 Q150 300 210 270 Q150 240 90 270 Z" fill="#fbcfe8"/>
-                        <path d="M150 270 L120 330 M150 270 L180 330" stroke="#fbcfe8" stroke-width="10" stroke-linecap="round"/>
-
-                        <!-- Background large blooms -->
-                        <circle cx="150" cy="130" r="65" fill="#a855f7" opacity="0.8"/> <!-- Purple -->
-                        <circle cx="80" cy="150" r="55" fill="#60a5fa" opacity="0.8"/> <!-- Blue -->
-                        <circle cx="220" cy="150" r="55" fill="#8b5cf6" opacity="0.8"/> <!-- Violet -->
-
-                        <!-- Mid blooms -->
-                        <circle cx="110" cy="90" r="50" fill="#c084fc" opacity="0.9"/> <!-- Light Purple -->
-                        <circle cx="190" cy="90" r="50" fill="#3b82f6" opacity="0.9"/> <!-- Royal Blue -->
-                        <circle cx="150" cy="180" r="45" fill="#d8b4fe" opacity="0.9"/> <!-- Lilac -->
-                        <circle cx="85" cy="200" r="35" fill="#93c5fd" opacity="0.9"/> <!-- Light Blue -->
-                        <circle cx="215" cy="200" r="35" fill="#a78bfa" opacity="0.9"/> <!-- Soft Violet -->
-
-                        <!-- Top small blooms/clusters -->
-                        <circle cx="150" cy="50" r="40" fill="#e9d5ff" opacity="0.95"/> <!-- Very Light Purple -->
-                        <circle cx="90" cy="120" r="30" fill="#bfdbfe" opacity="0.95"/>
-                        <circle cx="210" cy="120" r="30" fill="#c4b5fd" opacity="0.95"/>
-                        <circle cx="150" cy="120" r="30" fill="#60a5fa" opacity="0.95"/>
-                        
-                        <!-- Tiny decorative petals/dots -->
-                        <circle cx="60" cy="90" r="20" fill="#d8b4fe" opacity="0.8"/>
-                        <circle cx="240" cy="90" r="20" fill="#93c5fd" opacity="0.8"/>
-                        <circle cx="190" cy="40" r="22" fill="#a855f7" opacity="0.8"/>
-                        <circle cx="110" cy="40" r="22" fill="#3b82f6" opacity="0.8"/>
-
-                        <!-- Flower Centers (Yellow dots) -->
-                        <circle cx="150" cy="130" r="8" fill="#fef08a"/>
-                        <circle cx="110" cy="90" r="7" fill="#fef08a"/>
-                        <circle cx="190" cy="90" r="7" fill="#fef08a"/>
-                        <circle cx="150" cy="50" r="6" fill="#fef08a"/>
-                        <circle cx="80" cy="150" r="7" fill="#fef08a"/>
-                        <circle cx="220" cy="150" r="7" fill="#fef08a"/>
-                        <circle cx="150" cy="180" r="6" fill="#fef08a"/>
-                        <circle cx="90" cy="120" r="5" fill="#fef08a"/>
-                        <circle cx="210" cy="120" r="5" fill="#fef08a"/>
-                        <circle cx="85" cy="200" r="5" fill="#fef08a"/>
-                        <circle cx="215" cy="200" r="5" fill="#fef08a"/>
-
-                        <!-- Floating Sparkles/Leaves -->
-                        <path d="M40 120 L45 105 L50 120 L45 135 Z" fill="#fef08a"/>
-                        <path d="M260 140 L265 125 L270 140 L265 155 Z" fill="#fef08a"/>
-                        <path d="M150 5 L155 -10 L160 5 L155 20 Z" fill="#fef08a"/>
-                    </svg>
-                </div>
                 
-                <h1 class="font-heading text-5xl md:text-7xl font-bold text-pastel-dark mb-4 drop-shadow-sm">
-                    Congratulations!
-                </h1>
-                <h2 class="text-2xl md:text-3xl text-slate-500 font-semibold mb-8">
-                    You did it, Kayii! 🎓
-                </h2>
+                <!-- Frosted Glass Container to protect readability -->
+                <div class="bg-white/70 backdrop-blur-md rounded-[3rem] p-10 md:p-16 shadow-2xl border border-white flex flex-col items-center">
+                    
+                    <div class="animate-float mb-8">
+                        <!-- Grand Blue/Purple Bouquet SVG -->
+                        <svg width="250" height="300" viewBox="0 0 300 350" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M150 200 Q150 280 130 340" stroke="#86efac" stroke-width="8" stroke-linecap="round"/>
+                            <path d="M150 200 Q180 260 185 335" stroke="#86efac" stroke-width="8" stroke-linecap="round"/>
+                            <path d="M150 200 Q110 250 100 330" stroke="#86efac" stroke-width="8" stroke-linecap="round"/>
+                            <path d="M90 270 Q150 300 210 270 Q150 240 90 270 Z" fill="#fbcfe8"/>
+                            <path d="M150 270 L120 330 M150 270 L180 330" stroke="#fbcfe8" stroke-width="10" stroke-linecap="round"/>
+
+                            <circle cx="150" cy="130" r="65" fill="#a855f7" opacity="0.8"/>
+                            <circle cx="80" cy="150" r="55" fill="#60a5fa" opacity="0.8"/>
+                            <circle cx="220" cy="150" r="55" fill="#8b5cf6" opacity="0.8"/>
+
+                            <circle cx="110" cy="90" r="50" fill="#c084fc" opacity="0.9"/>
+                            <circle cx="190" cy="90" r="50" fill="#3b82f6" opacity="0.9"/>
+                            <circle cx="150" cy="180" r="45" fill="#d8b4fe" opacity="0.9"/>
+                            <circle cx="85" cy="200" r="35" fill="#93c5fd" opacity="0.9"/>
+                            <circle cx="215" cy="200" r="35" fill="#a78bfa" opacity="0.9"/>
+
+                            <circle cx="150" cy="50" r="40" fill="#e9d5ff" opacity="0.95"/>
+                            <circle cx="90" cy="120" r="30" fill="#bfdbfe" opacity="0.95"/>
+                            <circle cx="210" cy="120" r="30" fill="#c4b5fd" opacity="0.95"/>
+                            <circle cx="150" cy="120" r="30" fill="#60a5fa" opacity="0.95"/>
+                            
+                            <circle cx="60" cy="90" r="20" fill="#d8b4fe" opacity="0.8"/>
+                            <circle cx="240" cy="90" r="20" fill="#93c5fd" opacity="0.8"/>
+                            <circle cx="190" cy="40" r="22" fill="#a855f7" opacity="0.8"/>
+                            <circle cx="110" cy="40" r="22" fill="#3b82f6" opacity="0.8"/>
+
+                            <circle cx="150" cy="130" r="8" fill="#fef08a"/>
+                            <circle cx="110" cy="90" r="7" fill="#fef08a"/>
+                            <circle cx="190" cy="90" r="7" fill="#fef08a"/>
+                            <circle cx="150" cy="50" r="6" fill="#fef08a"/>
+                            <circle cx="80" cy="150" r="7" fill="#fef08a"/>
+                            <circle cx="220" cy="150" r="7" fill="#fef08a"/>
+                            <circle cx="150" cy="180" r="6" fill="#fef08a"/>
+                            <circle cx="90" cy="120" r="5" fill="#fef08a"/>
+                            <circle cx="210" cy="120" r="5" fill="#fef08a"/>
+                            <circle cx="85" cy="200" r="5" fill="#fef08a"/>
+                            <circle cx="215" cy="200" r="5" fill="#fef08a"/>
+
+                            <path d="M40 120 L45 105 L50 120 L45 135 Z" fill="#fef08a"/>
+                            <path d="M260 140 L265 125 L270 140 L265 155 Z" fill="#fef08a"/>
+                            <path d="M150 5 L155 -10 L160 5 L155 20 Z" fill="#fef08a"/>
+                        </svg>
+                    </div>
+                    
+                    <h1 class="font-heading text-5xl md:text-7xl font-bold text-pastel-dark mb-4 drop-shadow-sm">
+                        Congratulations!
+                    </h1>
+                    <h2 class="text-2xl md:text-3xl text-slate-500 font-semibold">
+                        You did it, Kayii! 🎓
+                    </h2>
+                </div>
             </section>
 
             <!-- The Interactive Letter -->
             <section id="letter-section" class="py-16 px-6 max-w-2xl mx-auto flex flex-col items-center w-full">
-                <h3 class="font-heading text-3xl font-semibold text-center mb-10 text-pastel-dark">A Letter For You</h3>
-                
-                <div id="envelope-container" class="envelope-container relative w-full max-w-lg cursor-pointer group z-20">
-                    <div class="bg-blue-300 w-full h-48 rounded-t-xl absolute top-0 left-0 z-0"></div>
+                <div class="bg-white/80 backdrop-blur-md rounded-3xl p-8 w-full shadow-xl border border-white flex flex-col items-center">
+                    <h3 class="font-heading text-3xl font-semibold text-center mb-10 text-pastel-dark">A Letter For You</h3>
                     
-                    <div class="letter-content absolute top-10 left-0 w-full px-4 z-10 drop-shadow-xl">
-                        <div class="letter-inner bg-white p-6 md:p-8 rounded-xl shadow-inner border border-blue-50">
-                            <p class="mb-4">Dear Kayii,</p>
-                            <p class="mb-4">
-                                I am so incredibly proud of you! All those late nights, stressful practicals, and hard work have finally paid off. You are officially a dentist! 🦷
-                            </p>
-                            <p class="mb-4">
-                                While I am still debugging code and surviving my IT classes, it is so inspiring to watch you clear this massive milestone. Whether we are gaming, watching our favorite shows, or just hanging out, you are the best Player 2 I could ask for. I can't wait to see what amazing things you do next!
-                            </p>
-                            <p class="font-semibold text-pastel-dark text-right">- Kero</p>
+                    <div id="envelope-container" class="envelope-container relative w-full max-w-md cursor-pointer group z-20">
+                        <div class="bg-blue-300 w-full h-48 rounded-t-xl absolute top-0 left-0 z-0"></div>
+                        
+                        <div class="letter-content absolute top-10 left-0 w-full px-4 z-10 drop-shadow-xl">
+                            <div class="letter-inner bg-white p-6 rounded-xl shadow-inner border border-blue-50 text-sm md:text-base">
+                                <p class="mb-4">Dear Kayii,</p>
+                                <p class="mb-4">
+                                    I am so incredibly proud of you! All those late nights, stressful practicals, and hard work have finally paid off. You are officially a dentist! 🦷
+                                </p>
+                                <p class="mb-4">
+                                    While I am still debugging code and surviving my IT classes, it is so inspiring to watch you clear this massive milestone. Whether we are gaming, watching our favorite shows, or just hanging out, you are the best Player 2 I could ask for. I can't wait to see what amazing things you do next!
+                                </p>
+                                <p class="font-semibold text-pastel-dark text-right">- Kero</p>
+                            </div>
+                        </div>
+
+                        <div class="bg-blue-200 w-full h-48 rounded-xl relative z-20 flex items-center justify-center shadow-lg transition-transform group-hover:scale-[1.02]">
+                            <span class="text-blue-500 font-bold tracking-widest uppercase opacity-50 select-none">Tap to open</span>
+                            <svg class="envelope-flap absolute top-0 left-0 w-full h-full drop-shadow-md pointer-events-none" preserveAspectRatio="none" viewBox="0 0 100 100">
+                                <polygon points="0,0 100,0 50,55" fill="#93C5FD" stroke="#60A5FA" stroke-width="1" stroke-linejoin="round"/>
+                            </svg>
+                            <svg class="absolute bottom-0 left-0 w-full h-full pointer-events-none" preserveAspectRatio="none" viewBox="0 0 100 100">
+                                <polygon points="0,100 50,45 100,100" fill="#BFDBFE" stroke="#93C5FD" stroke-width="1" stroke-linejoin="round"/>
+                                <polygon points="0,0 0,100 50,45" fill="#DBEAFE" stroke="#93C5FD" stroke-width="1" stroke-linejoin="round"/>
+                                <polygon points="100,0 100,100 50,45" fill="#DBEAFE" stroke="#93C5FD" stroke-width="1" stroke-linejoin="round"/>
+                            </svg>
                         </div>
                     </div>
-
-                    <div class="bg-blue-200 w-full h-48 rounded-xl relative z-20 flex items-center justify-center shadow-lg transition-transform group-hover:scale-[1.02]">
-                        <span class="text-blue-500 font-bold tracking-widest uppercase opacity-50 select-none">Tap to open</span>
-                        <svg class="envelope-flap absolute top-0 left-0 w-full h-full drop-shadow-md pointer-events-none" preserveAspectRatio="none" viewBox="0 0 100 100">
-                            <polygon points="0,0 100,0 50,55" fill="#93C5FD" stroke="#60A5FA" stroke-width="1" stroke-linejoin="round"/>
-                        </svg>
-                        <svg class="absolute bottom-0 left-0 w-full h-full pointer-events-none" preserveAspectRatio="none" viewBox="0 0 100 100">
-                            <polygon points="0,100 50,45 100,100" fill="#BFDBFE" stroke="#93C5FD" stroke-width="1" stroke-linejoin="round"/>
-                            <polygon points="0,0 0,100 50,45" fill="#DBEAFE" stroke="#93C5FD" stroke-width="1" stroke-linejoin="round"/>
-                            <polygon points="100,0 100,100 50,45" fill="#DBEAFE" stroke="#93C5FD" stroke-width="1" stroke-linejoin="round"/>
-                        </svg>
-                    </div>
+                    <!-- Spacers -->
+                    <div class="h-96 hidden md:block"></div>
+                    <div class="h-[28rem] block md:hidden"></div>
                 </div>
-                <!-- Spacers -->
-                <div class="h-96 hidden md:block"></div>
-                <div class="h-[28rem] block md:hidden"></div>
             </section>
 
             <!-- Our Co-op Team Section -->
             <section id="coop-section" class="py-16 px-6 max-w-5xl mx-auto text-center relative z-10 w-full">
-                <h3 class="font-heading text-3xl font-semibold mb-4 text-pastel-dark tracking-wide">Our Co-op Team</h3>
-                <p class="text-slate-500 mb-10 max-w-lg mx-auto">Like May and Cody (but with way less arguing and definitely no Book of Love), we make the ultimate team.</p>
-                
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <div class="bg-white rounded-3xl shadow-lg border-2 border-blue-100 overflow-hidden transform transition hover:-translate-y-2">
-                        <div class="w-full aspect-square bg-slate-200 relative">
-                            <img src="us-1.jpg" alt="Us" class="w-full h-full object-cover">
-                        </div>
-                    </div>
+                <div class="bg-white/80 backdrop-blur-md rounded-[3rem] p-10 shadow-xl border border-white">
+                    <h3 class="font-heading text-3xl font-semibold mb-4 text-pastel-dark tracking-wide">Our Co-op Team</h3>
+                    <p class="text-slate-500 mb-10 max-w-lg mx-auto">Like May and Cody (but with way less arguing and definitely no Book of Love), we make the ultimate team.</p>
                     
-                    <div class="bg-white rounded-3xl shadow-lg border-2 border-blue-100 overflow-hidden transform transition hover:-translate-y-2">
-                        <div class="w-full aspect-square bg-slate-200 relative">
-                            <img src="us-2.jpg" alt="Us" class="w-full h-full object-cover">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="bg-white rounded-3xl shadow-lg border-2 border-white overflow-hidden transform transition hover:-translate-y-2">
+                            <div class="w-full aspect-square bg-slate-200 relative">
+                                <img src="us-1.jpg" alt="Us" class="w-full h-full object-cover">
+                            </div>
                         </div>
-                    </div>
+                        
+                        <div class="bg-white rounded-3xl shadow-lg border-2 border-white overflow-hidden transform transition hover:-translate-y-2">
+                            <div class="w-full aspect-square bg-slate-200 relative">
+                                <img src="us-2.jpg" alt="Us" class="w-full h-full object-cover">
+                            </div>
+                        </div>
 
-                    <div class="bg-white rounded-3xl shadow-lg border-2 border-blue-100 overflow-hidden transform transition hover:-translate-y-2">
-                        <div class="w-full aspect-square bg-slate-200 relative">
-                            <img src="us-3.jpg" alt="Us" class="w-full h-full object-cover">
+                        <div class="bg-white rounded-3xl shadow-lg border-2 border-white overflow-hidden transform transition hover:-translate-y-2">
+                            <div class="w-full aspect-square bg-slate-200 relative">
+                                <img src="us-3.jpg" alt="Us" class="w-full h-full object-cover">
+                            </div>
                         </div>
                     </div>
                 </div>
             </section>
 
             <!-- Our Memories Section -->
-            <section id="memories-section" class="py-16 px-6 max-w-5xl mx-auto text-center bg-blue-50/50 rounded-3xl my-8 w-full">
-                <h3 class="font-heading text-3xl font-semibold mb-2 text-pastel-dark">Our Memories</h3>
-                <p class="text-slate-500 mb-8">From epic boss fights to our favorite gaming and movie nights.</p>
-                
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div class="aspect-video bg-slate-900 rounded-xl overflow-hidden shadow-md relative group flex items-center justify-center">
-                        <video src="boss-fight.mp4" controls class="w-full h-full object-cover" poster="https://via.placeholder.com/640x360/1e293b/ffffff?text=Hit+Play!"></video>
-                    </div>
+            <section id="memories-section" class="py-16 px-6 max-w-5xl mx-auto text-center my-8 w-full">
+                <div class="bg-white/80 backdrop-blur-md rounded-[3rem] p-10 shadow-xl border border-white">
+                    <h3 class="font-heading text-3xl font-semibold mb-2 text-pastel-dark">Our Memories</h3>
+                    <p class="text-slate-500 mb-8">From epic boss fights to our favorite gaming and movie nights.</p>
                     
-                    <div class="aspect-video bg-slate-200 rounded-xl overflow-hidden shadow-md relative group">
-                        <img src="stardew-fishing.png" alt="Stardew Valley" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
-                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="aspect-video bg-slate-900 rounded-xl overflow-hidden shadow-md relative group flex items-center justify-center border-2 border-white">
+                            <video src="boss-fight.mp4" controls class="w-full h-full object-cover" poster="https://via.placeholder.com/640x360/1e293b/ffffff?text=Hit+Play!"></video>
+                        </div>
+                        
+                        <div class="aspect-video bg-slate-200 rounded-xl overflow-hidden shadow-md relative group border-2 border-white">
+                            <img src="stardew-fishing.png" alt="Stardew Valley" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+                        </div>
 
-                    <div class="aspect-video bg-slate-200 rounded-xl overflow-hidden shadow-md relative group">
-                        <img src="https://via.placeholder.com/640x360?text=Upload+Memory" alt="Memory" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
-                    </div>
+                        <div class="aspect-video bg-slate-200 rounded-xl overflow-hidden shadow-md relative group border-2 border-white">
+                            <img src="https://via.placeholder.com/640x360?text=Upload+Memory" alt="Memory" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+                        </div>
 
-                    <div class="aspect-video bg-slate-200 rounded-xl overflow-hidden shadow-md relative group">
-                        <img src="https://via.placeholder.com/640x360?text=Upload+Memory" alt="Memory" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+                        <div class="aspect-video bg-slate-200 rounded-xl overflow-hidden shadow-md relative group border-2 border-white">
+                            <img src="https://via.placeholder.com/640x360?text=Upload+Memory" alt="Memory" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+                        </div>
                     </div>
                 </div>
             </section>
 
-            <footer class="text-center py-10 text-slate-400 text-sm w-full">
+            <footer class="text-center py-10 text-slate-500 font-bold text-sm w-full backdrop-blur-sm">
                 Designed by Angelo.
             </footer>
         </div>
@@ -457,7 +462,7 @@
                     // 1. Remove Black & White Filter
                     document.getElementById('main-body').classList.remove('bw-theme');
                     
-                    // 2. Trigger the Grid Expansion
+                    // 2. Trigger the Grid Expansion (Unleashes the flowers!)
                     const secretContent = document.getElementById('secret-content');
                     secretContent.classList.add('revealed');
                     
@@ -473,11 +478,11 @@
                         // 4. Remove overflow restrictions so the envelope animation doesn't clip
                         setTimeout(() => {
                             document.querySelector('.secret-inner').style.overflow = 'visible';
-                        }, 3000); // Waits for the 3s grid transition to finish
+                        }, 3000); 
 
-                    }, 1200); // Short delay before scrolling
+                    }, 1200); 
 
-                }, 1500); // Waits 1.5 seconds after winning so she can read "Perfect Catch!"
+                }, 1500); 
                 
             } else {
                 resultFail.classList.remove('hidden');
