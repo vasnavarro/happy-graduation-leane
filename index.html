@@ -155,19 +155,36 @@
         <h3 class="font-heading text-3xl font-semibold mb-4 text-pastel-dark tracking-wide">Player 1 & Player 2</h3>
         <p class="text-slate-500 mb-8 max-w-lg mx-auto">Like May and Cody (but with way less arguing and definitely no Book of Love), we make the ultimate co-op team.</p>
         
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <!-- Player 1 Card -->
-            <div class="bg-white p-6 rounded-3xl shadow-lg border-2 border-blue-100 transform transition hover:-translate-y-2">
-                <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4 text-2xl">🎮</div>
-                <h4 class="font-bold text-xl mb-2">Player 1: Kero</h4>
-                <p class="text-sm text-slate-500">Whether we're solving puzzles in It Takes Two or I'm hard-carrying the team, we make the perfect dynamic duo.</p>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-center">
+            
+            <!-- Player 1 Card (Video from Google Drive) -->
+            <div class="bg-white rounded-3xl shadow-lg border-2 border-blue-100 overflow-hidden transform transition hover:-translate-y-2 flex flex-col">
+                <!-- Video Container -->
+                <div class="w-full aspect-video bg-slate-200 relative overflow-hidden">
+                    <!-- PASTE YOUR GOOGLE DRIVE VIDEO ID BELOW -->
+                    <iframe src="https://drive.google.com/file/d/YOUR_VIDEO_ID_HERE/preview" width="100%" height="100%" allow="autoplay" allowfullscreen class="absolute top-0 left-0 w-full h-full border-0"></iframe>
+                </div>
+                <div class="p-6 flex-grow">
+                    <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-3 text-xl shadow-inner">🎮</div>
+                    <h4 class="font-bold text-xl mb-2">Player 1: Kero</h4>
+                    <p class="text-sm text-slate-500">Whether we're solving puzzles or you're absolutely carrying us through the boss fights, we make the perfect dynamic duo.</p>
+                </div>
             </div>
-            <!-- Player 2 Card -->
-            <div class="bg-white p-6 rounded-3xl shadow-lg border-2 border-blue-100 transform transition hover:-translate-y-2">
-                <div class="w-16 h-16 bg-pink-100 rounded-full flex items-center justify-center mx-auto mb-4 text-2xl">🎓</div>
-                <h4 class="font-bold text-xl mb-2">Player 2: Kayii</h4>
-                <p class="text-sm text-slate-500">You finally cleared the tutorial level of life! Ready for the next stage?</p>
+            
+            <!-- Player 2 Card (Image from GitHub) -->
+            <div class="bg-white rounded-3xl shadow-lg border-2 border-blue-100 overflow-hidden transform transition hover:-translate-y-2 flex flex-col">
+                <!-- Image Container -->
+                <div class="w-full aspect-video bg-slate-200 relative">
+                    <!-- MAKE SURE THIS MATCHES YOUR UPLOADED PICTURE NAME EXACTLY -->
+                    <img src="stardew-fishing.jpg" alt="Stardew Valley Fishing" class="w-full h-full object-cover">
+                </div>
+                <div class="p-6 flex-grow">
+                    <div class="w-12 h-12 bg-pink-100 rounded-full flex items-center justify-center mx-auto mb-3 text-xl shadow-inner">🎓</div>
+                    <h4 class="font-bold text-xl mb-2">Player 2: Kayii</h4>
+                    <p class="text-sm text-slate-500">You finally cleared the tutorial level of life! Ready for the next stage?</p>
+                </div>
             </div>
+
         </div>
     </section>
 
