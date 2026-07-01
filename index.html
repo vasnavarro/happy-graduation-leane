@@ -41,16 +41,26 @@
         }
         .bw-theme { filter: grayscale(100%) contrast(1.1); }
 
-        /* --- SPRITE SHEET ANIMATION CSS --- */
+        /* --- SPRITE ANIMATIONS --- */
         #player-sprite {
-            width: 100%;
-            height: 100%;
+            width: 100%; height: 100%;
             background-image: url('kayii.png'); 
-            background-size: 400% 300%; /* 4 columns, 3 rows */
-            background-position: 0% 0%; /* Default: Top Left (Front Idle) */
+            background-size: 400% 300%; 
+            background-position: 0% 0%; 
             background-repeat: no-repeat;
-            image-rendering: pixelated; /* Keeps the pixel art crisp! */
-            transition: transform 0.1s; /* For flipping left/right */
+            image-rendering: pixelated; 
+            transition: transform 0.1s; 
+        }
+
+        #kero-sprite {
+            width: 100%; height: 100%;
+            background-image: url('kin.png'); 
+            background-size: 400% 300%; 
+            background-position: 0% 100%; /* Side Idle row */
+            background-repeat: no-repeat;
+            image-rendering: pixelated;
+            transform: scaleX(-1); /* Flips him to face left initially */
+            transition: transform 0.1s;
         }
 
         /* --- THE FLOWER BOMBARDMENT BACKGROUNDS --- */
@@ -70,36 +80,18 @@
             animation: pan-bg-reverse 35s linear infinite;
         }
 
-        .secret-wrapper {
-            display: grid;
-            grid-template-rows: 0fr;
-            transition: grid-template-rows 3s ease-in-out, opacity 2.5s ease-in-out;
-            opacity: 0;
-        }
+        .secret-wrapper { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 3s ease-in-out, opacity 2.5s ease-in-out; opacity: 0; }
         .secret-wrapper.revealed { grid-template-rows: 1fr; opacity: 1; }
         .secret-inner { overflow: hidden; }
 
         .envelope-flap { transform-origin: top; transition: transform 0.6s ease-in-out; }
         .envelope-container.open .envelope-flap { transform: rotateX(180deg); z-index: 0; }
-        .letter-content {
-            display: grid;
-            grid-template-rows: 0fr;
-            transition: grid-template-rows 0.8s ease-in-out, opacity 0.5s ease, transform 0.8s ease-in-out;
-            opacity: 0;
-            transform: translateY(0);
-        }
+        .letter-content { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 0.8s ease-in-out, opacity 0.5s ease, transform 0.8s ease-in-out; opacity: 0; transform: translateY(0); }
         .envelope-container.open .letter-content { grid-template-rows: 1fr; opacity: 1; transform: translateY(150px); }
         .letter-inner { overflow: hidden; }
         .no-select { user-select: none; -webkit-user-select: none; }
         
-        .d-btn {
-            background: rgba(255,255,255,0.7);
-            border: 2px solid #94a3b8;
-            border-radius: 8px;
-            width: 45px; height: 45px;
-            display: flex; align-items: center; justify-content: center;
-            font-weight: bold; color: #334155; box-shadow: 0 4px 0 #94a3b8;
-        }
+        .d-btn { background: rgba(255,255,255,0.7); border: 2px solid #94a3b8; border-radius: 8px; width: 45px; height: 45px; display: flex; align-items: center; justify-content: center; font-weight: bold; color: #334155; box-shadow: 0 4px 0 #94a3b8; }
         .d-btn:active, .d-btn.active { transform: translateY(4px); box-shadow: 0 0 0 #94a3b8; background: #e2e8f0; }
     </style>
 </head>
@@ -108,12 +100,11 @@
     <!-- 1. The Gatekeeper: RPG & Fishing Minigame -->
     <section id="gatekeeper-section" class="min-h-screen flex flex-col items-center justify-center px-4 relative z-20">
         <h1 class="font-heading text-4xl md:text-5xl font-bold text-pastel-dark mb-2 text-center">Unlock Your Gift</h1>
-        <p id="game-instructions" class="text-slate-500 mb-6 text-center text-sm md:text-base max-w-sm">Use the D-Pad or Arrow Keys to walk to the pond. Cast your line when you're close!</p>
+        <p id="game-instructions" class="text-slate-500 mb-6 text-center text-sm md:text-base max-w-sm">Use the D-Pad or Arrow Keys. Go talk to Kero!</p>
 
-        <!-- WIDENED CONTAINER (max-w-4xl) -->
         <div class="bg-blue-50 rounded-3xl p-4 md:p-8 border-4 border-blue-200 shadow-xl relative w-full max-w-4xl flex flex-col items-center justify-center">
             
-            <!-- TALLER RPG OVERWORLD MAP (md:h-[480px]) -->
+            <!-- THE RPG OVERWORLD MAP -->
             <div id="rpg-container" class="relative w-full h-72 md:h-[480px] bg-green-300 rounded-xl overflow-hidden border-4 border-green-500 shadow-inner flex flex-col">
                 <div class="absolute inset-0 opacity-20 pointer-events-none" style="background-image: radial-gradient(#166534 2px, transparent 2px); background-size: 20px 20px;"></div>
                 
@@ -121,12 +112,27 @@
                     <div class="w-full h-full opacity-30" style="background-image: radial-gradient(circle, #eff6ff 2px, transparent 2.5px); background-size: 30px 15px;"></div>
                 </div>
 
-                <div id="action-prompt" class="absolute top-4 left-1/2 transform -translate-x-1/2 bg-white/90 px-6 py-3 rounded-full shadow-lg font-bold text-blue-600 text-sm md:text-base opacity-0 transition-opacity z-20">
-                    <span class="animate-pulse">🎣 Click 'Cast Line'!</span>
+                <!-- Action Prompt UI -->
+                <div id="action-prompt" class="absolute top-4 left-1/2 transform -translate-x-1/2 bg-white/95 px-6 py-3 rounded-full shadow-lg font-bold text-blue-600 text-sm md:text-base opacity-0 transition-opacity z-20 border-2 border-blue-300">
+                    <span id="prompt-text" class="animate-pulse">💬 Talk</span>
                 </div>
 
-                <!-- LARGER PLAYER AVATAR (md:w-28 md:h-28) -->
-                <div id="rpg-player" class="absolute w-20 h-20 md:w-28 md:h-28 z-10" style="left: 20px; top: 100px;">
+                <!-- DIALOGUE BOX UI -->
+                <div id="dialogue-box" class="absolute bottom-4 left-1/2 transform -translate-x-1/2 w-11/12 bg-white/95 border-4 border-blue-400 rounded-xl p-4 shadow-2xl hidden z-30 cursor-pointer">
+                    <h4 class="font-bold text-blue-600 mb-1 font-heading text-lg">Kero</h4>
+                    <p id="dialogue-text" class="text-sm md:text-base text-slate-700 font-semibold"></p>
+                    <p class="text-xs text-slate-400 text-right mt-2 animate-pulse font-bold">Tap here to continue ▼</p>
+                </div>
+
+                <!-- THE NPC/FOLLOWER: Kero -->
+                <!-- We use left and top percentages so he scales properly before JS takes over -->
+                <div id="kero-npc" class="absolute w-20 h-20 md:w-28 md:h-28 z-10" style="left: 55%; top: 40%;">
+                    <div class="absolute bottom-1 left-1/4 w-1/2 h-2 bg-black/20 rounded-full blur-[2px]"></div>
+                    <div id="kero-sprite" class="absolute inset-0"></div>
+                </div>
+
+                <!-- THE PLAYER: Kayii -->
+                <div id="rpg-player" class="absolute w-20 h-20 md:w-28 md:h-28 z-20" style="left: 20px; top: 100px;">
                     <div class="absolute bottom-1 left-1/4 w-1/2 h-2 bg-black/20 rounded-full blur-[2px]"></div>
                     <div id="player-sprite" class="absolute inset-0"></div>
                 </div>
@@ -138,12 +144,12 @@
                     <div></div><button class="d-btn no-select" id="btn-up">W</button><div></div>
                     <button class="d-btn no-select" id="btn-left">A</button><button class="d-btn no-select" id="btn-down">S</button><button class="d-btn no-select" id="btn-right">D</button>
                 </div>
-                <button id="rpg-cast-btn" class="bg-slate-300 text-slate-500 font-bold py-4 px-8 md:px-12 rounded-xl shadow-md transition-all text-sm md:text-lg opacity-50 cursor-not-allowed">
-                    Cast Line
+                <button id="rpg-action-btn" class="bg-slate-300 text-slate-500 font-bold py-4 px-8 md:px-12 rounded-xl shadow-md transition-all text-sm md:text-lg opacity-50 cursor-not-allowed">
+                    Action
                 </button>
             </div>
 
-            <!-- TALLER FISHING MINIGAME UI -->
+            <!-- THE FISHING MINIGAME UI -->
             <div id="game-ui" class="w-full h-full flex-col items-center justify-center z-10 hidden py-10">
                 <p class="text-slate-500 mb-6 text-center font-bold text-lg">Keep the fish in the green zone!</p>
                 <div class="flex flex-row h-48 md:h-72 w-full justify-center gap-6 mb-8">
@@ -298,15 +304,35 @@
         const envelopeContainer = document.getElementById('envelope-container');
         envelopeContainer.addEventListener('click', () => { envelopeContainer.classList.toggle('open'); });
 
-        // --- 2. RPG OVERWORLD WITH SPRITE ANIMATION ---
+        // --- RPG & NPC VARIABLES ---
         const rpgContainer = document.getElementById('rpg-container');
         const rpgPlayer = document.getElementById('rpg-player');
         const playerSprite = document.getElementById('player-sprite');
+        
+        const keroNpc = document.getElementById('kero-npc');
+        const keroSprite = document.getElementById('kero-sprite');
+        
         const rpgControls = document.getElementById('rpg-controls');
-        const rpgCastBtn = document.getElementById('rpg-cast-btn');
+        const actionBtnUI = document.getElementById('rpg-action-btn');
         const actionPrompt = document.getElementById('action-prompt');
+        const promptText = document.getElementById('prompt-text');
         const instructions = document.getElementById('game-instructions');
+        
+        // --- DIALOGUE SYSTEM ---
+        const dialogueBox = document.getElementById('dialogue-box');
+        const dialogueText = document.getElementById('dialogue-text');
+        let hasTalkedToKero = false;
+        let dialogueActive = false;
+        let dialogueIndex = 0;
+        
+        const dialogueLines = [
+            "Hey Kayii! You finally made it!",
+            "I'm so incredibly proud of you for graduating.",
+            "I've got your training rod ready at the pond...",
+            "Let's go catch something!"
+        ];
 
+        // --- MOVEMENT ENGINE ---
         let rpgActive = true;
         let pX = 20; let pY = 100; const speed = 3.5;
         const keys = { w: false, a: false, s: false, d: false, ArrowUp: false, ArrowLeft: false, ArrowDown: false, ArrowRight: false };
@@ -318,83 +344,180 @@
             const el = document.getElementById(id);
             const press = (e) => { e.preventDefault(); if(rpgActive) keys[k] = true; el.classList.add('active'); };
             const release = (e) => { e.preventDefault(); keys[k] = false; el.classList.remove('active'); };
-            el.addEventListener('mousedown', press); el.addEventListener('touchstart', press, {passive: false});
-            el.addEventListener('mouseup', release); el.addEventListener('mouseleave', release); el.addEventListener('touchend', release);
+            if(el){
+                el.addEventListener('mousedown', press); el.addEventListener('touchstart', press, {passive: false});
+                el.addEventListener('mouseup', release); el.addEventListener('mouseleave', release); el.addEventListener('touchend', release);
+            }
         };
         bindBtn('btn-up', 'w'); bindBtn('btn-left', 'a'); bindBtn('btn-down', 's'); bindBtn('btn-right', 'd');
 
-        // Animation Variables
-        let frameCount = 0;
-        let animIndex = 0; 
-        let currentFacing = 0; 
+        // Player Animation Vars
+        let frameCount = 0; let animIndex = 0; let currentFacing = 0; 
+        
+        // Kero (Follower) Animation Vars
+        let kX = -1; let kY = -1; // Will initialize on first loop
+        let kFrameCount = 0; let kAnimIndex = 0; let kFacing = 0; let kScale = -1;
+        
+        // State Machine
+        let currentAction = "none"; // "none", "talk", "fish"
 
         function rpgLoop() {
-            if (!rpgActive) return;
+            if (!rpgActive && !dialogueActive) return;
 
-            let isMoving = false;
-            let moveX = 0; let moveY = 0;
+            // Initialize Kero's position based on CSS on the very first frame
+            if (kX === -1) { kX = keroNpc.offsetLeft; kY = keroNpc.offsetTop; }
 
-            if (keys.s || keys.ArrowDown) { moveY += speed; isMoving = true; currentFacing = 0; playerSprite.style.transform = 'scaleX(1)'; }
-            else if (keys.w || keys.ArrowUp) { moveY -= speed; isMoving = true; currentFacing = 50; playerSprite.style.transform = 'scaleX(1)'; }
-            else if (keys.a || keys.ArrowLeft) { moveX -= speed; isMoving = true; currentFacing = 100; playerSprite.style.transform = 'scaleX(-1)'; }
-            else if (keys.d || keys.ArrowRight) { moveX += speed; isMoving = true; currentFacing = 100; playerSprite.style.transform = 'scaleX(1)'; }
+            if (rpgActive) {
+                // 1. PLAYER MOVEMENT
+                let isMoving = false;
+                let moveX = 0; let moveY = 0;
 
-            pX += moveX; pY += moveY;
+                if (keys.s || keys.ArrowDown) { moveY += speed; isMoving = true; currentFacing = 0; playerSprite.style.transform = 'scaleX(1)'; }
+                else if (keys.w || keys.ArrowUp) { moveY -= speed; isMoving = true; currentFacing = 50; playerSprite.style.transform = 'scaleX(1)'; }
+                else if (keys.a || keys.ArrowLeft) { moveX -= speed; isMoving = true; currentFacing = 100; playerSprite.style.transform = 'scaleX(-1)'; }
+                else if (keys.d || keys.ArrowRight) { moveX += speed; isMoving = true; currentFacing = 100; playerSprite.style.transform = 'scaleX(1)'; }
 
-            // Boundaries
-            const mapW = rpgContainer.clientWidth; const mapH = rpgContainer.clientHeight;
-            const pW = rpgPlayer.clientWidth; const pH = rpgPlayer.clientHeight;
-            if (pX < 0) pX = 0; if (pX > mapW - pW) pX = mapW - pW;
-            if (pY < 0) pY = 0; if (pY > mapH - pH) pY = mapH - pH;
+                pX += moveX; pY += moveY;
 
-            rpgPlayer.style.left = pX + 'px'; rpgPlayer.style.top = pY + 'px';
+                const mapW = rpgContainer.clientWidth; const mapH = rpgContainer.clientHeight;
+                const pW = rpgPlayer.clientWidth; const pH = rpgPlayer.clientHeight;
+                if (pX < 0) pX = 0; if (pX > mapW - pW) pX = mapW - pW;
+                if (pY < 0) pY = 0; if (pY > mapH - pH) pY = mapH - pH;
 
-            // --- ANIMATION LOGIC ---
-            if (isMoving) {
-                frameCount++;
-                if (frameCount > 8) { 
-                    animIndex++;
-                    if (animIndex > 3) animIndex = 1; 
-                    frameCount = 0;
+                rpgPlayer.style.left = pX + 'px'; rpgPlayer.style.top = pY + 'px';
+
+                if (isMoving) {
+                    frameCount++;
+                    if (frameCount > 8) { animIndex++; if (animIndex > 3) animIndex = 1; frameCount = 0; }
+                } else { animIndex = 0; }
+
+                let xPos = animIndex * 33.333;
+                playerSprite.style.backgroundPosition = `${xPos}% ${currentFacing}%`;
+
+                // 2. KERO POKEMON FOLLOWER AI
+                if (hasTalkedToKero) {
+                    let kIsMoving = false;
+                    
+                    // Calculate distance to Kayii
+                    let dx = pX - kX;
+                    let dy = pY - kY;
+                    let dist = Math.sqrt(dx*dx + dy*dy);
+                    
+                    // If Kayii is further than ~65 pixels, Kero walks towards her
+                    if (dist > 65) {
+                        kIsMoving = true;
+                        let angle = Math.atan2(dy, dx);
+                        kX += Math.cos(angle) * speed;
+                        kY += Math.sin(angle) * speed;
+                        
+                        // Update Kero's facing direction based on movement angle
+                        if (Math.abs(dx) > Math.abs(dy)) {
+                            if (dx > 0) { kFacing = 100; kScale = 1; } // Right
+                            else { kFacing = 100; kScale = -1; } // Left
+                        } else {
+                            if (dy > 0) { kFacing = 0; kScale = 1; } // Down
+                            else { kFacing = 50; kScale = 1; } // Up
+                        }
+                    }
+                    
+                    keroNpc.style.left = kX + 'px';
+                    keroNpc.style.top = kY + 'px';
+                    
+                    // Kero Animation cycle
+                    if (kIsMoving) {
+                        kFrameCount++;
+                        if (kFrameCount > 8) { kAnimIndex++; if (kAnimIndex > 3) kAnimIndex = 1; kFrameCount = 0; }
+                    } else { kAnimIndex = 0; }
+                    
+                    let kXPos = kAnimIndex * 33.333;
+                    keroSprite.style.backgroundPosition = `${kXPos}% ${kFacing}%`;
+                    keroSprite.style.transform = `scaleX(${kScale})`;
                 }
-            } else {
-                animIndex = 0; 
-            }
 
-            let xPos = animIndex * 33.333;
-            playerSprite.style.backgroundPosition = `${xPos}% ${currentFacing}%`;
+                // 3. UI CONTEXT CHECKS
+                const isNearKero = (pX < kX + pW + 20 && pX + pW > kX - 20 && pY < kY + pH + 20 && pY + pH > kY - 20);
+                const waterEdge = mapW - (mapW / 3) - (pW / 2);
+                const isNearWater = (pX > waterEdge);
 
-            // Check proximity to water
-            const waterEdge = mapW - (mapW / 3) - (pW / 2);
-            if (pX > waterEdge) {
-                rpgCastBtn.classList.remove('bg-slate-300', 'text-slate-500', 'opacity-50', 'cursor-not-allowed');
-                rpgCastBtn.classList.add('bg-pastel-dark', 'text-white', 'hover:bg-blue-500');
-                actionPrompt.classList.remove('opacity-0');
-            } else {
-                rpgCastBtn.classList.add('bg-slate-300', 'text-slate-500', 'opacity-50', 'cursor-not-allowed');
-                rpgCastBtn.classList.remove('bg-pastel-dark', 'text-white', 'hover:bg-blue-500');
-                actionPrompt.classList.add('opacity-0');
+                if (isNearKero && !hasTalkedToKero) {
+                    currentAction = "talk";
+                    promptText.innerText = "💬 Talk to Kero";
+                    enableActionBtn("💬 Talk");
+                } else if (isNearWater && hasTalkedToKero) {
+                    currentAction = "fish";
+                    promptText.innerText = "🎣 Cast Line";
+                    enableActionBtn("🎣 Cast Line");
+                } else {
+                    currentAction = "none";
+                    disableActionBtn();
+                }
             }
 
             requestAnimationFrame(rpgLoop);
         }
-        rpgLoop();
+        
+        function enableActionBtn(text) {
+            actionBtnUI.innerText = text;
+            actionBtnUI.classList.remove('bg-slate-300', 'text-slate-500', 'opacity-50', 'cursor-not-allowed');
+            actionBtnUI.classList.add('bg-pastel-dark', 'text-white', 'hover:bg-blue-500');
+            actionPrompt.classList.remove('opacity-0');
+        }
+        
+        function disableActionBtn() {
+            actionBtnUI.innerText = "Action";
+            actionBtnUI.classList.add('bg-slate-300', 'text-slate-500', 'opacity-50', 'cursor-not-allowed');
+            actionBtnUI.classList.remove('bg-pastel-dark', 'text-white', 'hover:bg-blue-500');
+            actionPrompt.classList.add('opacity-0');
+        }
 
-        // --- 3. TRANSITION TO FISHING ---
-        const gameUI = document.getElementById('game-ui');
-        rpgCastBtn.addEventListener('click', () => {
-            if (rpgCastBtn.classList.contains('cursor-not-allowed')) return; 
-            rpgActive = false;
-            rpgContainer.classList.add('hidden');
-            rpgControls.classList.add('hidden');
-            instructions.classList.add('hidden');
-            gameUI.classList.remove('hidden');
-            gameUI.classList.add('flex');
-            startFishingMinigame();
-        });
+        rpgLoop(); // Start engine
 
-        // --- 4. FISHING MINIGAME LOGIC ---
-        const actionBtn = document.getElementById('reel-action-btn');
+        // --- INTERACTION LOGIC ---
+        function triggerAction() {
+            if (currentAction === "none") return;
+
+            if (currentAction === "talk") {
+                if (!dialogueActive) {
+                    // Start dialogue
+                    rpgActive = false; 
+                    dialogueActive = true;
+                    dialogueIndex = 0;
+                    actionPrompt.classList.add('opacity-0');
+                    dialogueBox.classList.remove('hidden');
+                    dialogueText.innerText = dialogueLines[dialogueIndex];
+                } else {
+                    // Next line
+                    dialogueIndex++;
+                    if (dialogueIndex < dialogueLines.length) {
+                        dialogueText.innerText = dialogueLines[dialogueIndex];
+                    } else {
+                        // End Dialogue -> THE COLOR BLOOMS!
+                        dialogueActive = false;
+                        hasTalkedToKero = true;
+                        dialogueBox.classList.add('hidden');
+                        rpgActive = true; // Unfreeze game
+                        
+                        document.getElementById('main-body').classList.remove('bw-theme');
+                        instructions.innerText = "Go cast your line at the pond!";
+                    }
+                }
+            } else if (currentAction === "fish") {
+                rpgActive = false;
+                rpgContainer.classList.add('hidden');
+                rpgControls.classList.add('hidden');
+                instructions.classList.add('hidden');
+                
+                const gameUI = document.getElementById('game-ui');
+                gameUI.classList.remove('hidden'); gameUI.classList.add('flex');
+                startFishingMinigame();
+            }
+        }
+
+        actionBtnUI.addEventListener('click', triggerAction);
+        dialogueBox.addEventListener('click', triggerAction); 
+
+        // --- FISHING MINIGAME LOGIC ---
+        const reelBtn = document.getElementById('reel-action-btn');
         const catchBar = document.getElementById('catch-bar');
         const fishIcon = document.getElementById('fish-icon');
         const progressFill = document.getElementById('progress-fill');
@@ -438,11 +561,11 @@
 
         function endFishing(won) {
             fishingActive = false; cancelAnimationFrame(fishAnimationId);
-            gameUI.classList.remove('flex'); gameUI.classList.add('hidden');
+            document.getElementById('game-ui').classList.remove('flex'); 
+            document.getElementById('game-ui').classList.add('hidden');
             if (won) {
                 resultSuccess.classList.remove('hidden'); resultSuccess.classList.add('flex');
                 setTimeout(() => {
-                    document.getElementById('main-body').classList.remove('bw-theme');
                     document.getElementById('secret-content').classList.add('revealed');
                     const scrollHint = document.getElementById('scroll-hint');
                     scrollHint.classList.remove('hidden');
@@ -458,14 +581,15 @@
         window.resetToRPG = function() {
             resultFail.classList.add('hidden'); resultFail.classList.remove('flex');
             rpgContainer.classList.remove('hidden'); rpgControls.classList.remove('hidden'); instructions.classList.remove('hidden');
-            pX = rpgContainer.clientWidth - (rpgContainer.clientWidth / 3) - 60;
-            rpgActive = true; rpgLoop();
+            pX = rpgContainer.clientWidth - (rpgContainer.clientWidth / 3) - 60; // Spawn near water but safe
+            rpgActive = true; 
+            requestAnimationFrame(rpgLoop);
         }
 
         const handleReelPress = (e) => { e.preventDefault(); isHolding = true; };
         const handleReelRelease = (e) => { e.preventDefault(); isHolding = false; };
-        actionBtn.addEventListener('mousedown', handleReelPress); window.addEventListener('mouseup', handleReelRelease);
-        actionBtn.addEventListener('touchstart', handleReelPress, {passive: false}); window.addEventListener('touchend', handleReelRelease); window.addEventListener('touchcancel', handleReelRelease);
+        reelBtn.addEventListener('mousedown', handleReelPress); window.addEventListener('mouseup', handleReelRelease);
+        reelBtn.addEventListener('touchstart', handleReelPress, {passive: false}); window.addEventListener('touchend', handleReelRelease); window.addEventListener('touchcancel', handleReelRelease);
     </script>
 </body>
 </html>
