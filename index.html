@@ -69,6 +69,12 @@
         .letter-inner { 
             overflow: hidden; 
         }
+
+        /* Prevent text selection while furiously tapping the fishing button */
+        .no-select {
+            user-select: none;
+            -webkit-user-select: none;
+        }
     </style>
 </head>
 <body class="bg-pastel-light font-body text-slate-700 overflow-x-hidden">
@@ -159,9 +165,7 @@
             
             <!-- Player 1 Card (Your Picture) -->
             <div class="bg-white rounded-3xl shadow-lg border-2 border-blue-100 overflow-hidden transform transition hover:-translate-y-2 flex flex-col">
-                <!-- Image Container - Aspect Square for better portrait fit -->
                 <div class="w-full aspect-square bg-slate-200 relative">
-                    <!-- REPLACE 'kero-pic.jpg' WITH YOUR ACTUAL UPLOADED PICTURE -->
                     <img src="kero-pic.jpg" alt="Kero" class="w-full h-full object-cover">
                 </div>
                 <div class="p-6 flex-grow">
@@ -173,9 +177,7 @@
             
             <!-- Player 2 Card (Her Picture) -->
             <div class="bg-white rounded-3xl shadow-lg border-2 border-blue-100 overflow-hidden transform transition hover:-translate-y-2 flex flex-col">
-                <!-- Image Container - Aspect Square for better portrait fit -->
                 <div class="w-full aspect-square bg-slate-200 relative">
-                    <!-- REPLACE 'kayii-pic.jpg' WITH HER ACTUAL UPLOADED PICTURE -->
                     <img src="kayii-pic.jpg" alt="Kayii" class="w-full h-full object-cover">
                 </div>
                 <div class="p-6 flex-grow">
@@ -193,47 +195,58 @@
         <h3 class="font-heading text-3xl font-semibold mb-2 text-pastel-dark">Our Memories</h3>
         <p class="text-slate-500 mb-8">From epic boss fights to our favorite gaming and movie nights.</p>
         
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             
             <!-- Memory 1: It Takes Two Video -->
-            <div class="aspect-[3/4] bg-slate-900 rounded-xl overflow-hidden shadow-md relative group flex items-center justify-center">
-                <video src="boss-fight.mp4" controls class="w-full object-contain" poster="https://via.placeholder.com/300x400/1e293b/ffffff?text=Hit+Play!"></video>
+            <div class="aspect-video bg-slate-900 rounded-xl overflow-hidden shadow-md relative group flex items-center justify-center">
+                <video src="boss-fight.mp4" controls class="w-full h-full object-cover" poster="https://via.placeholder.com/640x360/1e293b/ffffff?text=Hit+Play!"></video>
             </div>
             
             <!-- Memory 2: Stardew Valley Fishing -->
-            <div class="aspect-[3/4] bg-slate-200 rounded-xl overflow-hidden shadow-md relative group">
-                <img src="stardew-fishing.png" alt="Stardew Valley" class="w-full h-full object-cover group-hover:scale-110 transition duration-300">
+            <div class="aspect-video bg-slate-200 rounded-xl overflow-hidden shadow-md relative group">
+                <img src="stardew-fishing.png" alt="Stardew Valley" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
             </div>
 
-            <!-- Memory 3: Placeholder (Replace later!) -->
-            <div class="aspect-[3/4] bg-slate-200 rounded-xl overflow-hidden shadow-md relative group">
-                <img src="https://via.placeholder.com/300x400?text=Upload+Memory" alt="Memory" class="w-full h-full object-cover group-hover:scale-110 transition duration-300">
+            <!-- Memory 3: Placeholder -->
+            <div class="aspect-video bg-slate-200 rounded-xl overflow-hidden shadow-md relative group">
+                <img src="https://via.placeholder.com/640x360?text=Upload+Memory" alt="Memory" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
             </div>
 
-            <!-- Memory 4: Placeholder (Replace later!) -->
-            <div class="aspect-[3/4] bg-slate-200 rounded-xl overflow-hidden shadow-md relative group">
-                <img src="https://via.placeholder.com/300x400?text=Upload+Memory" alt="Memory" class="w-full h-full object-cover group-hover:scale-110 transition duration-300">
+            <!-- Memory 4: Placeholder -->
+            <div class="aspect-video bg-slate-200 rounded-xl overflow-hidden shadow-md relative group">
+                <img src="https://via.placeholder.com/640x360?text=Upload+Memory" alt="Memory" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
             </div>
         </div>
     </section>
 
-    <!-- 5. Stardew Valley Fishing Minigame -->
+    <!-- 5. REAL Stardew Valley Fishing Minigame -->
     <section class="py-16 px-6 max-w-2xl mx-auto text-center mb-10">
-        <h3 class="font-heading text-3xl font-semibold mb-4 text-pastel-dark">Stardew Fishing Practice</h3>
-        <p class="text-slate-500 mb-8">Let's see if your reflexes are sharp. Hit the green zone!</p>
+        <h3 class="font-heading text-3xl font-semibold mb-2 text-pastel-dark">Stardew Fishing Practice</h3>
+        <p id="fishing-instructions" class="text-slate-500 mb-8">Tap & Hold the button to raise the green bar. Keep the fish inside it!</p>
 
-        <div class="bg-blue-100 rounded-3xl p-8 border-4 border-blue-200 shadow-inner relative overflow-hidden h-72 flex flex-col items-center justify-center">
+        <div class="bg-blue-100 rounded-3xl p-8 border-4 border-blue-200 shadow-inner relative h-96 flex flex-col items-center justify-center">
             
             <!-- Minigame UI -->
-            <div id="game-ui" class="w-full flex flex-col items-center z-10 hidden">
-                <div class="w-full max-w-md h-8 bg-blue-900 rounded-full relative overflow-hidden mb-6 border-2 border-white shadow-lg">
-                    <!-- The Catch Zone (Green) -->
-                    <div id="catch-zone" class="absolute h-full bg-green-400 w-1/4 left-[37.5%] opacity-80"></div>
-                    <!-- The Moving Cursor (Bobber) -->
-                    <div id="fishing-cursor" class="absolute h-full w-4 bg-red-500 rounded-full border-2 border-white shadow-md" style="left: 0%;"></div>
+            <div id="game-ui" class="w-full h-full flex flex-col items-center justify-center z-10 hidden">
+                
+                <div class="flex flex-row h-48 w-full justify-center gap-4 mb-8">
+                    <!-- The Main Fishing Track -->
+                    <div class="relative w-10 h-full bg-blue-900 rounded-lg overflow-hidden border-2 border-slate-300 shadow-inner">
+                        <!-- The Catch Bar (Green) -->
+                        <div id="catch-bar" class="absolute w-full h-[30%] bg-green-400/80 transition-colors duration-150" style="bottom: 0%;"></div>
+                        <!-- The Fish -->
+                        <div id="fish-icon" class="absolute w-full h-8 text-2xl flex items-center justify-center select-none" style="bottom: 10%;">🐟</div>
+                    </div>
+
+                    <!-- The Progress Bar (Right side) -->
+                    <div class="relative w-4 h-full bg-slate-800 rounded-full overflow-hidden border-2 border-slate-600">
+                        <div id="progress-fill" class="absolute bottom-0 w-full bg-green-500 transition-all duration-100" style="height: 15%;"></div>
+                    </div>
                 </div>
-                <button id="reel-btn" class="bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-8 rounded-full shadow-lg transform transition active:scale-95">
-                    🎣 Reel It In!
+
+                <!-- Hold Button -->
+                <button id="reel-action-btn" class="no-select bg-green-500 text-white font-bold py-4 px-10 rounded-full shadow-[0_6px_0_#166534] active:shadow-[0_0px_0_#166534] active:translate-y-[6px] transform transition-all cursor-pointer">
+                    🎣 HOLD TO REEL
                 </button>
             </div>
 
@@ -243,14 +256,14 @@
             </button>
 
             <!-- Result Messages -->
-            <div id="fish-result" class="hidden flex-col items-center z-10 bg-white/95 p-6 rounded-2xl shadow-xl border-2 border-green-300 mt-4">
+            <div id="fish-result" class="hidden flex-col items-center z-10 bg-white/95 p-6 rounded-2xl shadow-xl border-2 border-green-300">
                 <div class="text-5xl mb-2">🐟📜</div>
                 <h4 class="font-heading font-bold text-xl text-green-600 mb-1">Perfect Catch!</h4>
                 <p class="text-slate-600 text-sm">You caught an Iridium-quality Diploma!</p>
                 <button onclick="resetFishing()" class="mt-4 text-xs text-pastel-dark underline">Play again?</button>
             </div>
 
-            <div id="fish-fail" class="hidden flex-col items-center z-10 bg-white/95 p-6 rounded-2xl shadow-xl border-2 border-red-300 mt-4">
+            <div id="fish-fail" class="hidden flex-col items-center z-10 bg-white/95 p-6 rounded-2xl shadow-xl border-2 border-red-300">
                 <div class="text-5xl mb-2">🌿</div>
                 <h4 class="font-heading font-bold text-xl text-red-500 mb-1">It got away...</h4>
                 <p class="text-slate-600 text-sm">Just seaweed this time. Willy would be disappointed.</p>
@@ -258,7 +271,7 @@
             </div>
 
             <!-- Decorative Water -->
-            <div class="absolute bottom-0 w-full h-1/3 bg-blue-200/50 rounded-t-[100%] animate-pulse-slow z-0 pointer-events-none"></div>
+            <div class="absolute bottom-0 left-0 w-full h-1/3 bg-blue-200/50 rounded-t-[100%] animate-pulse-slow z-0 pointer-events-none"></div>
         </div>
     </section>
 
@@ -275,70 +288,166 @@
             envelopeContainer.classList.toggle('open');
         });
 
-        // 2. Fishing Minigame Logic
+        // 2. REAL Stardew Fishing Minigame Logic
         const castBtn = document.getElementById('cast-btn');
         const gameUI = document.getElementById('game-ui');
-        const reelBtn = document.getElementById('reel-btn');
-        const cursor = document.getElementById('fishing-cursor');
+        const actionBtn = document.getElementById('reel-action-btn');
+        
+        const catchBar = document.getElementById('catch-bar');
+        const fishIcon = document.getElementById('fish-icon');
+        const progressFill = document.getElementById('progress-fill');
+        
         const resultSuccess = document.getElementById('fish-result');
         const resultFail = document.getElementById('fish-fail');
+        const instructions = document.getElementById('fishing-instructions');
         
+        // Physics & Game State
         let gameActive = false;
-        let cursorPosition = 0;
-        let speed = 2.5; // Controls the speed of the bobber
-        let direction = 1;
         let animationId;
+        let isHolding = false;
+        
+        let barPos = 0;       // 0 to 70 (max bottom % for a 30% height bar)
+        let barVelocity = 0;
+        
+        let fishPos = 10;     // 0 to 90 (max bottom % for fish icon)
+        let fishTarget = 20;
+        
+        let progress = 15;    // 0 to 100
 
-        function animateCursor() {
+        function gameLoop() {
             if (!gameActive) return;
-            
-            cursorPosition += speed * direction;
-            if (cursorPosition >= 96 || cursorPosition <= 0) {
-                direction *= -1; // Reverse direction
+
+            // --- Catch Bar Physics ---
+            if (isHolding) {
+                barVelocity += 0.6; // Upward thrust when holding
+            } else {
+                barVelocity -= 0.6; // Gravity when released
             }
+            barVelocity *= 0.85;    // Friction/Damping to smooth it out
+            barPos += barVelocity;
+
+            // Keep bar within bounds (0% to 70%)
+            if (barPos < 0) { barPos = 0; barVelocity = 0; }
+            if (barPos > 70) { barPos = 70; barVelocity = 0; }
+
+            // --- Fish AI ---
+            // The fish randomly decides to swim to a new depth
+            if (Math.random() < 0.03) {
+                fishTarget = Math.random() * 85; 
+            }
+            // Smoothly move fish towards its target
+            fishPos += (fishTarget - fishPos) * 0.05;
+
+            // Keep fish within bounds
+            if (fishPos < 0) fishPos = 0;
+            if (fishPos > 90) fishPos = 90;
+
+            // --- Update Visual Positions ---
+            catchBar.style.bottom = barPos + '%';
+            fishIcon.style.bottom = fishPos + '%';
+
+            // --- Collision Detection ---
+            // Is the center of the fish inside the catch bar?
+            let fishCenter = fishPos + 5; 
+            let isCatching = (fishCenter >= barPos && fishCenter <= barPos + 30);
+
+            // --- Progress Logic ---
+            if (isCatching) {
+                progress += 0.35; // Fill meter
+                progressFill.style.backgroundColor = '#22c55e'; // Green progress
+                catchBar.style.backgroundColor = 'rgba(74, 222, 128, 0.8)'; // Green bar
+            } else {
+                progress -= 0.25; // Drain meter
+                progressFill.style.backgroundColor = '#ef4444'; // Red progress
+                catchBar.style.backgroundColor = 'rgba(248, 113, 113, 0.8)'; // Red bar
+            }
+
+            // Keep progress between 0 and 100
+            if (progress < 0) progress = 0;
+            if (progress > 100) progress = 100;
             
-            cursor.style.left = cursorPosition + '%';
-            animationId = requestAnimationFrame(animateCursor);
+            progressFill.style.height = progress + '%';
+
+            // --- Win / Loss Conditions ---
+            if (progress >= 100) {
+                endGame(true);
+                return;
+            } else if (progress <= 0) {
+                endGame(false);
+                return;
+            }
+
+            animationId = requestAnimationFrame(gameLoop);
         }
 
+        // Start Game
         castBtn.addEventListener('click', () => {
             castBtn.classList.add('hidden');
             resultSuccess.classList.add('hidden');
             resultFail.classList.add('hidden');
             resultSuccess.classList.remove('flex');
             resultFail.classList.remove('flex');
+            instructions.classList.add('hidden');
             
             gameUI.classList.remove('hidden');
             gameUI.classList.add('flex');
             
+            // Reset state
             gameActive = true;
-            cursorPosition = 0;
-            animateCursor();
+            isHolding = false;
+            barPos = 0;
+            barVelocity = 0;
+            fishPos = 10;
+            progress = 15;
+            
+            gameLoop();
         });
 
-        reelBtn.addEventListener('click', () => {
+        // End Game
+        function endGame(won) {
             gameActive = false;
             cancelAnimationFrame(animationId);
             gameUI.classList.remove('flex');
             gameUI.classList.add('hidden');
 
-            // The catch zone is centered
-            if (cursorPosition >= 36 && cursorPosition <= 61) {
+            if (won) {
                 resultSuccess.classList.remove('hidden');
                 resultSuccess.classList.add('flex');
             } else {
                 resultFail.classList.remove('hidden');
                 resultFail.classList.add('flex');
             }
-        });
+        }
 
+        // Reset UI
         window.resetFishing = function() {
             resultSuccess.classList.add('hidden');
             resultSuccess.classList.remove('flex');
             resultFail.classList.add('hidden');
             resultFail.classList.remove('flex');
+            
             castBtn.classList.remove('hidden');
+            instructions.classList.remove('hidden');
         }
+
+        // --- Button Hold Logic (Mouse & Touch) ---
+        const handlePress = (e) => { 
+            e.preventDefault(); // Prevents screen from scrolling on mobile
+            isHolding = true; 
+        };
+        const handleRelease = (e) => { 
+            e.preventDefault(); 
+            isHolding = false; 
+        };
+
+        // Desktop
+        actionBtn.addEventListener('mousedown', handlePress);
+        window.addEventListener('mouseup', handleRelease);
+        
+        // Mobile Touch
+        actionBtn.addEventListener('touchstart', handlePress, {passive: false});
+        window.addEventListener('touchend', handleRelease);
+        window.addEventListener('touchcancel', handleRelease);
     </script>
 </body>
 </html>
