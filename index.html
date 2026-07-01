@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Graduation Leane!</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        heading: ['Fredoka', 'sans-serif'],
+                        body: ['Nunito', 'sans-serif'],
+                    },
+                    colors: {
+                        pastel: {
+                            light: '#eff6ff', // blue-50
+                            blue: '#bfdbfe',  // blue-200
+                            dark: '#60a5fa',  // blue-400
+                        }
+                    },
+                    animation: {
+                        'float': 'float 3s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Smooth scrolling for anchor links */
+        html { scroll-behavior: smooth; }
+        
+        /* Envelope Animations */
+        .envelope-flap {
+            transform-origin: top;
+            transition: transform 0.6s ease-in-out;
+        }
+        .envelope-container.open .envelope-flap {
+            transform: rotateX(180deg);
+            z-index: 0;
+        }
+        
+        .letter-content {
+            display: grid;
+            grid-template-rows: 0fr;
+            transition: grid-template-rows 0.8s ease-in-out, opacity 0.5s ease;
+            opacity: 0;
+        }
+        .envelope-container.open .letter-content {
+            grid-template-rows: 1fr;
+            opacity: 1;
+        }
+        .letter-inner {
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body class="bg-pastel-light font-body text-slate-700 overflow-x-hidden">
+
+    <section class="min-h-screen flex flex-col items-center justify-center text-center p-6 relative">
+        <div class="animate-float mb-8">
+            <svg width="200" height="250" viewBox="0 0 200 250" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M100 150 Q100 220 90 250" stroke="#86efac" stroke-width="8" stroke-linecap="round"/>
+                <path d="M100 150 Q120 200 125 245" stroke="#86efac" stroke-width="8" stroke-linecap="round"/>
+                <path d="M100 150 Q75 190 70 240" stroke="#86efac" stroke-width="8" stroke-linecap="round"/>
+                <path d="M60 210 Q100 230 140 210 Q100 190 60 210 Z" fill="#fbcfe8"/>
+                <path d="M100 210 L80 250 M100 210 L120 250" stroke="#fbcfe8" stroke-width="8" stroke-linecap="round"/>
+                <circle cx="100" cy="80" r="40" fill="#93c5fd" opacity="0.9"/>
+                <circle cx="140" cy="110" r="35" fill="#bfdbfe" opacity="0.9"/>
+                <circle cx="60" cy="110" r="35" fill="#60a5fa" opacity="0.9"/>
+                <circle cx="100" cy="40" r="30" fill="#dbeafe" opacity="0.9"/>
+                <circle cx="130" cy="60" r="25" fill="#60a5fa" opacity="0.9"/>
+                <circle cx="70" cy="60" r="25" fill="#bfdbfe" opacity="0.9"/>
+                <circle cx="100" cy="80" r="10" fill="#fef08a"/>
+                <circle cx="140" cy="110" r="8" fill="#fef08a"/>
+                <circle cx="60" cy="110" r="8" fill="#fef08a"/>
+                <circle cx="100" cy="40" r="7" fill="#fef08a"/>
+            </svg>
+        </div>
+        
+        <h1 class="font-heading text-5xl md:text-7xl font-bold text-pastel-dark mb-4 drop-shadow-sm">
+            Happy Graduation!
+        </h1>
+        <h2 class="text-2xl md:text-3xl text-slate-500 font-semibold mb-8">
+            You did it, Leane! 🎓
+        </h2>
+        
+        <a href="#letter-section" class="mt-12 text-pastel-dark animate-bounce">
+            <svg class="w-8 h-8 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+            </svg>
+        </a>
+    </section>
+
+    <section id="letter-section" class="py-20 px-6 max-w-2xl mx-auto flex flex-col items-center">
+        <h3 class="font-heading text-3xl font-semibold text-center mb-10 text-pastel-dark">A Letter For You</h3>
+        
+        <div id="envelope-container" class="envelope-container relative w-full max-w-lg cursor-pointer group">
+            <div class="bg-blue-300 w-full h-48 rounded-t-xl absolute top-0 left-0 z-0"></div>
+            
+            <div class="letter-content absolute top-10 left-0 w-full px-4 z-10 drop-shadow-xl">
+                <div class="letter-inner bg-white p-6 md:p-8 rounded-xl shadow-inner border border-blue-50">
+                    <p class="mb-4">Dear Leane,</p>
+                    <p class="mb-4">
+                        I am so incredibly proud of you! All those late nights, stressful exams, and hard work have finally paid off. 
+                        You're officially a graduate, and the world is better for it.
+                    </p>
+                    <p class="mb-4">
+                        Take a moment to soak it all in. I can't wait to see what amazing things you do next!
+                    </p>
+                    <p class="font-semibold text-pastel-dark text-right">- With love ❤️</p>
+                </div>
+            </div>
+
+            <div class="bg-blue-200 w-full h-48 rounded-xl relative z-20 flex items-center justify-center shadow-lg transition-transform group-hover:scale-[1.02]">
+                <span class="text-blue-500 font-bold tracking-widest uppercase opacity-50 select-none">Tap to open</span>
+                
+                <svg class="envelope-flap absolute top-0 left-0 w-full h-full drop-shadow-md pointer-events-none" preserveAspectRatio="none" viewBox="0 0 100 100">
+                    <polygon points="0,0 100,0 50,55" fill="#93C5FD" stroke="#60A5FA" stroke-width="1" stroke-linejoin="round"/>
+                </svg>
+                <svg class="absolute bottom-0 left-0 w-full h-full pointer-events-none" preserveAspectRatio="none" viewBox="0 0 100 100">
+                    <polygon points="0,100 50,45 100,100" fill="#BFDBFE" stroke="#93C5FD" stroke-width="1" stroke-linejoin="round"/>
+                    <polygon points="0,0 0,100 50,45" fill="#DBEAFE" stroke="#93C5FD" stroke-width="1" stroke-linejoin="round"/>
+                    <polygon points="100,0 100,100 50,45" fill="#DBEAFE" stroke="#93C5FD" stroke-width="1" stroke-linejoin="round"/>
+                </svg>
+            </div>
+        </div>
+        <div class="h-64 hidden md:block"></div>
+        <div class="h-96 block md:hidden"></div>
+    </section>
+
+    <hr class="border-blue-100 max-w-4xl mx-auto w-3/4">
+
+    <section class="py-20 px-6 max-w-3xl mx-auto text-center">
+        <h3 class="font-heading text-3xl font-semibold mb-2 text-pastel-dark">Our Soundtrack</h3>
+        <p class="text-slate-500 mb-8">A little playlist for your post-grad adventures.</p>
+        
+        <div class="bg-white p-2 md:p-4 rounded-3xl shadow-xl shadow-blue-100/50">
+            <iframe style="border-radius:20px" src="https://open.spotify.com/embed/playlist/37i9dQZF1DXcBWIGoYBM5M?utm_source=generator&theme=0" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+        </div>
+    </section>
+
+    <hr class="border-blue-100 max-w-4xl mx-auto w-3/4">
+
+    <section class="py-20 px-6 max-w-2xl mx-auto text-center mb-10">
+        <h3 class="font-heading text-3xl font-semibold mb-4 text-pastel-dark">Time to Relax</h3>
+        <p class="text-slate-500 mb-8">Kick back by the digital pond. Give it a cast!</p>
+
+        <div class="bg-blue-100 rounded-3xl p-10 border-4 border-blue-200 shadow-inner relative overflow-hidden h-64 flex flex-col items-center justify-center transition-all">
+            
+            <button id="cast-btn" class="bg-pastel-dark hover:bg-blue-500 text-white font-bold py-3 px-8 rounded-full shadow-lg transform transition hover:-translate-y-1 active:translate-y-1 focus:outline-none z-10">
+                🎣 Cast Line
+            </button>
+
+            <div id="fishing-loader" class="hidden flex-col items-center z-10">
+                <div class="w-8 h-8 border-4 border-white border-t-pastel-dark rounded-full animate-spin mb-2"></div>
+                <p class="text-blue-500 font-semibold animate-pulse">Waiting for a bite...</p>
+            </div>
+
+            <div id="fish-result" class="hidden flex-col items-center z-10 bg-white/90 p-6 rounded-2xl shadow-xl border-2 border-green-300 transform scale-95 transition-transform duration-300">
+                <div class="text-5xl mb-2">🐟📜</div>
+                <h4 class="font-heading font-bold text-xl text-green-600 mb-1">Perfect Catch!</h4>
+                <p class="text-slate-600 text-sm">
+                    Way easier than Stardew Valley fishing!<br>
+                    You caught a fish AND a diploma! Congrats!
+                </p>
+                <button onclick="resetFishing()" class="mt-4 text-xs text-pastel-dark underline hover:text-blue-600">Cast again?</button>
+            </div>
+
+            <div class="absolute bottom-0 w-full h-1/2 bg-blue-200/50 rounded-t-[100%] animate-pulse z-0"></div>
+        </div>
+    </section>
+
+    <footer class="text-center py-6 text-slate-400 text-sm bg-white">
+        Designed with ❤️ for Leane's Graduation.
+    </footer>
+
+    <script>
+        // 1. Envelope Logic
+        const envelopeContainer = document.getElementById('envelope-container');
+        envelopeContainer.addEventListener('click', () => {
+            envelopeContainer.classList.toggle('open');
+        });
+
+        // 2. Fishing Minigame Logic
+        const castBtn = document.getElementById('cast-btn');
+        const loader = document.getElementById('fishing-loader');
+        const result = document.getElementById('fish-result');
+
+        castBtn.addEventListener('click', () => {
+            // Hide button, show loader
+            castBtn.classList.add('hidden');
+            loader.classList.remove('hidden');
+            loader.classList.add('flex');
+
+            // 1-second delay for the Stardew Valley joke reveal
+            setTimeout(() => {
+                loader.classList.remove('flex');
+                loader.classList.add('hidden');
+                
+                result.classList.remove('hidden');
+                result.classList.add('flex');
+                
+                // Pop animation
+                setTimeout(() => result.classList.remove('scale-95'), 50);
+            }, 1000);
+        });
+
+        // Optional reset for the game
+        window.resetFishing = function() {
+            result.classList.add('hidden');
+            result.classList.remove('flex');
+            result.classList.add('scale-95');
+            
+            castBtn.classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>
