@@ -4,9 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Congratulations Kayii!</title>
-    <!-- Tailwind CSS for rapid styling -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
     
     <script>
@@ -18,25 +16,16 @@
                         body: ['Nunito', 'sans-serif'],
                     },
                     colors: {
-                        pastel: {
-                            light: '#eff6ff', 
-                            blue: '#bfdbfe',  
-                            dark: '#60a5fa',  
-                        }
+                        pastel: { light: '#eff6ff', blue: '#bfdbfe', dark: '#60a5fa' }
                     },
                     animation: {
                         'float': 'float 3s ease-in-out infinite',
                         'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-                        'wobble': 'wobble 0.5s ease-in-out infinite',
                     },
                     keyframes: {
                         float: {
                             '0%, 100%': { transform: 'translateY(0)' },
                             '50%': { transform: 'translateY(-10px)' },
-                        },
-                        wobble: {
-                            '0%, 100%': { transform: 'rotate(-5deg)' },
-                            '50%': { transform: 'rotate(5deg)' },
                         }
                     }
                 }
@@ -46,56 +35,52 @@
     <style>
         html { scroll-behavior: smooth; }
         
-        /* The "Once We Were Us" Cinematic Black & White Theme */
         body {
             transition: filter 3s ease-in-out, background-color 3s ease-in-out;
             background-color: #f8fafc;
         }
-        .bw-theme {
-            filter: grayscale(100%) contrast(1.1);
+        .bw-theme { filter: grayscale(100%) contrast(1.1); }
+
+        /* --- SPRITE SHEET ANIMATION CSS --- */
+        #player-sprite {
+            width: 100%;
+            height: 100%;
+            /* Pointing directly to your uploaded file! */
+            background-image: url('kayii.png'); 
+            background-size: 400% 300%; /* 4 columns, 3 rows */
+            background-position: 0% 0%; /* Default: Top Left (Front Idle) */
+            background-repeat: no-repeat;
+            image-rendering: pixelated; /* Keeps the pixel art crisp! */
+            transition: transform 0.1s; /* For flipping left/right */
         }
 
         /* --- THE FLOWER BOMBARDMENT BACKGROUNDS --- */
-        @keyframes pan-bg {
-            0% { background-position: 0px 0px; }
-            100% { background-position: 300px 300px; }
-        }
-        @keyframes pan-bg-reverse {
-            0% { background-position: 0px 0px; }
-            100% { background-position: -450px -450px; }
-        }
+        @keyframes pan-bg { 0% { background-position: 0px 0px; } 100% { background-position: 300px 300px; } }
+        @keyframes pan-bg-reverse { 0% { background-position: 0px 0px; } 100% { background-position: -450px -450px; } }
         
         .floral-bg-1 {
-            background-image: url("data:image/svg+xml,%3Csvg width='300' height='300' xmlns='http://www.w3.org/2000/svg'%3E%3Cg opacity='0.5'%3E%3C!-- Blue --%3E%3Ccircle cx='50' cy='30' r='15' fill='%2360a5fa'/%3E%3Ccircle cx='70' cy='30' r='15' fill='%2360a5fa'/%3E%3Ccircle cx='40' cy='50' r='15' fill='%2360a5fa'/%3E%3Ccircle cx='80' cy='50' r='15' fill='%2360a5fa'/%3E%3Ccircle cx='50' cy='70' r='15' fill='%2360a5fa'/%3E%3Ccircle cx='70' cy='70' r='15' fill='%2360a5fa'/%3E%3Ccircle cx='60' cy='50' r='12' fill='%23fef08a'/%3E%3C!-- Purple --%3E%3Ccircle cx='200' cy='180' r='20' fill='%23a855f7'/%3E%3Ccircle cx='230' cy='180' r='20' fill='%23a855f7'/%3E%3Ccircle cx='185' cy='210' r='20' fill='%23a855f7'/%3E%3Ccircle cx='245' cy='210' r='20' fill='%23a855f7'/%3E%3Ccircle cx='200' cy='240' r='20' fill='%23a855f7'/%3E%3Ccircle cx='230' cy='240' r='20' fill='%23a855f7'/%3E%3Ccircle cx='215' cy='210' r='15' fill='%23fef08a'/%3E%3C!-- Lilac --%3E%3Ccircle cx='260' cy='40' r='12' fill='%23d8b4fe'/%3E%3Ccircle cx='280' cy='40' r='12' fill='%23d8b4fe'/%3E%3Ccircle cx='250' cy='60' r='12' fill='%23d8b4fe'/%3E%3Ccircle cx='290' cy='60' r='12' fill='%23d8b4fe'/%3E%3Ccircle cx='260' cy='80' r='12' fill='%23d8b4fe'/%3E%3Ccircle cx='280' cy='80' r='12' fill='%23d8b4fe'/%3E%3Ccircle cx='270' cy='60' r='8' fill='%23fef08a'/%3E%3C!-- Cyan --%3E%3Ccircle cx='80' cy='200' r='18' fill='%2393c5fd'/%3E%3Ccircle cx='110' cy='200' r='18' fill='%2393c5fd'/%3E%3Ccircle cx='65' cy='230' r='18' fill='%2393c5fd'/%3E%3Ccircle cx='125' cy='230' r='18' fill='%2393c5fd'/%3E%3Ccircle cx='80' cy='260' r='18' fill='%2393c5fd'/%3E%3Ccircle cx='110' cy='260' r='18' fill='%2393c5fd'/%3E%3Ccircle cx='95' cy='230' r='12' fill='%23fef08a'/%3E%3C/g%3E%3C/svg%3E");
+            background-image: url("data:image/svg+xml,%3Csvg width='300' height='300' xmlns='http://www.w3.org/2000/svg'%3E%3Cg opacity='0.5'%3E%3Ccircle cx='50' cy='30' r='15' fill='%2360a5fa'/%3E%3Ccircle cx='70' cy='30' r='15' fill='%2360a5fa'/%3E%3Ccircle cx='40' cy='50' r='15' fill='%2360a5fa'/%3E%3Ccircle cx='80' cy='50' r='15' fill='%2360a5fa'/%3E%3Ccircle cx='50' cy='70' r='15' fill='%2360a5fa'/%3E%3Ccircle cx='70' cy='70' r='15' fill='%2360a5fa'/%3E%3Ccircle cx='60' cy='50' r='12' fill='%23fef08a'/%3E%3Ccircle cx='200' cy='180' r='20' fill='%23a855f7'/%3E%3Ccircle cx='230' cy='180' r='20' fill='%23a855f7'/%3E%3Ccircle cx='185' cy='210' r='20' fill='%23a855f7'/%3E%3Ccircle cx='245' cy='210' r='20' fill='%23a855f7'/%3E%3Ccircle cx='200' cy='240' r='20' fill='%23a855f7'/%3E%3Ccircle cx='230' cy='240' r='20' fill='%23a855f7'/%3E%3Ccircle cx='215' cy='210' r='15' fill='%23fef08a'/%3E%3Ccircle cx='260' cy='40' r='12' fill='%23d8b4fe'/%3E%3Ccircle cx='280' cy='40' r='12' fill='%23d8b4fe'/%3E%3Ccircle cx='250' cy='60' r='12' fill='%23d8b4fe'/%3E%3Ccircle cx='290' cy='60' r='12' fill='%23d8b4fe'/%3E%3Ccircle cx='260' cy='80' r='12' fill='%23d8b4fe'/%3E%3Ccircle cx='280' cy='80' r='12' fill='%23d8b4fe'/%3E%3Ccircle cx='270' cy='60' r='8' fill='%23fef08a'/%3E%3Ccircle cx='80' cy='200' r='18' fill='%2393c5fd'/%3E%3Ccircle cx='110' cy='200' r='18' fill='%2393c5fd'/%3E%3Ccircle cx='65' cy='230' r='18' fill='%2393c5fd'/%3E%3Ccircle cx='125' cy='230' r='18' fill='%2393c5fd'/%3E%3Ccircle cx='80' cy='260' r='18' fill='%2393c5fd'/%3E%3Ccircle cx='110' cy='260' r='18' fill='%2393c5fd'/%3E%3Ccircle cx='95' cy='230' r='12' fill='%23fef08a'/%3E%3C/g%3E%3C/svg%3E");
             background-size: 300px 300px;
             animation: pan-bg 25s linear infinite;
         }
         
         .floral-bg-2 {
-            background-image: url("data:image/svg+xml,%3Csvg width='300' height='300' xmlns='http://www.w3.org/2000/svg'%3E%3Cg opacity='0.35'%3E%3C!-- Blue --%3E%3Ccircle cx='50' cy='30' r='15' fill='%2360a5fa'/%3E%3Ccircle cx='70' cy='30' r='15' fill='%2360a5fa'/%3E%3Ccircle cx='40' cy='50' r='15' fill='%2360a5fa'/%3E%3Ccircle cx='80' cy='50' r='15' fill='%2360a5fa'/%3E%3Ccircle cx='50' cy='70' r='15' fill='%2360a5fa'/%3E%3Ccircle cx='70' cy='70' r='15' fill='%2360a5fa'/%3E%3Ccircle cx='60' cy='50' r='12' fill='%23fef08a'/%3E%3C!-- Purple --%3E%3Ccircle cx='200' cy='180' r='20' fill='%23a855f7'/%3E%3Ccircle cx='230' cy='180' r='20' fill='%23a855f7'/%3E%3Ccircle cx='185' cy='210' r='20' fill='%23a855f7'/%3E%3Ccircle cx='245' cy='210' r='20' fill='%23a855f7'/%3E%3Ccircle cx='200' cy='240' r='20' fill='%23a855f7'/%3E%3Ccircle cx='230' cy='240' r='20' fill='%23a855f7'/%3E%3Ccircle cx='215' cy='210' r='15' fill='%23fef08a'/%3E%3C!-- Lilac --%3E%3Ccircle cx='260' cy='40' r='12' fill='%23d8b4fe'/%3E%3Ccircle cx='280' cy='40' r='12' fill='%23d8b4fe'/%3E%3Ccircle cx='250' cy='60' r='12' fill='%23d8b4fe'/%3E%3Ccircle cx='290' cy='60' r='12' fill='%23d8b4fe'/%3E%3Ccircle cx='260' cy='80' r='12' fill='%23d8b4fe'/%3E%3Ccircle cx='280' cy='80' r='12' fill='%23d8b4fe'/%3E%3Ccircle cx='270' cy='60' r='8' fill='%23fef08a'/%3E%3C!-- Cyan --%3E%3Ccircle cx='80' cy='200' r='18' fill='%2393c5fd'/%3E%3Ccircle cx='110' cy='200' r='18' fill='%2393c5fd'/%3E%3Ccircle cx='65' cy='230' r='18' fill='%2393c5fd'/%3E%3Ccircle cx='125' cy='230' r='18' fill='%2393c5fd'/%3E%3Ccircle cx='80' cy='260' r='18' fill='%2393c5fd'/%3E%3Ccircle cx='110' cy='260' r='18' fill='%2393c5fd'/%3E%3Ccircle cx='95' cy='230' r='12' fill='%23fef08a'/%3E%3C/g%3E%3C/svg%3E");
+            background-image: url("data:image/svg+xml,%3Csvg width='300' height='300' xmlns='http://www.w3.org/2000/svg'%3E%3Cg opacity='0.35'%3E%3Ccircle cx='50' cy='30' r='15' fill='%2360a5fa'/%3E%3Ccircle cx='70' cy='30' r='15' fill='%2360a5fa'/%3E%3Ccircle cx='40' cy='50' r='15' fill='%2360a5fa'/%3E%3Ccircle cx='80' cy='50' r='15' fill='%2360a5fa'/%3E%3Ccircle cx='50' cy='70' r='15' fill='%2360a5fa'/%3E%3Ccircle cx='70' cy='70' r='15' fill='%2360a5fa'/%3E%3Ccircle cx='60' cy='50' r='12' fill='%23fef08a'/%3E%3Ccircle cx='200' cy='180' r='20' fill='%23a855f7'/%3E%3Ccircle cx='230' cy='180' r='20' fill='%23a855f7'/%3E%3Ccircle cx='185' cy='210' r='20' fill='%23a855f7'/%3E%3Ccircle cx='245' cy='210' r='20' fill='%23a855f7'/%3E%3Ccircle cx='200' cy='240' r='20' fill='%23a855f7'/%3E%3Ccircle cx='230' cy='240' r='20' fill='%23a855f7'/%3E%3Ccircle cx='215' cy='210' r='15' fill='%23fef08a'/%3E%3Ccircle cx='260' cy='40' r='12' fill='%23d8b4fe'/%3E%3Ccircle cx='280' cy='40' r='12' fill='%23d8b4fe'/%3E%3Ccircle cx='250' cy='60' r='12' fill='%23d8b4fe'/%3E%3Ccircle cx='290' cy='60' r='12' fill='%23d8b4fe'/%3E%3Ccircle cx='260' cy='80' r='12' fill='%23d8b4fe'/%3E%3Ccircle cx='280' cy='80' r='12' fill='%23d8b4fe'/%3E%3Ccircle cx='270' cy='60' r='8' fill='%23fef08a'/%3E%3Ccircle cx='80' cy='200' r='18' fill='%2393c5fd'/%3E%3Ccircle cx='110' cy='200' r='18' fill='%2393c5fd'/%3E%3Ccircle cx='65' cy='230' r='18' fill='%2393c5fd'/%3E%3Ccircle cx='125' cy='230' r='18' fill='%2393c5fd'/%3E%3Ccircle cx='80' cy='260' r='18' fill='%2393c5fd'/%3E%3Ccircle cx='110' cy='260' r='18' fill='%2393c5fd'/%3E%3Ccircle cx='95' cy='230' r='12' fill='%23fef08a'/%3E%3C/g%3E%3C/svg%3E");
             background-size: 450px 450px;
             transform: rotate(180deg);
             animation: pan-bg-reverse 35s linear infinite;
         }
 
-        /* The Secret Expansion Trick */
         .secret-wrapper {
             display: grid;
             grid-template-rows: 0fr;
             transition: grid-template-rows 3s ease-in-out, opacity 2.5s ease-in-out;
             opacity: 0;
         }
-        .secret-wrapper.revealed {
-            grid-template-rows: 1fr;
-            opacity: 1;
-        }
+        .secret-wrapper.revealed { grid-template-rows: 1fr; opacity: 1; }
         .secret-inner { overflow: hidden; }
 
-        /* Envelope Animations */
-        .envelope-flap {
-            transform-origin: top;
-            transition: transform 0.6s ease-in-out;
-        }
+        .envelope-flap { transform-origin: top; transition: transform 0.6s ease-in-out; }
         .envelope-container.open .envelope-flap { transform: rotateX(180deg); z-index: 0; }
         .letter-content {
             display: grid;
@@ -104,33 +89,19 @@
             opacity: 0;
             transform: translateY(0);
         }
-        .envelope-container.open .letter-content {
-            grid-template-rows: 1fr;
-            opacity: 1;
-            transform: translateY(150px); 
-        }
+        .envelope-container.open .letter-content { grid-template-rows: 1fr; opacity: 1; transform: translateY(150px); }
         .letter-inner { overflow: hidden; }
         .no-select { user-select: none; -webkit-user-select: none; }
         
-        /* D-Pad Buttons */
         .d-btn {
             background: rgba(255,255,255,0.7);
             border: 2px solid #94a3b8;
             border-radius: 8px;
-            width: 45px;
-            height: 45px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            color: #334155;
-            box-shadow: 0 4px 0 #94a3b8;
+            width: 45px; height: 45px;
+            display: flex; align-items: center; justify-content: center;
+            font-weight: bold; color: #334155; box-shadow: 0 4px 0 #94a3b8;
         }
-        .d-btn:active, .d-btn.active {
-            transform: translateY(4px);
-            box-shadow: 0 0 0 #94a3b8;
-            background: #e2e8f0;
-        }
+        .d-btn:active, .d-btn.active { transform: translateY(4px); box-shadow: 0 0 0 #94a3b8; background: #e2e8f0; }
     </style>
 </head>
 <body class="font-body text-slate-700 overflow-x-hidden bw-theme" id="main-body">
@@ -144,48 +115,35 @@
             
             <!-- THE RPG OVERWORLD MAP -->
             <div id="rpg-container" class="relative w-full h-64 md:h-80 bg-green-300 rounded-xl overflow-hidden border-4 border-green-500 shadow-inner flex flex-col">
-                <!-- Grass Texture Overlay -->
                 <div class="absolute inset-0 opacity-20 pointer-events-none" style="background-image: radial-gradient(#166534 2px, transparent 2px); background-size: 20px 20px;"></div>
                 
-                <!-- Water Area (Right side) -->
                 <div id="water-zone" class="absolute right-0 top-0 w-1/3 h-full bg-blue-400 border-l-4 border-blue-300 flex items-center justify-center">
-                    <!-- Subtle waves -->
                     <div class="w-full h-full opacity-30" style="background-image: radial-gradient(circle, #eff6ff 2px, transparent 2.5px); background-size: 30px 15px;"></div>
                 </div>
 
-                <!-- Action Prompt (Hidden until near water) -->
                 <div id="action-prompt" class="absolute top-4 left-1/2 transform -translate-x-1/2 bg-white/90 px-4 py-2 rounded-full shadow-lg font-bold text-blue-600 text-sm opacity-0 transition-opacity z-20">
                     <span class="animate-pulse">🎣 Click 'Cast Line'!</span>
                 </div>
 
-                <!-- The Avatar / Player -->
-                <div id="rpg-player" class="absolute w-12 h-12 md:w-16 md:h-16 z-10 transition-transform" style="left: 20px; top: 100px;">
-                    <!-- Dropshadow for depth -->
-                    <div class="absolute bottom-0 left-1/4 w-1/2 h-2 bg-black/20 rounded-full blur-[2px]"></div>
-                    <!-- UPLOAD HER DISCORD AVATAR AS kayii-sprite.png -->
-                    <img src="kayii-sprite.png" id="player-sprite" class="w-full h-full object-contain relative" alt="Player">
+                <!-- The Avatar / Player with the Sprite DIV instead of IMG -->
+                <div id="rpg-player" class="absolute w-16 h-16 md:w-20 md:h-20 z-10" style="left: 20px; top: 100px;">
+                    <div class="absolute bottom-1 left-1/4 w-1/2 h-2 bg-black/20 rounded-full blur-[2px]"></div>
+                    <div id="player-sprite"></div>
                 </div>
             </div>
 
             <!-- MOBILE CONTROLS & ACTION BUTTON -->
             <div id="rpg-controls" class="w-full mt-6 flex flex-row items-center justify-between px-2">
-                <!-- D-Pad -->
                 <div class="grid grid-cols-3 gap-1">
-                    <div></div>
-                    <button class="d-btn no-select" id="btn-up">W</button>
-                    <div></div>
-                    <button class="d-btn no-select" id="btn-left">A</button>
-                    <button class="d-btn no-select" id="btn-down">S</button>
-                    <button class="d-btn no-select" id="btn-right">D</button>
+                    <div></div><button class="d-btn no-select" id="btn-up">W</button><div></div>
+                    <button class="d-btn no-select" id="btn-left">A</button><button class="d-btn no-select" id="btn-down">S</button><button class="d-btn no-select" id="btn-right">D</button>
                 </div>
-                
-                <!-- RPG Cast Line Button -->
                 <button id="rpg-cast-btn" class="bg-slate-300 text-slate-500 font-bold py-4 px-6 md:px-10 rounded-xl shadow-md transition-all text-sm md:text-base opacity-50 cursor-not-allowed">
                     Cast Line
                 </button>
             </div>
 
-            <!-- THE FISHING MINIGAME UI (Hidden initially) -->
+            <!-- THE FISHING MINIGAME UI -->
             <div id="game-ui" class="w-full h-full flex-col items-center justify-center z-10 hidden py-10">
                 <p class="text-slate-500 mb-6 text-center font-bold">Keep the fish in the green zone!</p>
                 <div class="flex flex-row h-48 w-full justify-center gap-4 mb-8">
@@ -218,53 +176,42 @@
         </div>
         
         <div id="scroll-hint" class="mt-12 text-pastel-dark animate-bounce opacity-0 transition-opacity duration-1000 hidden">
-            <svg class="w-10 h-10 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
-            </svg>
+            <svg class="w-10 h-10 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path></svg>
         </div>
     </section>
 
     <!-- 2. The Hidden Reward: Expands upon winning -->
     <div id="secret-content" class="secret-wrapper w-full relative">
-        
-        <!-- THE FLOWER BOMBARDMENT LAYERS -->
         <div class="absolute inset-0 floral-bg-1 z-0 pointer-events-none"></div>
         <div class="absolute inset-0 floral-bg-2 z-0 pointer-events-none"></div>
         
         <div class="secret-inner w-full flex flex-col items-center relative z-10">
-            
-            <!-- Hero Section with Frosted Glass -->
+            <!-- Hero Section -->
             <section id="hero-section" class="min-h-screen flex flex-col items-center justify-center text-center p-6 relative w-full pt-20">
                 <div class="bg-white/70 backdrop-blur-md rounded-[3rem] p-10 md:p-16 shadow-2xl border border-white flex flex-col items-center">
                     <div class="animate-float mb-8">
-                        <!-- Grand Blue/Purple Bouquet SVG -->
                         <svg width="250" height="300" viewBox="0 0 300 350" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M150 200 Q150 280 130 340" stroke="#86efac" stroke-width="8" stroke-linecap="round"/>
                             <path d="M150 200 Q180 260 185 335" stroke="#86efac" stroke-width="8" stroke-linecap="round"/>
                             <path d="M150 200 Q110 250 100 330" stroke="#86efac" stroke-width="8" stroke-linecap="round"/>
                             <path d="M90 270 Q150 300 210 270 Q150 240 90 270 Z" fill="#fbcfe8"/>
                             <path d="M150 270 L120 330 M150 270 L180 330" stroke="#fbcfe8" stroke-width="10" stroke-linecap="round"/>
-
                             <circle cx="150" cy="130" r="65" fill="#a855f7" opacity="0.8"/>
                             <circle cx="80" cy="150" r="55" fill="#60a5fa" opacity="0.8"/>
                             <circle cx="220" cy="150" r="55" fill="#8b5cf6" opacity="0.8"/>
-
                             <circle cx="110" cy="90" r="50" fill="#c084fc" opacity="0.9"/>
                             <circle cx="190" cy="90" r="50" fill="#3b82f6" opacity="0.9"/>
                             <circle cx="150" cy="180" r="45" fill="#d8b4fe" opacity="0.9"/>
                             <circle cx="85" cy="200" r="35" fill="#93c5fd" opacity="0.9"/>
                             <circle cx="215" cy="200" r="35" fill="#a78bfa" opacity="0.9"/>
-
                             <circle cx="150" cy="50" r="40" fill="#e9d5ff" opacity="0.95"/>
                             <circle cx="90" cy="120" r="30" fill="#bfdbfe" opacity="0.95"/>
                             <circle cx="210" cy="120" r="30" fill="#c4b5fd" opacity="0.95"/>
                             <circle cx="150" cy="120" r="30" fill="#60a5fa" opacity="0.95"/>
-                            
                             <circle cx="60" cy="90" r="20" fill="#d8b4fe" opacity="0.8"/>
                             <circle cx="240" cy="90" r="20" fill="#93c5fd" opacity="0.8"/>
                             <circle cx="190" cy="40" r="22" fill="#a855f7" opacity="0.8"/>
                             <circle cx="110" cy="40" r="22" fill="#3b82f6" opacity="0.8"/>
-
                             <circle cx="150" cy="130" r="8" fill="#fef08a"/>
                             <circle cx="110" cy="90" r="7" fill="#fef08a"/>
                             <circle cx="190" cy="90" r="7" fill="#fef08a"/>
@@ -276,19 +223,13 @@
                             <circle cx="210" cy="120" r="5" fill="#fef08a"/>
                             <circle cx="85" cy="200" r="5" fill="#fef08a"/>
                             <circle cx="215" cy="200" r="5" fill="#fef08a"/>
-
                             <path d="M40 120 L45 105 L50 120 L45 135 Z" fill="#fef08a"/>
                             <path d="M260 140 L265 125 L270 140 L265 155 Z" fill="#fef08a"/>
                             <path d="M150 5 L155 -10 L160 5 L155 20 Z" fill="#fef08a"/>
                         </svg>
                     </div>
-                    
-                    <h1 class="font-heading text-5xl md:text-7xl font-bold text-pastel-dark mb-4 drop-shadow-sm">
-                        Congratulations!
-                    </h1>
-                    <h2 class="text-2xl md:text-3xl text-slate-500 font-semibold">
-                        You did it, Kayii! 🎓
-                    </h2>
+                    <h1 class="font-heading text-5xl md:text-7xl font-bold text-pastel-dark mb-4 drop-shadow-sm">Congratulations!</h1>
+                    <h2 class="text-2xl md:text-3xl text-slate-500 font-semibold">You did it, Kayii! 🎓</h2>
                 </div>
             </section>
 
@@ -296,28 +237,19 @@
             <section id="letter-section" class="py-16 px-6 max-w-2xl mx-auto flex flex-col items-center w-full">
                 <div class="bg-white/80 backdrop-blur-md rounded-3xl p-8 w-full shadow-xl border border-white flex flex-col items-center">
                     <h3 class="font-heading text-3xl font-semibold text-center mb-10 text-pastel-dark">A Letter For You</h3>
-                    
                     <div id="envelope-container" class="envelope-container relative w-full max-w-md cursor-pointer group z-20">
                         <div class="bg-blue-300 w-full h-48 rounded-t-xl absolute top-0 left-0 z-0"></div>
-                        
                         <div class="letter-content absolute top-10 left-0 w-full px-4 z-10 drop-shadow-xl">
                             <div class="letter-inner bg-white p-6 rounded-xl shadow-inner border border-blue-50 text-sm md:text-base">
                                 <p class="mb-4">Dear Kayii,</p>
-                                <p class="mb-4">
-                                    I am so incredibly proud of you! All those late nights, stressful practicals, and hard work have finally paid off. You are officially a dentist! 🦷
-                                </p>
-                                <p class="mb-4">
-                                    While I am still debugging code and surviving my IT classes, it is so inspiring to watch you clear this massive milestone. Whether we are gaming, watching our favorite shows, or just hanging out, you are the best Player 2 I could ask for. I can't wait to see what amazing things you do next!
-                                </p>
+                                <p class="mb-4">I am so incredibly proud of you! All those late nights, stressful practicals, and hard work have finally paid off. You are officially a dentist! 🦷</p>
+                                <p class="mb-4">While I am still debugging code and surviving my IT classes, it is so inspiring to watch you clear this massive milestone. Whether we are gaming, watching our favorite shows, or just hanging out, you are the best Player 2 I could ask for. I can't wait to see what amazing things you do next!</p>
                                 <p class="font-semibold text-pastel-dark text-right">- Kero</p>
                             </div>
                         </div>
-
                         <div class="bg-blue-200 w-full h-48 rounded-xl relative z-20 flex items-center justify-center shadow-lg transition-transform group-hover:scale-[1.02]">
                             <span class="text-blue-500 font-bold tracking-widest uppercase opacity-50 select-none">Tap to open</span>
-                            <svg class="envelope-flap absolute top-0 left-0 w-full h-full drop-shadow-md pointer-events-none" preserveAspectRatio="none" viewBox="0 0 100 100">
-                                <polygon points="0,0 100,0 50,55" fill="#93C5FD" stroke="#60A5FA" stroke-width="1" stroke-linejoin="round"/>
-                            </svg>
+                            <svg class="envelope-flap absolute top-0 left-0 w-full h-full drop-shadow-md pointer-events-none" preserveAspectRatio="none" viewBox="0 0 100 100"><polygon points="0,0 100,0 50,55" fill="#93C5FD" stroke="#60A5FA" stroke-width="1" stroke-linejoin="round"/></svg>
                             <svg class="absolute bottom-0 left-0 w-full h-full pointer-events-none" preserveAspectRatio="none" viewBox="0 0 100 100">
                                 <polygon points="0,100 50,45 100,100" fill="#BFDBFE" stroke="#93C5FD" stroke-width="1" stroke-linejoin="round"/>
                                 <polygon points="0,0 0,100 50,45" fill="#DBEAFE" stroke="#93C5FD" stroke-width="1" stroke-linejoin="round"/>
@@ -325,7 +257,6 @@
                             </svg>
                         </div>
                     </div>
-                    <!-- Spacers -->
                     <div class="h-96 hidden md:block"></div>
                     <div class="h-[28rem] block md:hidden"></div>
                 </div>
@@ -336,25 +267,10 @@
                 <div class="bg-white/80 backdrop-blur-md rounded-[3rem] p-10 shadow-xl border border-white">
                     <h3 class="font-heading text-3xl font-semibold mb-4 text-pastel-dark tracking-wide">Our Co-op Team</h3>
                     <p class="text-slate-500 mb-10 max-w-lg mx-auto">Like May and Cody (but with way less arguing and definitely no Book of Love), we make the ultimate team.</p>
-                    
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                        <div class="bg-white rounded-3xl shadow-lg border-2 border-white overflow-hidden transform transition hover:-translate-y-2">
-                            <div class="w-full aspect-square bg-slate-200 relative">
-                                <img src="us-1.jpg" alt="Us" class="w-full h-full object-cover">
-                            </div>
-                        </div>
-                        
-                        <div class="bg-white rounded-3xl shadow-lg border-2 border-white overflow-hidden transform transition hover:-translate-y-2">
-                            <div class="w-full aspect-square bg-slate-200 relative">
-                                <img src="us-2.jpg" alt="Us" class="w-full h-full object-cover">
-                            </div>
-                        </div>
-
-                        <div class="bg-white rounded-3xl shadow-lg border-2 border-white overflow-hidden transform transition hover:-translate-y-2">
-                            <div class="w-full aspect-square bg-slate-200 relative">
-                                <img src="us-3.jpg" alt="Us" class="w-full h-full object-cover">
-                            </div>
-                        </div>
+                        <div class="bg-white rounded-3xl shadow-lg border-2 border-white overflow-hidden transform transition hover:-translate-y-2"><div class="w-full aspect-square bg-slate-200 relative"><img src="us-1.jpg" alt="Us" class="w-full h-full object-cover"></div></div>
+                        <div class="bg-white rounded-3xl shadow-lg border-2 border-white overflow-hidden transform transition hover:-translate-y-2"><div class="w-full aspect-square bg-slate-200 relative"><img src="us-2.jpg" alt="Us" class="w-full h-full object-cover"></div></div>
+                        <div class="bg-white rounded-3xl shadow-lg border-2 border-white overflow-hidden transform transition hover:-translate-y-2"><div class="w-full aspect-square bg-slate-200 relative"><img src="us-3.jpg" alt="Us" class="w-full h-full object-cover"></div></div>
                     </div>
                 </div>
             </section>
@@ -364,42 +280,25 @@
                 <div class="bg-white/80 backdrop-blur-md rounded-[3rem] p-10 shadow-xl border border-white">
                     <h3 class="font-heading text-3xl font-semibold mb-2 text-pastel-dark">Our Memories</h3>
                     <p class="text-slate-500 mb-8">From epic boss fights to our favorite gaming and movie nights.</p>
-                    
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div class="aspect-video bg-slate-900 rounded-xl overflow-hidden shadow-md relative group flex items-center justify-center border-2 border-white">
-                            <video src="boss-fight.mp4" controls class="w-full h-full object-cover" poster="https://via.placeholder.com/640x360/1e293b/ffffff?text=Hit+Play!"></video>
-                        </div>
-                        
-                        <div class="aspect-video bg-slate-200 rounded-xl overflow-hidden shadow-md relative group border-2 border-white">
-                            <img src="stardew-fishing.png" alt="Stardew Valley" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
-                        </div>
-
-                        <div class="aspect-video bg-slate-200 rounded-xl overflow-hidden shadow-md relative group border-2 border-white">
-                            <img src="https://via.placeholder.com/640x360?text=Upload+Memory" alt="Memory" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
-                        </div>
-
-                        <div class="aspect-video bg-slate-200 rounded-xl overflow-hidden shadow-md relative group border-2 border-white">
-                            <img src="https://via.placeholder.com/640x360?text=Upload+Memory" alt="Memory" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
-                        </div>
+                        <div class="aspect-video bg-slate-900 rounded-xl overflow-hidden shadow-md relative group flex items-center justify-center border-2 border-white"><video src="boss-fight.mp4" controls class="w-full h-full object-cover" poster="https://via.placeholder.com/640x360/1e293b/ffffff?text=Hit+Play!"></video></div>
+                        <div class="aspect-video bg-slate-200 rounded-xl overflow-hidden shadow-md relative group border-2 border-white"><img src="stardew-fishing.png" alt="Stardew Valley" class="w-full h-full object-cover group-hover:scale-105 transition duration-300"></div>
+                        <div class="aspect-video bg-slate-200 rounded-xl overflow-hidden shadow-md relative group border-2 border-white"><img src="https://via.placeholder.com/640x360?text=Upload+Memory" alt="Memory" class="w-full h-full object-cover group-hover:scale-105 transition duration-300"></div>
+                        <div class="aspect-video bg-slate-200 rounded-xl overflow-hidden shadow-md relative group border-2 border-white"><img src="https://via.placeholder.com/640x360?text=Upload+Memory" alt="Memory" class="w-full h-full object-cover group-hover:scale-105 transition duration-300"></div>
                     </div>
                 </div>
             </section>
 
-            <footer class="text-center py-10 text-slate-500 font-bold text-sm w-full backdrop-blur-sm">
-                Designed by Angelo.
-            </footer>
+            <footer class="text-center py-10 text-slate-500 font-bold text-sm w-full backdrop-blur-sm">Designed by Angelo.</footer>
         </div>
     </div>
 
     <!-- Interactive Logic -->
     <script>
-        // --- 1. ENVELOPE LOGIC ---
         const envelopeContainer = document.getElementById('envelope-container');
-        envelopeContainer.addEventListener('click', () => {
-            envelopeContainer.classList.toggle('open');
-        });
+        envelopeContainer.addEventListener('click', () => { envelopeContainer.classList.toggle('open'); });
 
-        // --- 2. RPG OVERWORLD LOGIC ---
+        // --- 2. RPG OVERWORLD WITH SPRITE ANIMATION ---
         const rpgContainer = document.getElementById('rpg-container');
         const rpgPlayer = document.getElementById('rpg-player');
         const playerSprite = document.getElementById('player-sprite');
@@ -409,27 +308,25 @@
         const instructions = document.getElementById('game-instructions');
 
         let rpgActive = true;
-        let pX = 20; // Starting X
-        let pY = 100; // Starting Y
-        const speed = 2.5;
+        let pX = 20; let pY = 100; const speed = 2.5;
         const keys = { w: false, a: false, s: false, d: false, ArrowUp: false, ArrowLeft: false, ArrowDown: false, ArrowRight: false };
 
-        // Keyboard tracking
         window.addEventListener('keydown', (e) => { if(rpgActive && keys.hasOwnProperty(e.key)) keys[e.key] = true; });
         window.addEventListener('keyup', (e) => { if(keys.hasOwnProperty(e.key)) keys[e.key] = false; });
 
-        // D-Pad Touch/Mouse tracking
         const bindBtn = (id, k) => {
             const el = document.getElementById(id);
             const press = (e) => { e.preventDefault(); if(rpgActive) keys[k] = true; el.classList.add('active'); };
             const release = (e) => { e.preventDefault(); keys[k] = false; el.classList.remove('active'); };
-            el.addEventListener('mousedown', press);
-            el.addEventListener('touchstart', press, {passive: false});
-            el.addEventListener('mouseup', release);
-            el.addEventListener('mouseleave', release);
-            el.addEventListener('touchend', release);
+            el.addEventListener('mousedown', press); el.addEventListener('touchstart', press, {passive: false});
+            el.addEventListener('mouseup', release); el.addEventListener('mouseleave', release); el.addEventListener('touchend', release);
         };
         bindBtn('btn-up', 'w'); bindBtn('btn-left', 'a'); bindBtn('btn-down', 's'); bindBtn('btn-right', 'd');
+
+        // Animation Variables
+        let frameCount = 0;
+        let animIndex = 0; // 0=Idle, 1=Walk1, 2=Walk2, 3=Walk3
+        let currentFacing = 0; // 0=Front, 50=Back, 100=Side (Y-axis percentages)
 
         function rpgLoop() {
             if (!rpgActive) return;
@@ -437,44 +334,44 @@
             let isMoving = false;
             let moveX = 0; let moveY = 0;
 
-            if (keys.w || keys.ArrowUp) { moveY -= speed; isMoving = true; }
-            if (keys.s || keys.ArrowDown) { moveY += speed; isMoving = true; }
-            if (keys.a || keys.ArrowLeft) { moveX -= speed; isMoving = true; playerSprite.style.transform = 'scaleX(-1)'; }
-            if (keys.d || keys.ArrowRight) { moveX += speed; isMoving = true; playerSprite.style.transform = 'scaleX(1)'; }
+            if (keys.s || keys.ArrowDown) { moveY += speed; isMoving = true; currentFacing = 0; playerSprite.style.transform = 'scaleX(1)'; }
+            else if (keys.w || keys.ArrowUp) { moveY -= speed; isMoving = true; currentFacing = 50; playerSprite.style.transform = 'scaleX(1)'; }
+            else if (keys.a || keys.ArrowLeft) { moveX -= speed; isMoving = true; currentFacing = 100; playerSprite.style.transform = 'scaleX(-1)'; }
+            else if (keys.d || keys.ArrowRight) { moveX += speed; isMoving = true; currentFacing = 100; playerSprite.style.transform = 'scaleX(1)'; }
 
-            // Add wobble animation if moving
-            if (isMoving && !playerSprite.classList.contains('animate-wobble')) {
-                playerSprite.classList.add('animate-wobble');
-            } else if (!isMoving) {
-                playerSprite.classList.remove('animate-wobble');
+            pX += moveX; pY += moveY;
+
+            // Boundaries
+            const mapW = rpgContainer.clientWidth; const mapH = rpgContainer.clientHeight;
+            const pW = rpgPlayer.clientWidth; const pH = rpgPlayer.clientHeight;
+            if (pX < 0) pX = 0; if (pX > mapW - pW) pX = mapW - pW;
+            if (pY < 0) pY = 0; if (pY > mapH - pH) pY = mapH - pH;
+
+            rpgPlayer.style.left = pX + 'px'; rpgPlayer.style.top = pY + 'px';
+
+            // --- ANIMATION LOGIC ---
+            if (isMoving) {
+                frameCount++;
+                if (frameCount > 8) { // Adjust this number to change walking animation speed
+                    animIndex++;
+                    if (animIndex > 3) animIndex = 1; // Loop between frames 1, 2, 3 (skip 0 which is idle)
+                    frameCount = 0;
+                }
+            } else {
+                animIndex = 0; // Snap to Idle frame if not moving
             }
 
-            pX += moveX;
-            pY += moveY;
+            // Map animIndex to X-axis percentages (0%, 33.33%, 66.66%, 100%)
+            let xPos = animIndex * 33.333;
+            playerSprite.style.backgroundPosition = `${xPos}% ${currentFacing}%`;
 
-            // Boundaries (Assume map is roughly 300-500px wide based on screen, constrain by container size)
-            const mapW = rpgContainer.clientWidth;
-            const mapH = rpgContainer.clientHeight;
-            const pW = rpgPlayer.clientWidth;
-            const pH = rpgPlayer.clientHeight;
-
-            if (pX < 0) pX = 0;
-            if (pX > mapW - pW) pX = mapW - pW;
-            if (pY < 0) pY = 0;
-            if (pY > mapH - pH) pY = mapH - pH;
-
-            rpgPlayer.style.left = pX + 'px';
-            rpgPlayer.style.top = pY + 'px';
-
-            // Check proximity to water (Water is right 33% of the map)
+            // Check proximity to water
             const waterEdge = mapW - (mapW / 3) - (pW / 2);
             if (pX > waterEdge) {
-                // Near water
                 rpgCastBtn.classList.remove('bg-slate-300', 'text-slate-500', 'opacity-50', 'cursor-not-allowed');
                 rpgCastBtn.classList.add('bg-pastel-dark', 'text-white', 'hover:bg-blue-500');
                 actionPrompt.classList.remove('opacity-0');
             } else {
-                // Away from water
                 rpgCastBtn.classList.add('bg-slate-300', 'text-slate-500', 'opacity-50', 'cursor-not-allowed');
                 rpgCastBtn.classList.remove('bg-pastel-dark', 'text-white', 'hover:bg-blue-500');
                 actionPrompt.classList.add('opacity-0');
@@ -482,23 +379,18 @@
 
             requestAnimationFrame(rpgLoop);
         }
-        rpgLoop(); // Start RPG loop
+        rpgLoop();
 
-        // --- 3. TRANSITION TO FISHING MINIGAME ---
+        // --- 3. TRANSITION TO FISHING ---
         const gameUI = document.getElementById('game-ui');
-        
         rpgCastBtn.addEventListener('click', () => {
-            if (rpgCastBtn.classList.contains('cursor-not-allowed')) return; // Must be near water
-            
-            // Hide RPG, Show Fishing
+            if (rpgCastBtn.classList.contains('cursor-not-allowed')) return; 
             rpgActive = false;
             rpgContainer.classList.add('hidden');
             rpgControls.classList.add('hidden');
             instructions.classList.add('hidden');
-            
             gameUI.classList.remove('hidden');
             gameUI.classList.add('flex');
-            
             startFishingMinigame();
         });
 
@@ -510,124 +402,71 @@
         const resultSuccess = document.getElementById('fish-result');
         const resultFail = document.getElementById('fish-fail');
         
-        let fishingActive = false;
-        let fishAnimationId;
-        let isHolding = false;
-        let barPos = 0; let barVelocity = 0;
-        let fishPos = 10; let fishTarget = 20;
-        let progress = 15;    
+        let fishingActive = false; let fishAnimationId; let isHolding = false;
+        let barPos = 0; let barVelocity = 0; let fishPos = 10; let fishTarget = 20; let progress = 15;    
 
         function startFishingMinigame() {
-            fishingActive = true;
-            isHolding = false;
-            barPos = 0; barVelocity = 0;
-            fishPos = 10; progress = 15;
+            fishingActive = true; isHolding = false; barPos = 0; barVelocity = 0; fishPos = 10; progress = 15;
             fishingLoop();
         }
 
         function fishingLoop() {
             if (!fishingActive) return;
-
-            // Catch Bar Physics
-            if (isHolding) { barVelocity += 0.35; } 
-            else { barVelocity -= 0.35; }
-            barVelocity *= 0.82;    
-            barPos += barVelocity;
-
+            if (isHolding) { barVelocity += 0.35; } else { barVelocity -= 0.35; }
+            barVelocity *= 0.82; barPos += barVelocity;
             if (barPos < 0) { barPos = 0; barVelocity = 0; }
             if (barPos > 70) { barPos = 70; barVelocity = 0; }
 
-            // Fish AI
             if (Math.random() < 0.02) { fishTarget = Math.random() * 85; }
             fishPos += (fishTarget - fishPos) * 0.02; 
+            if (fishPos < 0) fishPos = 0; if (fishPos > 90) fishPos = 90;
 
-            if (fishPos < 0) fishPos = 0;
-            if (fishPos > 90) fishPos = 90;
+            catchBar.style.bottom = barPos + '%'; fishIcon.style.bottom = fishPos + '%';
 
-            catchBar.style.bottom = barPos + '%';
-            fishIcon.style.bottom = fishPos + '%';
-
-            // Collision & Progress
             let fishCenter = fishPos + 5; 
             let isCatching = (fishCenter >= barPos && fishCenter <= barPos + 30);
-
             if (isCatching) {
-                progress += 0.35; 
-                progressFill.style.backgroundColor = '#22c55e'; 
-                catchBar.style.backgroundColor = 'rgba(74, 222, 128, 0.8)'; 
+                progress += 0.35; progressFill.style.backgroundColor = '#22c55e'; catchBar.style.backgroundColor = 'rgba(74, 222, 128, 0.8)'; 
             } else {
-                progress -= 0.15; 
-                progressFill.style.backgroundColor = '#ef4444'; 
-                catchBar.style.backgroundColor = 'rgba(248, 113, 113, 0.8)'; 
+                progress -= 0.15; progressFill.style.backgroundColor = '#ef4444'; catchBar.style.backgroundColor = 'rgba(248, 113, 113, 0.8)'; 
             }
-
-            if (progress < 0) progress = 0;
-            if (progress > 100) progress = 100;
+            if (progress < 0) progress = 0; if (progress > 100) progress = 100;
             progressFill.style.height = progress + '%';
 
-            if (progress >= 100) { endFishing(true); return; } 
-            else if (progress <= 0) { endFishing(false); return; }
-
+            if (progress >= 100) { endFishing(true); return; } else if (progress <= 0) { endFishing(false); return; }
             fishAnimationId = requestAnimationFrame(fishingLoop);
         }
 
         function endFishing(won) {
-            fishingActive = false;
-            cancelAnimationFrame(fishAnimationId);
-            gameUI.classList.remove('flex');
-            gameUI.classList.add('hidden');
-
+            fishingActive = false; cancelAnimationFrame(fishAnimationId);
+            gameUI.classList.remove('flex'); gameUI.classList.add('hidden');
             if (won) {
-                resultSuccess.classList.remove('hidden');
-                resultSuccess.classList.add('flex');
-                
-                // THE GRAND REVEAL
+                resultSuccess.classList.remove('hidden'); resultSuccess.classList.add('flex');
                 setTimeout(() => {
                     document.getElementById('main-body').classList.remove('bw-theme');
                     document.getElementById('secret-content').classList.add('revealed');
-                    
                     const scrollHint = document.getElementById('scroll-hint');
                     scrollHint.classList.remove('hidden');
                     setTimeout(() => scrollHint.classList.remove('opacity-0'), 100);
-
                     setTimeout(() => {
                         document.getElementById('hero-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
-                        setTimeout(() => {
-                            document.querySelector('.secret-inner').style.overflow = 'visible';
-                        }, 3000); 
+                        setTimeout(() => { document.querySelector('.secret-inner').style.overflow = 'visible'; }, 3000); 
                     }, 1200); 
                 }, 1500); 
-                
-            } else {
-                resultFail.classList.remove('hidden');
-                resultFail.classList.add('flex');
-            }
+            } else { resultFail.classList.remove('hidden'); resultFail.classList.add('flex'); }
         }
 
         window.resetToRPG = function() {
-            resultFail.classList.add('hidden');
-            resultFail.classList.remove('flex');
-            
-            // Show RPG again
-            rpgContainer.classList.remove('hidden');
-            rpgControls.classList.remove('hidden');
-            instructions.classList.remove('hidden');
-            
-            // Put player back near water but safe
+            resultFail.classList.add('hidden'); resultFail.classList.remove('flex');
+            rpgContainer.classList.remove('hidden'); rpgControls.classList.remove('hidden'); instructions.classList.remove('hidden');
             pX = rpgContainer.clientWidth - (rpgContainer.clientWidth / 3) - 60;
-            rpgActive = true;
-            rpgLoop();
+            rpgActive = true; rpgLoop();
         }
 
-        // Reel Button Logic
         const handleReelPress = (e) => { e.preventDefault(); isHolding = true; };
         const handleReelRelease = (e) => { e.preventDefault(); isHolding = false; };
-
-        actionBtn.addEventListener('mousedown', handleReelPress);
-        window.addEventListener('mouseup', handleReelRelease);
-        actionBtn.addEventListener('touchstart', handleReelPress, {passive: false});
-        window.addEventListener('touchend', handleReelRelease);
-        window.addEventListener('touchcancel', handleReelRelease);
+        actionBtn.addEventListener('mousedown', handleReelPress); window.addEventListener('mouseup', handleReelRelease);
+        actionBtn.addEventListener('touchstart', handleReelPress, {passive: false}); window.addEventListener('touchend', handleReelRelease); window.addEventListener('touchcancel', handleReelRelease);
     </script>
 </body>
 </html>
