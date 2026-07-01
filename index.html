@@ -3,8 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Graduation Leane!</title>
+    <title>Happy Graduation Kayii!</title>
+    <!-- Tailwind CSS for rapid styling -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts for a cozy, modern aesthetic -->
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
     
     <script>
@@ -37,6 +39,7 @@
         }
     </script>
     <style>
+        /* Smooth scrolling for anchor links */
         html { scroll-behavior: smooth; }
         
         /* Envelope Animations */
@@ -48,17 +51,24 @@
             transform: rotateX(180deg);
             z-index: 0;
         }
+        
+        /* Letter Slide Animation Fix */
         .letter-content {
             display: grid;
             grid-template-rows: 0fr;
-            transition: grid-template-rows 0.8s ease-in-out, opacity 0.5s ease;
+            transition: grid-template-rows 0.8s ease-in-out, opacity 0.5s ease, transform 0.8s ease-in-out;
             opacity: 0;
+            transform: translateY(0);
         }
         .envelope-container.open .letter-content {
             grid-template-rows: 1fr;
             opacity: 1;
+            /* Slides the letter down so it completely clears the front flap */
+            transform: translateY(150px); 
         }
-        .letter-inner { overflow: hidden; }
+        .letter-inner { 
+            overflow: hidden; 
+        }
     </style>
 </head>
 <body class="bg-pastel-light font-body text-slate-700 overflow-x-hidden">
@@ -66,22 +76,19 @@
     <!-- 1. Hero Section -->
     <section class="min-h-screen flex flex-col items-center justify-center text-center p-6 relative">
         <div class="animate-float mb-8">
+            <!-- Digital Blue Bouquet SVG -->
             <svg width="200" height="250" viewBox="0 0 200 250" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <!-- Stems -->
                 <path d="M100 150 Q100 220 90 250" stroke="#86efac" stroke-width="8" stroke-linecap="round"/>
                 <path d="M100 150 Q120 200 125 245" stroke="#86efac" stroke-width="8" stroke-linecap="round"/>
                 <path d="M100 150 Q75 190 70 240" stroke="#86efac" stroke-width="8" stroke-linecap="round"/>
-                <!-- Ribbon -->
                 <path d="M60 210 Q100 230 140 210 Q100 190 60 210 Z" fill="#fbcfe8"/>
                 <path d="M100 210 L80 250 M100 210 L120 250" stroke="#fbcfe8" stroke-width="8" stroke-linecap="round"/>
-                <!-- Flowers -->
                 <circle cx="100" cy="80" r="40" fill="#93c5fd" opacity="0.9"/>
                 <circle cx="140" cy="110" r="35" fill="#bfdbfe" opacity="0.9"/>
                 <circle cx="60" cy="110" r="35" fill="#60a5fa" opacity="0.9"/>
                 <circle cx="100" cy="40" r="30" fill="#dbeafe" opacity="0.9"/>
                 <circle cx="130" cy="60" r="25" fill="#60a5fa" opacity="0.9"/>
                 <circle cx="70" cy="60" r="25" fill="#bfdbfe" opacity="0.9"/>
-                <!-- Centers -->
                 <circle cx="100" cy="80" r="10" fill="#fef08a"/>
                 <circle cx="140" cy="110" r="8" fill="#fef08a"/>
                 <circle cx="60" cy="110" r="8" fill="#fef08a"/>
@@ -93,7 +100,7 @@
             Happy Graduation!
         </h1>
         <h2 class="text-2xl md:text-3xl text-slate-500 font-semibold mb-8">
-            You did it, Leane! 🎓
+            You did it, Kayii! 🎓
         </h2>
         
         <a href="#letter-section" class="mt-12 text-pastel-dark animate-bounce">
@@ -107,22 +114,25 @@
     <section id="letter-section" class="py-16 px-6 max-w-2xl mx-auto flex flex-col items-center">
         <h3 class="font-heading text-3xl font-semibold text-center mb-10 text-pastel-dark">A Letter For You</h3>
         
-        <div id="envelope-container" class="envelope-container relative w-full max-w-lg cursor-pointer group">
+        <div id="envelope-container" class="envelope-container relative w-full max-w-lg cursor-pointer group z-20">
+            <!-- Envelope Back -->
             <div class="bg-blue-300 w-full h-48 rounded-t-xl absolute top-0 left-0 z-0"></div>
             
+            <!-- The Hidden Letter -->
             <div class="letter-content absolute top-10 left-0 w-full px-4 z-10 drop-shadow-xl">
                 <div class="letter-inner bg-white p-6 md:p-8 rounded-xl shadow-inner border border-blue-50">
-                    <p class="mb-4">Dear Leane,</p>
+                    <p class="mb-4">Dear Kayii,</p>
                     <p class="mb-4">
                         I am so incredibly proud of you! All those late nights, stressful exams, and hard work have finally paid off.
                     </p>
                     <p class="mb-4">
                         Whether we are gaming, watching our favorite shows, or just hanging out, you are the best Player 2 I could ask for. I can't wait to see what amazing things you do next!
                     </p>
-                    <p class="font-semibold text-pastel-dark text-right">- With love ❤️</p>
+                    <p class="font-semibold text-pastel-dark text-right">- Kero</p>
                 </div>
             </div>
 
+            <!-- Envelope Front & Flap -->
             <div class="bg-blue-200 w-full h-48 rounded-xl relative z-20 flex items-center justify-center shadow-lg transition-transform group-hover:scale-[1.02]">
                 <span class="text-blue-500 font-bold tracking-widest uppercase opacity-50 select-none">Tap to open</span>
                 <svg class="envelope-flap absolute top-0 left-0 w-full h-full drop-shadow-md pointer-events-none" preserveAspectRatio="none" viewBox="0 0 100 100">
@@ -135,12 +145,13 @@
                 </svg>
             </div>
         </div>
-        <div class="h-64 hidden md:block"></div>
-        <div class="h-80 block md:hidden"></div>
+        <!-- Larger Spacers to accommodate the expanded and shifted letter -->
+        <div class="h-96 hidden md:block"></div>
+        <div class="h-[28rem] block md:hidden"></div>
     </section>
 
     <!-- 3. It Takes Two: Co-op Section -->
-    <section class="py-16 px-6 max-w-4xl mx-auto text-center">
+    <section class="py-16 px-6 max-w-4xl mx-auto text-center mt-12 md:mt-0 relative z-10">
         <h3 class="font-heading text-3xl font-semibold mb-4 text-pastel-dark tracking-wide">Player 1 & Player 2</h3>
         <p class="text-slate-500 mb-8 max-w-lg mx-auto">Like May and Cody (but with way less arguing and definitely no Book of Love), we make the ultimate co-op team.</p>
         
@@ -148,19 +159,19 @@
             <!-- Player 1 Card -->
             <div class="bg-white p-6 rounded-3xl shadow-lg border-2 border-blue-100 transform transition hover:-translate-y-2">
                 <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4 text-2xl">🎮</div>
-                <h4 class="font-bold text-xl mb-2">The Carry</h4>
-                <p class="text-sm text-slate-500">Add a fun memory or joke about your gaming sessions here.</p>
+                <h4 class="font-bold text-xl mb-2">Player 1: Kero</h4>
+                <p class="text-sm text-slate-500">Whether we're solving puzzles in It Takes Two or I'm hard-carrying the team, we make the perfect dynamic duo.</p>
             </div>
             <!-- Player 2 Card -->
             <div class="bg-white p-6 rounded-3xl shadow-lg border-2 border-blue-100 transform transition hover:-translate-y-2">
                 <div class="w-16 h-16 bg-pink-100 rounded-full flex items-center justify-center mx-auto mb-4 text-2xl">🎓</div>
-                <h4 class="font-bold text-xl mb-2">The Graduate</h4>
-                <p class="text-sm text-slate-500">Add a sweet note about Leane being the best co-op partner.</p>
+                <h4 class="font-bold text-xl mb-2">Player 2: Kayii</h4>
+                <p class="text-sm text-slate-500">You finally cleared the tutorial level of life! Ready for the next stage?</p>
             </div>
         </div>
     </section>
 
-    <!-- 4. Anime & Movies Watchlist (Placeholders for Images) -->
+    <!-- 4. Anime & Movies Watchlist -->
     <section class="py-16 px-6 max-w-5xl mx-auto text-center bg-blue-50/50 rounded-3xl my-8">
         <h3 class="font-heading text-3xl font-semibold mb-2 text-pastel-dark">Our Watchlist</h3>
         <p class="text-slate-500 mb-8">From epic anime arcs to our favorite movie nights.</p>
@@ -222,14 +233,14 @@
                 <button onclick="resetFishing()" class="mt-4 text-xs text-pastel-dark underline">Cast again?</button>
             </div>
 
-            <!-- Water -->
+            <!-- Decorative Water -->
             <div class="absolute bottom-0 w-full h-1/3 bg-blue-200/50 rounded-t-[100%] animate-pulse-slow z-0 pointer-events-none"></div>
         </div>
     </section>
 
     <!-- Footer -->
     <footer class="text-center py-6 text-slate-400 text-sm bg-white">
-        Designed with ❤️ for Leane's Graduation.
+        Designed by Angelo.
     </footer>
 
     <!-- Interactive Logic -->
@@ -250,24 +261,22 @@
         
         let gameActive = false;
         let cursorPosition = 0;
-        let speed = 2.5; // How fast the bar moves
+        let speed = 2.5; // Controls the speed of the bobber
         let direction = 1;
         let animationId;
 
-        // Animate the bobber back and forth
         function animateCursor() {
             if (!gameActive) return;
             
             cursorPosition += speed * direction;
             if (cursorPosition >= 96 || cursorPosition <= 0) {
-                direction *= -1; // Reverse direction when hitting edges
+                direction *= -1; // Reverse direction
             }
             
             cursor.style.left = cursorPosition + '%';
             animationId = requestAnimationFrame(animateCursor);
         }
 
-        // Start the game
         castBtn.addEventListener('click', () => {
             castBtn.classList.add('hidden');
             resultSuccess.classList.add('hidden');
@@ -283,14 +292,13 @@
             animateCursor();
         });
 
-        // Try to catch
         reelBtn.addEventListener('click', () => {
             gameActive = false;
             cancelAnimationFrame(animationId);
             gameUI.classList.remove('flex');
             gameUI.classList.add('hidden');
 
-            // The green catch zone is roughly between 37.5% and 62.5%
+            // The catch zone is centered
             if (cursorPosition >= 36 && cursorPosition <= 61) {
                 resultSuccess.classList.remove('hidden');
                 resultSuccess.classList.add('flex');
@@ -300,7 +308,6 @@
             }
         });
 
-        // Reset
         window.resetFishing = function() {
             resultSuccess.classList.add('hidden');
             resultSuccess.classList.remove('flex');
