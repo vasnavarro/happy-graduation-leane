@@ -17,13 +17,14 @@
                     },
                     colors: {
                         pastel: {
-                            light: '#eff6ff', // blue-50
-                            blue: '#bfdbfe',  // blue-200
-                            dark: '#60a5fa',  // blue-400
+                            light: '#eff6ff', 
+                            blue: '#bfdbfe',  
+                            dark: '#60a5fa',  
                         }
                     },
                     animation: {
                         'float': 'float 3s ease-in-out infinite',
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
                     },
                     keyframes: {
                         float: {
@@ -36,7 +37,6 @@
         }
     </script>
     <style>
-        /* Smooth scrolling for anchor links */
         html { scroll-behavior: smooth; }
         
         /* Envelope Animations */
@@ -48,7 +48,6 @@
             transform: rotateX(180deg);
             z-index: 0;
         }
-        
         .letter-content {
             display: grid;
             grid-template-rows: 0fr;
@@ -59,27 +58,30 @@
             grid-template-rows: 1fr;
             opacity: 1;
         }
-        .letter-inner {
-            overflow: hidden;
-        }
+        .letter-inner { overflow: hidden; }
     </style>
 </head>
 <body class="bg-pastel-light font-body text-slate-700 overflow-x-hidden">
 
+    <!-- 1. Hero Section -->
     <section class="min-h-screen flex flex-col items-center justify-center text-center p-6 relative">
         <div class="animate-float mb-8">
             <svg width="200" height="250" viewBox="0 0 200 250" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <!-- Stems -->
                 <path d="M100 150 Q100 220 90 250" stroke="#86efac" stroke-width="8" stroke-linecap="round"/>
                 <path d="M100 150 Q120 200 125 245" stroke="#86efac" stroke-width="8" stroke-linecap="round"/>
                 <path d="M100 150 Q75 190 70 240" stroke="#86efac" stroke-width="8" stroke-linecap="round"/>
+                <!-- Ribbon -->
                 <path d="M60 210 Q100 230 140 210 Q100 190 60 210 Z" fill="#fbcfe8"/>
                 <path d="M100 210 L80 250 M100 210 L120 250" stroke="#fbcfe8" stroke-width="8" stroke-linecap="round"/>
+                <!-- Flowers -->
                 <circle cx="100" cy="80" r="40" fill="#93c5fd" opacity="0.9"/>
                 <circle cx="140" cy="110" r="35" fill="#bfdbfe" opacity="0.9"/>
                 <circle cx="60" cy="110" r="35" fill="#60a5fa" opacity="0.9"/>
                 <circle cx="100" cy="40" r="30" fill="#dbeafe" opacity="0.9"/>
                 <circle cx="130" cy="60" r="25" fill="#60a5fa" opacity="0.9"/>
                 <circle cx="70" cy="60" r="25" fill="#bfdbfe" opacity="0.9"/>
+                <!-- Centers -->
                 <circle cx="100" cy="80" r="10" fill="#fef08a"/>
                 <circle cx="140" cy="110" r="8" fill="#fef08a"/>
                 <circle cx="60" cy="110" r="8" fill="#fef08a"/>
@@ -101,7 +103,8 @@
         </a>
     </section>
 
-    <section id="letter-section" class="py-20 px-6 max-w-2xl mx-auto flex flex-col items-center">
+    <!-- 2. The Interactive Letter -->
+    <section id="letter-section" class="py-16 px-6 max-w-2xl mx-auto flex flex-col items-center">
         <h3 class="font-heading text-3xl font-semibold text-center mb-10 text-pastel-dark">A Letter For You</h3>
         
         <div id="envelope-container" class="envelope-container relative w-full max-w-lg cursor-pointer group">
@@ -111,11 +114,10 @@
                 <div class="letter-inner bg-white p-6 md:p-8 rounded-xl shadow-inner border border-blue-50">
                     <p class="mb-4">Dear Leane,</p>
                     <p class="mb-4">
-                        I am so incredibly proud of you! All those late nights, stressful exams, and hard work have finally paid off. 
-                        You're officially a graduate, and the world is better for it.
+                        I am so incredibly proud of you! All those late nights, stressful exams, and hard work have finally paid off.
                     </p>
                     <p class="mb-4">
-                        Take a moment to soak it all in. I can't wait to see what amazing things you do next!
+                        Whether we are gaming, watching our favorite shows, or just hanging out, you are the best Player 2 I could ask for. I can't wait to see what amazing things you do next!
                     </p>
                     <p class="font-semibold text-pastel-dark text-right">- With love ❤️</p>
                 </div>
@@ -123,7 +125,6 @@
 
             <div class="bg-blue-200 w-full h-48 rounded-xl relative z-20 flex items-center justify-center shadow-lg transition-transform group-hover:scale-[1.02]">
                 <span class="text-blue-500 font-bold tracking-widest uppercase opacity-50 select-none">Tap to open</span>
-                
                 <svg class="envelope-flap absolute top-0 left-0 w-full h-full drop-shadow-md pointer-events-none" preserveAspectRatio="none" viewBox="0 0 100 100">
                     <polygon points="0,0 100,0 50,55" fill="#93C5FD" stroke="#60A5FA" stroke-width="1" stroke-linejoin="round"/>
                 </svg>
@@ -135,55 +136,103 @@
             </div>
         </div>
         <div class="h-64 hidden md:block"></div>
-        <div class="h-96 block md:hidden"></div>
+        <div class="h-80 block md:hidden"></div>
     </section>
 
-    <hr class="border-blue-100 max-w-4xl mx-auto w-3/4">
-
-    <section class="py-20 px-6 max-w-3xl mx-auto text-center">
-        <h3 class="font-heading text-3xl font-semibold mb-2 text-pastel-dark">Our Soundtrack</h3>
-        <p class="text-slate-500 mb-8">A little playlist for your post-grad adventures.</p>
+    <!-- 3. It Takes Two: Co-op Section -->
+    <section class="py-16 px-6 max-w-4xl mx-auto text-center">
+        <h3 class="font-heading text-3xl font-semibold mb-4 text-pastel-dark tracking-wide">Player 1 & Player 2</h3>
+        <p class="text-slate-500 mb-8 max-w-lg mx-auto">Like May and Cody (but with way less arguing and definitely no Book of Love), we make the ultimate co-op team.</p>
         
-        <div class="bg-white p-2 md:p-4 rounded-3xl shadow-xl shadow-blue-100/50">
-            <iframe style="border-radius:20px" src="https://open.spotify.com/embed/playlist/37i9dQZF1DXcBWIGoYBM5M?utm_source=generator&theme=0" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <!-- Player 1 Card -->
+            <div class="bg-white p-6 rounded-3xl shadow-lg border-2 border-blue-100 transform transition hover:-translate-y-2">
+                <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4 text-2xl">🎮</div>
+                <h4 class="font-bold text-xl mb-2">The Carry</h4>
+                <p class="text-sm text-slate-500">Add a fun memory or joke about your gaming sessions here.</p>
+            </div>
+            <!-- Player 2 Card -->
+            <div class="bg-white p-6 rounded-3xl shadow-lg border-2 border-blue-100 transform transition hover:-translate-y-2">
+                <div class="w-16 h-16 bg-pink-100 rounded-full flex items-center justify-center mx-auto mb-4 text-2xl">🎓</div>
+                <h4 class="font-bold text-xl mb-2">The Graduate</h4>
+                <p class="text-sm text-slate-500">Add a sweet note about Leane being the best co-op partner.</p>
+            </div>
         </div>
     </section>
 
-    <hr class="border-blue-100 max-w-4xl mx-auto w-3/4">
+    <!-- 4. Anime & Movies Watchlist (Placeholders for Images) -->
+    <section class="py-16 px-6 max-w-5xl mx-auto text-center bg-blue-50/50 rounded-3xl my-8">
+        <h3 class="font-heading text-3xl font-semibold mb-2 text-pastel-dark">Our Watchlist</h3>
+        <p class="text-slate-500 mb-8">From epic anime arcs to our favorite movie nights.</p>
+        
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <!-- Image Placeholders (Replace the src with your actual image URLs later!) -->
+            <div class="aspect-[3/4] bg-slate-200 rounded-xl overflow-hidden shadow-md relative group">
+                <img src="https://via.placeholder.com/300x400?text=Upload+Anime+Pic" alt="Memory" class="w-full h-full object-cover group-hover:scale-110 transition duration-300">
+            </div>
+            <div class="aspect-[3/4] bg-slate-200 rounded-xl overflow-hidden shadow-md relative group">
+                <img src="https://via.placeholder.com/300x400?text=Upload+Movie+Pic" alt="Memory" class="w-full h-full object-cover group-hover:scale-110 transition duration-300">
+            </div>
+            <div class="aspect-[3/4] bg-slate-200 rounded-xl overflow-hidden shadow-md relative group">
+                <img src="https://via.placeholder.com/300x400?text=Upload+Anime+Pic" alt="Memory" class="w-full h-full object-cover group-hover:scale-110 transition duration-300">
+            </div>
+            <div class="aspect-[3/4] bg-slate-200 rounded-xl overflow-hidden shadow-md relative group">
+                <img src="https://via.placeholder.com/300x400?text=Upload+Movie+Pic" alt="Memory" class="w-full h-full object-cover group-hover:scale-110 transition duration-300">
+            </div>
+        </div>
+    </section>
 
-    <section class="py-20 px-6 max-w-2xl mx-auto text-center mb-10">
-        <h3 class="font-heading text-3xl font-semibold mb-4 text-pastel-dark">Time to Relax</h3>
-        <p class="text-slate-500 mb-8">Kick back by the digital pond. Give it a cast!</p>
+    <!-- 5. Stardew Valley Fishing Minigame -->
+    <section class="py-16 px-6 max-w-2xl mx-auto text-center mb-10">
+        <h3 class="font-heading text-3xl font-semibold mb-4 text-pastel-dark">Stardew Fishing Practice</h3>
+        <p class="text-slate-500 mb-8">Let's see if your reflexes are sharp. Hit the green zone!</p>
 
-        <div class="bg-blue-100 rounded-3xl p-10 border-4 border-blue-200 shadow-inner relative overflow-hidden h-64 flex flex-col items-center justify-center transition-all">
+        <div class="bg-blue-100 rounded-3xl p-8 border-4 border-blue-200 shadow-inner relative overflow-hidden h-72 flex flex-col items-center justify-center">
             
-            <button id="cast-btn" class="bg-pastel-dark hover:bg-blue-500 text-white font-bold py-3 px-8 rounded-full shadow-lg transform transition hover:-translate-y-1 active:translate-y-1 focus:outline-none z-10">
-                🎣 Cast Line
+            <!-- Minigame UI -->
+            <div id="game-ui" class="w-full flex flex-col items-center z-10 hidden">
+                <div class="w-full max-w-md h-8 bg-blue-900 rounded-full relative overflow-hidden mb-6 border-2 border-white shadow-lg">
+                    <!-- The Catch Zone (Green) -->
+                    <div id="catch-zone" class="absolute h-full bg-green-400 w-1/4 left-[37.5%] opacity-80"></div>
+                    <!-- The Moving Cursor (Bobber) -->
+                    <div id="fishing-cursor" class="absolute h-full w-4 bg-red-500 rounded-full border-2 border-white shadow-md" style="left: 0%;"></div>
+                </div>
+                <button id="reel-btn" class="bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-8 rounded-full shadow-lg transform transition active:scale-95">
+                    🎣 Reel It In!
+                </button>
+            </div>
+
+            <!-- Start Button -->
+            <button id="cast-btn" class="bg-pastel-dark hover:bg-blue-500 text-white font-bold py-3 px-8 rounded-full shadow-lg transform transition hover:-translate-y-1 z-10">
+                Cast Line
             </button>
 
-            <div id="fishing-loader" class="hidden flex-col items-center z-10">
-                <div class="w-8 h-8 border-4 border-white border-t-pastel-dark rounded-full animate-spin mb-2"></div>
-                <p class="text-blue-500 font-semibold animate-pulse">Waiting for a bite...</p>
-            </div>
-
-            <div id="fish-result" class="hidden flex-col items-center z-10 bg-white/90 p-6 rounded-2xl shadow-xl border-2 border-green-300 transform scale-95 transition-transform duration-300">
+            <!-- Result Messages -->
+            <div id="fish-result" class="hidden flex-col items-center z-10 bg-white/95 p-6 rounded-2xl shadow-xl border-2 border-green-300 mt-4">
                 <div class="text-5xl mb-2">🐟📜</div>
                 <h4 class="font-heading font-bold text-xl text-green-600 mb-1">Perfect Catch!</h4>
-                <p class="text-slate-600 text-sm">
-                    Way easier than Stardew Valley fishing!<br>
-                    You caught a fish AND a diploma! Congrats!
-                </p>
-                <button onclick="resetFishing()" class="mt-4 text-xs text-pastel-dark underline hover:text-blue-600">Cast again?</button>
+                <p class="text-slate-600 text-sm">You caught an Iridium-quality Diploma!</p>
+                <button onclick="resetFishing()" class="mt-4 text-xs text-pastel-dark underline">Play again?</button>
             </div>
 
-            <div class="absolute bottom-0 w-full h-1/2 bg-blue-200/50 rounded-t-[100%] animate-pulse z-0"></div>
+            <div id="fish-fail" class="hidden flex-col items-center z-10 bg-white/95 p-6 rounded-2xl shadow-xl border-2 border-red-300 mt-4">
+                <div class="text-5xl mb-2">🌿</div>
+                <h4 class="font-heading font-bold text-xl text-red-500 mb-1">It got away...</h4>
+                <p class="text-slate-600 text-sm">Just seaweed this time. Willy would be disappointed.</p>
+                <button onclick="resetFishing()" class="mt-4 text-xs text-pastel-dark underline">Cast again?</button>
+            </div>
+
+            <!-- Water -->
+            <div class="absolute bottom-0 w-full h-1/3 bg-blue-200/50 rounded-t-[100%] animate-pulse-slow z-0 pointer-events-none"></div>
         </div>
     </section>
 
+    <!-- Footer -->
     <footer class="text-center py-6 text-slate-400 text-sm bg-white">
         Designed with ❤️ for Leane's Graduation.
     </footer>
 
+    <!-- Interactive Logic -->
     <script>
         // 1. Envelope Logic
         const envelopeContainer = document.getElementById('envelope-container');
@@ -193,34 +242,70 @@
 
         // 2. Fishing Minigame Logic
         const castBtn = document.getElementById('cast-btn');
-        const loader = document.getElementById('fishing-loader');
-        const result = document.getElementById('fish-result');
+        const gameUI = document.getElementById('game-ui');
+        const reelBtn = document.getElementById('reel-btn');
+        const cursor = document.getElementById('fishing-cursor');
+        const resultSuccess = document.getElementById('fish-result');
+        const resultFail = document.getElementById('fish-fail');
+        
+        let gameActive = false;
+        let cursorPosition = 0;
+        let speed = 2.5; // How fast the bar moves
+        let direction = 1;
+        let animationId;
 
+        // Animate the bobber back and forth
+        function animateCursor() {
+            if (!gameActive) return;
+            
+            cursorPosition += speed * direction;
+            if (cursorPosition >= 96 || cursorPosition <= 0) {
+                direction *= -1; // Reverse direction when hitting edges
+            }
+            
+            cursor.style.left = cursorPosition + '%';
+            animationId = requestAnimationFrame(animateCursor);
+        }
+
+        // Start the game
         castBtn.addEventListener('click', () => {
-            // Hide button, show loader
             castBtn.classList.add('hidden');
-            loader.classList.remove('hidden');
-            loader.classList.add('flex');
-
-            // 1-second delay for the Stardew Valley joke reveal
-            setTimeout(() => {
-                loader.classList.remove('flex');
-                loader.classList.add('hidden');
-                
-                result.classList.remove('hidden');
-                result.classList.add('flex');
-                
-                // Pop animation
-                setTimeout(() => result.classList.remove('scale-95'), 50);
-            }, 1000);
+            resultSuccess.classList.add('hidden');
+            resultFail.classList.add('hidden');
+            resultSuccess.classList.remove('flex');
+            resultFail.classList.remove('flex');
+            
+            gameUI.classList.remove('hidden');
+            gameUI.classList.add('flex');
+            
+            gameActive = true;
+            cursorPosition = 0;
+            animateCursor();
         });
 
-        // Optional reset for the game
+        // Try to catch
+        reelBtn.addEventListener('click', () => {
+            gameActive = false;
+            cancelAnimationFrame(animationId);
+            gameUI.classList.remove('flex');
+            gameUI.classList.add('hidden');
+
+            // The green catch zone is roughly between 37.5% and 62.5%
+            if (cursorPosition >= 36 && cursorPosition <= 61) {
+                resultSuccess.classList.remove('hidden');
+                resultSuccess.classList.add('flex');
+            } else {
+                resultFail.classList.remove('hidden');
+                resultFail.classList.add('flex');
+            }
+        });
+
+        // Reset
         window.resetFishing = function() {
-            result.classList.add('hidden');
-            result.classList.remove('flex');
-            result.classList.add('scale-95');
-            
+            resultSuccess.classList.add('hidden');
+            resultSuccess.classList.remove('flex');
+            resultFail.classList.add('hidden');
+            resultFail.classList.remove('flex');
             castBtn.classList.remove('hidden');
         }
     </script>
