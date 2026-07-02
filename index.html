@@ -148,13 +148,8 @@
                     </div>
 
                     <!-- THE WIDE S-CURVE MAZE WALLS -->
-                    <!-- Wall 1: Forces her right (Leaves a massive gap on the right) -->
                     <div class="maze-wall absolute z-20" style="left: -5%; top: 25%; width: 40%; height: 40px;"></div>
-                    
-                    <!-- Wall 2: Forces her to squeeze down the middle -->
                     <div class="maze-wall absolute z-20" style="left: 65%; top: -5%; width: 40px; height: 50%;"></div>
-
-                    <!-- Wall 3: Forces her to walk back left (Leaves a massive gap on the left) -->
                     <div class="maze-wall absolute z-20" style="left: 30%; top: 65%; width: 60%; height: 40px;"></div>
 
                     <!-- THE FOG OF WAR -->
@@ -172,13 +167,13 @@
                         <p class="text-xs text-slate-400 text-right mt-2 animate-pulse font-bold">Tap here to continue ▼</p>
                     </div>
 
-                    <!-- THE NPC: Kero (Waiting at the very end of the maze, bottom left) -->
+                    <!-- THE NPC: Kero -->
                     <div id="kero-npc" class="absolute w-20 h-20 md:w-28 md:h-28 z-20" style="left: 10%; top: 75%;">
                         <div class="absolute bottom-1 left-1/4 w-1/2 h-2 bg-black/20 rounded-full blur-[2px]"></div>
                         <div id="kero-sprite" class="absolute inset-0"></div>
                     </div>
 
-                    <!-- THE PLAYER: Kayii (Starts Top Left) -->
+                    <!-- THE PLAYER: Kayii -->
                     <div id="rpg-player" class="absolute w-20 h-20 md:w-28 md:h-28 z-30" style="left: 2%; top: 2%;">
                         <div class="absolute bottom-1 left-1/4 w-1/2 h-2 bg-black/20 rounded-full blur-[2px]"></div>
                         <div id="player-sprite" class="absolute inset-0"></div>
@@ -238,12 +233,15 @@
                     </div>
                 </div>
 
-                <!-- Fish Fail Layer -->
+                <!-- Fish Fail Layer (Updated with Try Again / Exit Buttons!) -->
                 <div id="fish-fail" class="hidden relative w-full h-[500px] md:h-[600px] flex-col items-center justify-center z-10 bg-red-50 p-10 rounded-xl shadow-inner border-4 border-red-400">
                     <div class="text-6xl mb-4">🌿</div>
                     <h4 class="font-heading font-bold text-2xl text-red-500 mb-2">It got away...</h4>
                     <p class="text-slate-600 text-base">Just seaweed this time.</p>
-                    <button onclick="resetToRPG()" class="mt-6 text-base text-white font-bold px-6 py-3 rounded bg-red-400 hover:bg-red-500 transition-colors shadow-md">Try again?</button>
+                    <div class="flex flex-row gap-4 mt-8">
+                        <button onclick="retryFishing()" class="text-sm md:text-base text-white font-bold px-6 py-3 rounded-lg bg-red-500 hover:bg-red-600 transition-colors shadow-md">Try Again</button>
+                        <button onclick="exitToMap()" class="text-sm md:text-base text-slate-600 font-bold px-6 py-3 rounded-lg bg-slate-200 hover:bg-slate-300 transition-colors shadow-md border-2 border-slate-300">Exit to Map</button>
+                    </div>
                 </div>
             </div>
         </section>
@@ -458,7 +456,6 @@
             if (!pXInit) { pX = rpgPlayer.offsetLeft; pY = rpgPlayer.offsetTop; pXInit = true; }
 
             if (rpgActive) {
-                // 1. PLAYER MOVEMENT
                 let isMoving = false;
                 let moveX = 0; let moveY = 0;
 
@@ -473,8 +470,6 @@
 
                 const mapW = rpgContainer.clientWidth; const mapH = rpgContainer.clientHeight;
                 const pW = rpgPlayer.clientWidth; const pH = rpgPlayer.clientHeight;
-                
-                // Kayii can walk all the way to the water boundary (but not swim)
                 const maxRightX = mapW * 0.66 - (pW * 0.5); 
 
                 if (nextX < 0) nextX = 0; if (nextX > maxRightX) nextX = maxRightX; 
@@ -527,7 +522,7 @@
                     let kXPos = kAnimIndex * 33.333; keroSprite.style.backgroundPosition = `${kXPos}% ${kFacing}%`; keroSprite.style.transform = `scaleX(${kScale})`;
                 }
 
-                // 3. UI CONTEXT CHECKS (Fishing logic updated to check for Beach Patch strictly!)
+                // 3. UI CONTEXT CHECKS
                 const isNearKero = (pX < kX + pW + 20 && pX + pW > kX - 20 && pY < kY + pH + 20 && pY + pH > kY - 20);
                 
                 const beach = document.getElementById('beach-patch');
@@ -581,7 +576,6 @@
             if (dialogueIndex < dialogueLines.length) {
                 dialogueText.innerText = dialogueLines[dialogueIndex];
             } else {
-                // DIALOGUE FINISHED: THE GREAT REVEAL
                 dialogueActive = false; hasTalkedToKero = true;
                 dialogueBox.classList.add('hidden'); rpgActive = true; 
                 
@@ -687,13 +681,20 @@
             }, 1000); 
         }
 
-        window.resetToRPG = function() {
+        // --- NEW FAIL STATE FUNCTIONS ---
+        window.exitToMap = function() {
             failMessage.classList.add('hidden'); failMessage.classList.remove('flex');
             rpgContainer.classList.remove('hidden'); rpgControls.classList.remove('hidden'); instructions.classList.remove('hidden');
-            const pW = rpgPlayer.clientWidth;
-            pX = 10; 
-            pY = 10;
-            rpgActive = true; requestAnimationFrame(rpgLoop);
+            // Deliberately skipping the pX and pY reset so she stays right where she was!
+            rpgActive = true; 
+            requestAnimationFrame(rpgLoop);
+        }
+
+        window.retryFishing = function() {
+            failMessage.classList.add('hidden'); failMessage.classList.remove('flex');
+            const gameUI = document.getElementById('game-ui'); 
+            gameUI.classList.remove('hidden'); gameUI.classList.add('flex');
+            startFishingMinigame();
         }
 
         const handleReelPress = (e) => { e.preventDefault(); isHolding = true; };
