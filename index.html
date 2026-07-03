@@ -150,8 +150,8 @@
                         <span class="text-3xl animate-bounce drop-shadow-md">🎣</span>
                     </div>
 
-                    <!-- NEW: THE EXIT 8 SIGN -->
-                    <div id="exit8-sign" class="absolute z-10 w-8 h-8 bg-yellow-400 border-[3px] border-black flex flex-col items-center justify-center shadow-md transform rotate-2 cursor-pointer hover:scale-110 transition-transform" style="left: 51%; top: 22%;">
+                    <!-- NEW: THE INVISIBLE EXIT 8 SIGN -->
+                    <div id="exit8-sign" class="absolute z-10 w-8 h-8 bg-yellow-400 border-[3px] border-black flex flex-col items-center justify-center shadow-md transform rotate-2 cursor-pointer hover:scale-110 transition-all duration-1000 opacity-0 pointer-events-none" style="left: 51%; top: 22%;">
                         <span class="font-bold text-black text-sm leading-none mt-1">8</span>
                         <div class="w-full border-t-[3px] border-black mt-px border-dotted"></div>
                     </div>
@@ -166,9 +166,11 @@
                     <div class="maze-wall absolute z-20" style="left: 65%; top: -5%; width: 40px; height: 50%;"></div>
                     <div class="maze-wall absolute z-20" style="left: 30%; top: 65%; width: 60%; height: 40px;"></div>
 
-                    <!-- NEW: THE SHEEP DETECTIVES -->
-                    <div id="sheep1-npc" class="absolute z-20 text-3xl md:text-4xl drop-shadow-md transform -scale-x-100" style="left: 5%; top: 45%;">🐑</div>
-                    <div id="sheep2-npc" class="absolute z-20 text-3xl md:text-4xl drop-shadow-md transform -scale-x-100" style="left: 15%; top: 48%;">🐑</div>
+                    <!-- NEW: THE SHEEP DETECTIVES (Lily & Mopple) -->
+                    <div id="sheep-npc" class="absolute z-20 flex gap-1 items-end" style="left: 10%; top: 12%;">
+                        <span class="text-3xl md:text-4xl drop-shadow-md transform -scale-x-100">🐑</span>
+                        <span class="text-3xl md:text-4xl drop-shadow-md transform -scale-x-100 mb-2">🐑</span>
+                    </div>
 
                     <!-- THE FOG OF WAR -->
                     <div id="fog-overlay" class="absolute inset-0 z-[35] pointer-events-none transition-opacity duration-1500" style="background: rgba(15, 23, 42, 0.98);"></div>
@@ -433,8 +435,7 @@
         const chestObj = document.getElementById('chest-obj');
         
         // NEW EASTER EGG ELEMENTS
-        const sheep1Npc = document.getElementById('sheep1-npc');
-        const sheep2Npc = document.getElementById('sheep2-npc');
+        const sheepNpc = document.getElementById('sheep-npc');
         const exit8Sign = document.getElementById('exit8-sign');
 
         const rpgControls = document.getElementById('rpg-controls');
@@ -574,10 +575,8 @@
                 const isNearBeach = (pX + pW > beach.offsetLeft && pX < beach.offsetLeft + beach.clientWidth && pY + pH > beach.offsetTop && pY < beach.offsetTop + beach.clientHeight);
                 const isNearChest = !chestOpened && (pX + pW > chestObj.offsetLeft - 20 && pX < chestObj.offsetLeft + chestObj.clientWidth + 20 && pY + pH > chestObj.offsetTop - 20 && pY < chestObj.offsetTop + chestObj.clientHeight + 20);
                 
-                const isNearExit8 = (pX + pW > exit8Sign.offsetLeft - 20 && pX < exit8Sign.offsetLeft + exit8Sign.clientWidth + 20 && pY + pH > exit8Sign.offsetTop - 20 && pY < exit8Sign.offsetTop + exit8Sign.clientHeight + 20);
-                const isNearSheep1 = (pX + pW > sheep1Npc.offsetLeft - 20 && pX < sheep1Npc.offsetLeft + sheep1Npc.clientWidth + 20 && pY + pH > sheep1Npc.offsetTop - 20 && pY < sheep1Npc.offsetTop + sheep1Npc.clientHeight + 20);
-                const isNearSheep2 = (pX + pW > sheep2Npc.offsetLeft - 20 && pX < sheep2Npc.offsetLeft + sheep2Npc.clientWidth + 20 && pY + pH > sheep2Npc.offsetTop - 20 && pY < sheep2Npc.offsetTop + sheep2Npc.clientHeight + 20);
-
+                const isNearExit8 = hasTalkedToKero && (pX + pW > exit8Sign.offsetLeft - 20 && pX < exit8Sign.offsetLeft + exit8Sign.clientWidth + 20 && pY + pH > exit8Sign.offsetTop - 20 && pY < exit8Sign.offsetTop + exit8Sign.clientHeight + 20);
+                const isNearSheep = (pX + pW > sheepNpc.offsetLeft - 20 && pX < sheepNpc.offsetLeft + sheepNpc.clientWidth + 20 && pY + pH > sheepNpc.offsetTop - 20 && pY < sheepNpc.offsetTop + sheepNpc.clientHeight + 20);
 
                 if (isNearKero && !hasTalkedToKero) {
                     currentAction = "talk"; promptText.innerText = "💬 Talk to Kero"; enableActionBtn("💬 Talk");
@@ -585,10 +584,8 @@
                     currentAction = "chest"; promptText.innerText = "🎁 Open Gift"; enableActionBtn("🎁 Open");
                 } else if (isNearExit8) {
                     currentAction = "exit8"; promptText.innerText = "🔍 Inspect Sign"; enableActionBtn("🔍 Inspect");
-                } else if (isNearSheep1) {
-                    currentAction = "sheep1"; promptText.innerText = "💬 Talk to Sheep"; enableActionBtn("💬 Talk");
-                } else if (isNearSheep2) {
-                    currentAction = "sheep2"; promptText.innerText = "💬 Talk to Sheep"; enableActionBtn("💬 Talk");
+                } else if (isNearSheep) {
+                    currentAction = "sheep"; promptText.innerText = "💬 Talk to Lily & Mopple"; enableActionBtn("💬 Talk");
                 } else if (isNearBeach && hasTalkedToKero) {
                     currentAction = "fish"; promptText.innerText = "🎣 Cast Line"; enableActionBtn("🎣 Cast Line");
                 } else {
@@ -660,6 +657,10 @@
                     mazeActive = false; 
                     if (fogOverlay) fogOverlay.style.opacity = '0'; 
                     document.querySelectorAll('.maze-wall').forEach(w => w.style.opacity = '0');
+                    
+                    // Reveal Exit 8 sign once the fog is gone!
+                    document.getElementById('exit8-sign').classList.remove('opacity-0', 'pointer-events-none');
+
                     instructions.innerText = "Open the chest, or head to the beach to fish!";
                 });
 
@@ -681,17 +682,17 @@
                     instructions.innerText = "No anomalies found. Safe to fish!";
                 });
 
-            } else if (currentAction === "sheep1") {
+            } else if (currentAction === "sheep") {
                 const lines = hasTalkedToKero ? 
-                    ["Meeeeh... Case closed! You found Kero. Excellent detective work, Kayii!"] : 
-                    ["Meeeeh... Detective’s Log. The fog is thick today. Our primary suspect, 'Kero', is hiding somewhere in here."];
-                startDialogue("Sheep Detective", lines);
-
-            } else if (currentAction === "sheep2") {
-                const lines = hasTalkedToKero ? 
-                    ["Meeeeh... Congratulations! Our investigation here is done. You can now proceed to the beach for some fishing."] : 
-                    ["Meeeeh... Use your WASD keys to investigate. Leave no pixel unturned!"];
-                startDialogue("Sheep Detective", lines);
+                    [
+                        "Lily: Meeeeh... Case closed! You found Kero. Excellent detective work, Kayii!",
+                        "Mopple: Meeeeh... Congratulations! Our investigation here is done. You can now proceed to the beach for some fishing."
+                    ] : 
+                    [
+                        "Lily: Meeeeh... Detective’s Log. The fog is thick today. Our primary suspect, 'Kero', is hiding somewhere in here.",
+                        "Mopple: Meeeeh... Use your WASD keys to investigate. Leave no pixel unturned!"
+                    ];
+                startDialogue("Lily & Mopple", lines);
 
             } else if (currentAction === "fish") {
                 rpgActive = false;
