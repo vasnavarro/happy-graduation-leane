@@ -88,22 +88,12 @@
             .mouse-only { display: none !important; }
         }
 
-        /* --- MOBILE-PERFECT SCROLL ENVELOPE --- */
+        /* --- ENVELOPE --- */
         .envelope-flap { transform-origin: top; transition: transform 0.8s ease-in-out; }
         .envelope-container.open .envelope-flap { transform: rotateX(180deg); z-index: 0; }
         
-        .letter-content { 
-            max-height: 0px; 
-            overflow: hidden;
-            transition: max-height 1s ease-in-out, opacity 0.7s ease, transform 0.8s ease-in-out; 
-            opacity: 0; 
-            transform: translateY(0); 
-        }
-        .envelope-container.open .letter-content { 
-            max-height: 800px; 
-            opacity: 1; 
-            transform: translateY(150px); 
-        }
+        .letter-content { max-height: 0px; overflow: hidden; transition: max-height 1s ease-in-out, opacity 0.7s ease, transform 0.8s ease-in-out; opacity: 0; transform: translateY(0); }
+        .envelope-container.open .letter-content { max-height: 800px; opacity: 1; transform: translateY(150px); }
         
         .letter-inner { overflow: hidden; }
         .no-select { user-select: none; -webkit-user-select: none; -webkit-tap-highlight-color: transparent; }
@@ -119,9 +109,13 @@
             border-radius: 12px;
             transition: opacity 1.5s ease-in-out; 
         }
+
+        /* --- JAGGED WILLOW STICK CLIP PATHS --- */
+        .willow-left-half { clip-path: polygon(0 0, 100% 0, 90% 25%, 100% 50%, 85% 75%, 100% 100%, 0 100%); }
+        .willow-right-half { clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%, 15% 75%, 0 50%, 10% 25%); }
     </style>
 </head>
-<body class="font-body text-slate-700 overflow-x-hidden bw-theme" id="main-body">
+<body class="font-body text-slate-700 overflow-x-hidden bw-theme transition-colors duration-150" id="main-body">
 
     <!-- MAIN GAME WRAPPER -->
     <div id="main-content-wrapper">
@@ -137,14 +131,18 @@
                 <div id="rpg-container" class="relative w-full h-[500px] md:h-[600px] bg-green-400 rounded-xl overflow-hidden border-4 border-green-600 shadow-inner flex flex-col transition-all duration-300">
                     <div class="absolute inset-0 opacity-20 pointer-events-none" style="background-image: radial-gradient(#166534 2px, transparent 2px); background-size: 20px 20px;"></div>
                     
-                    <!-- THE WATER ZONE -->
                     <div id="water-zone" class="absolute right-0 top-0 w-1/3 h-full bg-blue-400 border-l-4 border-blue-300 flex items-center justify-center z-0">
                         <div class="w-full h-full opacity-30" style="background-image: radial-gradient(circle, #eff6ff 2px, transparent 2.5px); background-size: 30px 15px;"></div>
                     </div>
 
-                    <!-- THE SANDY BEACH FISHING PATCH -->
+                    <!-- THE SANDY BEACH FISHING PATCH (Northeast) -->
                     <div id="beach-patch" class="absolute z-10 rounded-l-3xl border-l-4 border-y-4 border-yellow-400 shadow-inner flex items-center justify-start pl-2 md:pl-4" style="left: 55%; top: 10%; width: 15%; height: 140px; background-color: #fef08a; background-image: radial-gradient(#eab308 1.5px, transparent 1.5px); background-size: 12px 12px;">
                         <span class="text-3xl animate-bounce drop-shadow-md">🎣</span>
+                    </div>
+
+                    <!-- NEW: THE SOUTHEAST CHEST -->
+                    <div id="chest-obj" class="absolute z-10 w-12 h-12 flex items-center justify-center text-4xl drop-shadow-lg transition-transform" style="left: 57%; top: 80%;">
+                        🎁
                     </div>
 
                     <!-- THE WIDE S-CURVE MAZE WALLS -->
@@ -167,6 +165,43 @@
                         <p class="text-xs text-slate-400 text-right mt-2 animate-pulse font-bold">Tap here to continue ▼</p>
                     </div>
 
+                    <!-- WILLOW IN-GAME MODAL -->
+                    <div id="willow-modal" class="absolute inset-0 z-[60] bg-slate-900/90 backdrop-blur-md hidden flex-col items-center justify-center p-4 transition-colors duration-300">
+                        
+                        <!-- Box Graphic -->
+                        <div id="willow-box-modal" class="relative cursor-pointer transform transition duration-300 hover:scale-105 group w-full flex justify-center" onclick="openWillowModal()">
+                            <img src="image_f703b3.jpg" alt="One Wish Willow" class="w-full max-w-[280px] md:max-w-sm rounded-xl shadow-2xl border-2 border-slate-200">
+                            <div class="absolute inset-0 max-w-[280px] md:max-w-sm mx-auto bg-black/0 group-hover:bg-black/20 transition-colors rounded-xl flex items-center justify-center">
+                                <span class="bg-pastel-dark text-white font-bold py-2 px-6 rounded-full shadow-xl opacity-0 group-hover:opacity-100 transition-opacity">Tap to Open</span>
+                            </div>
+                        </div>
+
+                        <!-- Stick Area -->
+                        <div id="willow-stick-modal" class="hidden flex-col items-center w-full mt-4">
+                            <p class="text-white font-bold mb-2 animate-pulse text-lg drop-shadow-md">Close your eyes.</p>
+                            <p class="text-pastel-blue font-extrabold mb-10 text-lg md:text-xl tracking-wide drop-shadow-md text-center max-w-xs">Make a graduation wish, then tap to snap the willow.</p>
+                            
+                            <div id="the-stick-wrapper" class="relative w-full max-w-[250px] h-12 md:h-16 flex cursor-pointer group" onclick="breakWillowModal()">
+                                <!-- Left Half -->
+                                <div id="stick-left" class="w-1/2 h-full bg-gradient-to-r from-slate-700 to-slate-600 rounded-l-full relative shadow-[inset_0_-4px_10px_rgba(0,0,0,0.5)] willow-left-half group-hover:brightness-125 transition-all" style="transform-origin: bottom right; transition: transform 0.15s cubic-bezier(0.25, 0.46, 0.45, 0.94);">
+                                    <div class="absolute w-4 h-3 bg-black rounded-full top-2 left-4 opacity-40"></div>
+                                    <div class="absolute w-6 h-4 bg-black rounded-full bottom-2 left-12 opacity-40"></div>
+                                    <div class="absolute w-5 h-3 bg-black rounded-full top-4 right-4 opacity-40"></div>
+                                </div>
+                                <!-- Right Half -->
+                                <div id="stick-right" class="w-1/2 h-full bg-gradient-to-l from-slate-700 to-slate-600 rounded-r-full relative shadow-[inset_0_-4px_10px_rgba(0,0,0,0.5)] willow-right-half -ml-[2px] group-hover:brightness-125 transition-all" style="transform-origin: bottom left; transition: transform 0.15s cubic-bezier(0.25, 0.46, 0.45, 0.94);">
+                                    <div class="absolute w-5 h-3 bg-black rounded-full top-3 left-4 opacity-40"></div>
+                                    <div class="absolute w-8 h-4 bg-black rounded-full bottom-2 right-10 opacity-40"></div>
+                                    <div class="absolute w-4 h-3 bg-black rounded-full top-2 right-4 opacity-40"></div>
+                                </div>
+                            </div>
+                            
+                            <p id="willow-result" class="text-yellow-300 font-heading font-extrabold text-3xl md:text-4xl mt-12 tracking-wide opacity-0 translate-y-4 transition-all duration-1000 drop-shadow-[0_0_10px_rgba(253,224,71,0.8)]">✨ WISH GRANTED ✨</p>
+                            
+                            <button id="close-willow-btn" class="mt-8 px-8 py-3 bg-white text-slate-800 rounded-full font-bold shadow-lg opacity-0 transition-opacity duration-1000 hidden cursor-pointer hover:bg-slate-100" onclick="closeWillowModal()">Back to Map</button>
+                        </div>
+                    </div>
+
                     <!-- THE NPC: Kero -->
                     <div id="kero-npc" class="absolute w-20 h-20 md:w-28 md:h-28 z-20" style="left: 10%; top: 75%;">
                         <div class="absolute bottom-1 left-1/4 w-1/2 h-2 bg-black/20 rounded-full blur-[2px]"></div>
@@ -182,28 +217,20 @@
 
                 <!-- CONTROLS & ACTION BUTTONS -->
                 <div id="rpg-controls" class="w-full mt-6 flex flex-row items-center justify-between gap-4 px-2">
-                    
                     <div class="touch-device-grid grid-cols-3 gap-1">
                         <div></div><button class="d-btn no-select" id="btn-up">W</button><div></div>
                         <button class="d-btn no-select" id="btn-left">A</button><button class="d-btn no-select" id="btn-down">S</button><button class="d-btn no-select" id="btn-right">D</button>
                     </div>
-                    
-                    <button id="mobile-action-btn" class="touch-device-flex no-select bg-pastel-dark text-white font-bold py-4 px-8 sm:px-12 rounded-xl shadow-md active:translate-y-[4px] active:shadow-none text-lg">
-                        Action
-                    </button>
-
+                    <button id="mobile-action-btn" class="touch-device-flex no-select bg-pastel-dark text-white font-bold py-4 px-8 sm:px-12 rounded-xl shadow-md active:translate-y-[4px] active:shadow-none text-lg">Action</button>
                     <div class="mouse-only w-full flex justify-between items-center px-4">
-                        <p class="text-slate-400 font-bold text-sm">Keyboard: WASD / Arrow Keys. Near Kero/Beach, press 'SPACE' or Click Action.</p>
-                        <button id="rpg-action-btn" class="bg-slate-300 text-slate-500 font-bold py-4 px-12 rounded-xl shadow-md transition-all text-lg opacity-50 cursor-not-allowed">
-                            Action
-                        </button>
+                        <p class="text-slate-400 font-bold text-sm">Keyboard: WASD / Arrow Keys. Near Interactables, press 'SPACE' or Click Action.</p>
+                        <button id="rpg-action-btn" class="bg-slate-300 text-slate-500 font-bold py-4 px-12 rounded-xl shadow-md transition-all text-lg opacity-50 cursor-not-allowed">Action</button>
                     </div>
                 </div>
 
                 <!-- FISHING MINIGAME UI -->
                 <div id="game-ui" class="relative w-full h-[500px] md:h-[600px] flex-col items-center justify-center z-10 hidden transition-all duration-300 border-4 border-white rounded-xl shadow-inner overflow-hidden">
                     <div class="absolute inset-0 game-bg-layer bg-fishing transition-opacity duration-1000" id="game-bg-layer"></div>
-
                     <div class="relative z-20 w-full h-full flex flex-col items-center justify-center pt-8">
                         <p class="text-white font-heading mb-6 text-center font-bold text-2xl md:text-3xl drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)] bg-black/40 px-6 py-3 rounded-full">🎣 Cast Line!</p>
                         <div class="flex flex-row h-40 md:h-64 w-full justify-center gap-6 mb-8">
@@ -215,16 +242,13 @@
                                 <div id="progress-fill" class="absolute bottom-0 w-full bg-green-500 transition-all duration-100" style="height: 15%;"></div>
                             </div>
                         </div>
-                        <button id="reel-action-btn" class="no-select bg-green-500 text-white font-bold py-4 px-10 md:px-16 rounded-full shadow-[0_6px_0_#166534] active:shadow-[0_0px_0_#166534] active:translate-y-[6px] transform transition-all cursor-pointer text-lg md:text-xl">
-                            🎣 HOLD TO REEL
-                        </button>
+                        <button id="reel-action-btn" class="no-select bg-green-500 text-white font-bold py-4 px-10 md:px-16 rounded-full shadow-[0_6px_0_#166534] active:shadow-[0_0px_0_#166534] active:translate-y-[6px] transform transition-all cursor-pointer text-lg md:text-xl">🎣 HOLD TO REEL</button>
                     </div>
                 </div>
 
                 <!-- Cinematic Result Layer -->
                 <div id="cinematic-result" class="relative w-full h-[500px] md:h-[600px] z-30 transition-opacity duration-1000 opacity-0 hidden rounded-xl flex items-center justify-center flex-col p-4 md:p-10 text-center border-4 border-white shadow-inner overflow-hidden">
                     <div class="absolute inset-0 cinematic-bg-layer bg-caught transition-opacity duration-1000" id="cinematic-bg-layer"></div>
-                    
                     <div class="relative z-40 bg-black/50 p-6 md:p-10 rounded-3xl shadow-2xl border-4 border-white/50 flex flex-col items-center">
                         <div class="text-5xl md:text-9xl mb-4 md:mb-8 animate-float">✨🐟✨</div>
                         <h4 class="font-heading font-bold text-3xl md:text-6xl text-white mb-2 md:mb-4 drop-shadow-[0_3px_3px_rgba(0,0,0,0.8)]">Perfect Catch!</h4>
@@ -233,7 +257,7 @@
                     </div>
                 </div>
 
-                <!-- Fish Fail Layer (MOBILE PROOFED BUTTONS) -->
+                <!-- Fish Fail Layer -->
                 <div id="fish-fail" class="hidden relative w-full h-[500px] md:h-[600px] flex-col items-center justify-center z-10 bg-red-50 p-10 rounded-xl shadow-inner border-4 border-red-400">
                     <div class="text-6xl mb-4">🌿</div>
                     <h4 class="font-heading font-bold text-2xl text-red-500 mb-2">It got away...</h4>
@@ -303,7 +327,6 @@
                     <div class="bg-white/80 backdrop-blur-md rounded-3xl p-6 md:p-8 w-full shadow-xl border border-white flex flex-col items-center">
                         <h3 class="font-heading text-2xl md:text-3xl font-semibold text-center mb-8 md:mb-10 text-pastel-dark">A Letter For You</h3>
                         
-                        <!-- SCROLL TO OPEN ENVELOPE -->
                         <div id="envelope-container" class="envelope-container relative w-full max-w-md group z-20 no-select">
                             <div class="bg-blue-300 w-full h-48 rounded-t-xl absolute top-0 left-0 z-0"></div>
                             <div class="letter-content absolute top-10 left-0 w-full px-4 z-10 drop-shadow-xl pointer-events-none">
@@ -334,7 +357,6 @@
                         <h3 class="font-heading text-2xl md:text-3xl font-semibold mb-4 text-pastel-dark tracking-wide">Our Co-op Team</h3>
                         <p class="text-slate-500 mb-10 max-w-lg mx-auto text-sm md:text-base">Like May and Cody (but with way less arguing and definitely no Book of Love), we make the ultimate team.</p>
                         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                            <!-- CO-OP PHOTOS UPDATED HERE -->
                             <div class="bg-white rounded-3xl shadow-lg border-2 border-white overflow-hidden transform transition hover:-translate-y-2"><div class="w-full aspect-square bg-slate-200 relative"><img src="Controller.png" alt="Us - Controller" class="w-full h-full object-cover"></div></div>
                             <div class="bg-white rounded-3xl shadow-lg border-2 border-white overflow-hidden transform transition hover:-translate-y-2"><div class="w-full aspect-square bg-slate-200 relative"><img src="Hair%20Tug.png" alt="Us - Hair Tug" class="w-full h-full object-cover"></div></div>
                             <div class="bg-white rounded-3xl shadow-lg border-2 border-white overflow-hidden transform transition hover:-translate-y-2"><div class="w-full aspect-square bg-slate-200 relative"><img src="Bullying.png" alt="Us - Bullying" class="w-full h-full object-cover"></div></div>
@@ -384,6 +406,7 @@
         
         const keroNpc = document.getElementById('kero-npc');
         const keroSprite = document.getElementById('kero-sprite');
+        const chestObj = document.getElementById('chest-obj');
         
         const rpgControls = document.getElementById('rpg-controls');
         const actionBtnUI = document.getElementById('rpg-action-btn');
@@ -395,19 +418,29 @@
         
         const fogOverlay = document.getElementById('fog-overlay');
         let mazeActive = true; 
+        let chestOpened = false;
         
         // --- DIALOGUE SYSTEM ---
         const dialogueBox = document.getElementById('dialogue-box');
         const dialogueText = document.getElementById('dialogue-text');
+        
         let hasTalkedToKero = false;
         let dialogueActive = false;
         let dialogueIndex = 0;
-        
         const dialogueLines = [
             "Hey Kayii! You made it through the fog!",
             "I'm so incredibly proud of you for graduating.",
             "I've got your training rod ready at the pond over there...",
             "Show me what you've got!"
+        ];
+
+        let chestDialogueActive = false;
+        let chestDialogueIndex = 0;
+        const chestLines = [
+            "What's this? A vintage box?",
+            "Kero: Oh! You found the hidden gift!",
+            "Kero: It's a One Wish Willow! Since you just graduated, it's tradition. You get one wish for your new journey.",
+            "Kero: Open it up, make your wish, and snap it!"
         ];
 
         // --- MOVEMENT ENGINE ---
@@ -419,7 +452,7 @@
         window.addEventListener('keydown', (e) => { 
             const key = e.key.toLowerCase();
             if(rpgActive && keys.hasOwnProperty(key)) keys[key] = true; 
-            if(dialogueActive && key === " ") triggerAction();
+            if((dialogueActive || chestDialogueActive) && key === " ") triggerAction();
         });
         window.addEventListener('keyup', (e) => { 
             const key = e.key.toLowerCase();
@@ -436,13 +469,13 @@
         
         const handleActionPress = (e) => { 
             e.preventDefault(); 
-            if(rpgActive || dialogueActive) triggerAction(); 
+            if(rpgActive || dialogueActive || chestDialogueActive) triggerAction(); 
         };
         mobileActionBtn.addEventListener('mousedown', handleActionPress);
         mobileActionBtn.addEventListener('touchstart', handleActionPress, {passive: false});
         
-        dialogueBox.addEventListener('touchstart', (e) => { e.preventDefault(); if(dialogueActive) triggerAction(); });
-        dialogueBox.addEventListener('mousedown', (e) => { e.preventDefault(); if(dialogueActive) triggerAction(); });
+        dialogueBox.addEventListener('touchstart', (e) => { e.preventDefault(); if(dialogueActive || chestDialogueActive) triggerAction(); });
+        dialogueBox.addEventListener('mousedown', (e) => { e.preventDefault(); if(dialogueActive || chestDialogueActive) triggerAction(); });
 
         let frameCount = 0; let animIndex = 0; let currentFacing = 0; 
         let kX = -1; let kY = -1; 
@@ -451,7 +484,7 @@
         let currentAction = "none"; 
 
         function rpgLoop() {
-            if (!rpgActive && !dialogueActive) return;
+            if (!rpgActive && !dialogueActive && !chestDialogueActive) return;
 
             if (kX === -1) { kX = keroNpc.offsetLeft; kY = keroNpc.offsetTop; }
             if (!pXInit) { pX = rpgPlayer.offsetLeft; pY = rpgPlayer.offsetTop; pXInit = true; }
@@ -465,7 +498,6 @@
                 else if (keys.a || keys.arrowleft) { moveX -= speed; isMoving = true; currentFacing = 100; playerSprite.style.transform = 'scaleX(-1)'; }
                 else if (keys.d || keys.arrowright) { moveX += speed; isMoving = true; currentFacing = 100; playerSprite.style.transform = 'scaleX(1)'; }
 
-                // --- COLLISION LOGIC ---
                 let nextX = pX + moveX;
                 let nextY = pY + moveY;
 
@@ -497,7 +529,6 @@
 
                 rpgPlayer.style.left = pX + 'px'; rpgPlayer.style.top = pY + 'px';
 
-                // --- DYNAMIC FOG SPOTLIGHT ---
                 if (fogOverlay && mazeActive) {
                     const centerX = pX + (pW / 2);
                     const centerY = pY + (pH / 2);
@@ -507,7 +538,7 @@
                 if (isMoving) { frameCount++; if (frameCount > 8) { animIndex++; if (animIndex > 3) animIndex = 1; frameCount = 0; } } else { animIndex = 0; }
                 let xPos = animIndex * 33.333; playerSprite.style.backgroundPosition = `${xPos}% ${currentFacing}%`;
 
-                // 2. KERO POKEMON FOLLOWER AI
+                // Follower AI
                 if (hasTalkedToKero) {
                     let kIsMoving = false;
                     let dx = pX - kX; let dy = pY - kY; let dist = Math.sqrt(dx*dx + dy*dy);
@@ -523,14 +554,18 @@
                     let kXPos = kAnimIndex * 33.333; keroSprite.style.backgroundPosition = `${kXPos}% ${kFacing}%`; keroSprite.style.transform = `scaleX(${kScale})`;
                 }
 
-                // 3. UI CONTEXT CHECKS
+                // UI CONTEXT CHECKS
                 const isNearKero = (pX < kX + pW + 20 && pX + pW > kX - 20 && pY < kY + pH + 20 && pY + pH > kY - 20);
                 
                 const beach = document.getElementById('beach-patch');
                 const isNearBeach = (pX + pW > beach.offsetLeft && pX < beach.offsetLeft + beach.clientWidth && pY + pH > beach.offsetTop && pY < beach.offsetTop + beach.clientHeight);
 
+                const isNearChest = !chestOpened && (pX + pW > chestObj.offsetLeft - 20 && pX < chestObj.offsetLeft + chestObj.clientWidth + 20 && pY + pH > chestObj.offsetTop - 20 && pY < chestObj.offsetTop + chestObj.clientHeight + 20);
+
                 if (isNearKero && !hasTalkedToKero) {
                     currentAction = "talk"; promptText.innerText = "💬 Talk to Kero"; enableActionBtn("💬 Talk");
+                } else if (isNearChest) {
+                    currentAction = "chest"; promptText.innerText = "🎁 Open Gift"; enableActionBtn("🎁 Open");
                 } else if (isNearBeach && hasTalkedToKero) {
                     currentAction = "fish"; promptText.innerText = "🎣 Cast Line"; enableActionBtn("🎣 Cast Line");
                 } else {
@@ -556,6 +591,7 @@
 
         function triggerAction() {
             if (dialogueActive) { advanceDialogue(); return; }
+            if (chestDialogueActive) { advanceChestDialogue(); return; }
             if (currentAction === "none") return;
 
             if (currentAction === "talk") {
@@ -564,6 +600,12 @@
                 instructions.innerText = "Tap/Space to continue...";
                 dialogueBox.classList.remove('hidden');
                 dialogueText.innerText = dialogueLines[dialogueIndex];
+            } else if (currentAction === "chest") {
+                rpgActive = false; chestDialogueActive = true; chestDialogueIndex = 0;
+                actionPrompt.classList.add('opacity-0');
+                instructions.innerText = "Tap/Space to continue...";
+                dialogueBox.classList.remove('hidden');
+                dialogueText.innerText = chestLines[chestDialogueIndex];
             } else if (currentAction === "fish") {
                 rpgActive = false;
                 rpgContainer.classList.add('hidden'); rpgControls.classList.add('hidden'); instructions.classList.add('hidden');
@@ -577,7 +619,6 @@
             if (dialogueIndex < dialogueLines.length) {
                 dialogueText.innerText = dialogueLines[dialogueIndex];
             } else {
-                // DIALOGUE FINISHED: THE GREAT REVEAL
                 dialogueActive = false; hasTalkedToKero = true;
                 dialogueBox.classList.add('hidden'); rpgActive = true; 
                 
@@ -588,12 +629,81 @@
                     wall.style.opacity = '0';
                 });
 
-                instructions.innerText = "Go to the sandy beach to cast your line!";
+                instructions.innerText = "Explore the map or go fish!";
+            }
+        }
+
+        function advanceChestDialogue() {
+            chestDialogueIndex++;
+            if (chestDialogueIndex < chestLines.length) {
+                dialogueText.innerText = chestLines[chestDialogueIndex];
+            } else {
+                chestDialogueActive = false;
+                dialogueBox.classList.add('hidden');
+                // Open the Willow Modal Over the Game
+                const modal = document.getElementById('willow-modal');
+                modal.classList.remove('hidden');
+                modal.classList.add('flex');
             }
         }
 
         actionBtnUI.addEventListener('click', triggerAction);
 
+        // --- NEW: IN-GAME ONE WISH WILLOW LOGIC ---
+        window.openWillowModal = function() {
+            document.getElementById('willow-box-modal').classList.add('hidden');
+            const stickArea = document.getElementById('willow-stick-modal');
+            stickArea.classList.remove('hidden');
+            stickArea.classList.add('flex');
+        };
+
+        window.breakWillowModal = function() {
+            if(window.willowBroken) return;
+            window.willowBroken = true;
+            
+            const left = document.getElementById('stick-left');
+            const right = document.getElementById('stick-right');
+            
+            // A gentle, magical snap
+            left.style.transform = "rotate(-15deg) translateY(10px) translateX(-5px)";
+            right.style.transform = "rotate(15deg) translateY(10px) translateX(5px)";
+            
+            // Soft white/pastel flash
+            const modal = document.getElementById('willow-modal');
+            modal.style.backgroundColor = "rgba(255,255,255,0.9)"; 
+            setTimeout(() => {
+                modal.style.backgroundColor = "rgba(15, 23, 42, 0.9)";
+            }, 200);
+
+            // Wholesome Wish Granted Message
+            setTimeout(() => {
+                const result = document.getElementById('willow-result');
+                result.classList.remove('opacity-0', 'translate-y-4');
+                result.classList.add('opacity-100', 'translate-y-0');
+                
+                const closeBtn = document.getElementById('close-willow-btn');
+                closeBtn.classList.remove('hidden');
+                setTimeout(() => closeBtn.classList.remove('opacity-0'), 100);
+            }, 600);
+        };
+
+        window.closeWillowModal = function() {
+            const modal = document.getElementById('willow-modal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+            
+            // Turn chest into sparkles and disable it
+            chestObj.innerText = "✨";
+            chestObj.classList.add('opacity-50');
+            chestOpened = true;
+            
+            rpgActive = true;
+            instructions.innerText = "Go to the sandy beach to cast your line!";
+            requestAnimationFrame(rpgLoop);
+        };
+
+
+        // --- FISHING MINIGAME ---
         const gameBgLayer = document.getElementById('game-bg-layer');
         const catchBtn = document.getElementById('reel-action-btn');
         const catchBar = document.getElementById('catch-bar');
@@ -673,17 +783,14 @@
             
             setTimeout(() => {
                 gatekeeper.style.display = 'none'; 
-                
                 const secretContent = document.getElementById('secret-content');
                 secretContent.style.display = 'block';
                 void secretContent.offsetWidth; 
-                
                 secretContent.style.opacity = '1';
                 window.scrollTo(0, 0); 
             }, 1000); 
         }
 
-        // --- BULLETPROOF MOBILE FAIL STATE BUTTONS ---
         const btnRetry = document.getElementById('btn-retry-fishing');
         const btnExit = document.getElementById('btn-exit-map');
 
@@ -709,11 +816,11 @@
         btnExit.addEventListener('mousedown', doExit);
         btnExit.addEventListener('touchstart', doExit, {passive: false});
 
-        // --- FISHING REEL BUTTON LISTENERS ---
         const handleReelPress = (e) => { e.preventDefault(); isHolding = true; };
         const handleReelRelease = (e) => { e.preventDefault(); isHolding = false; };
         catchBtn.addEventListener('mousedown', handleReelPress); window.addEventListener('mouseup', handleReelRelease);
         catchBtn.addEventListener('touchstart', handleReelPress, {passive: false}); window.addEventListener('touchend', handleReelRelease); window.addEventListener('touchcancel', handleReelRelease);
+
     </script>
 </body>
 </html>
