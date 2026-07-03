@@ -88,12 +88,22 @@
             .mouse-only { display: none !important; }
         }
 
-        /* --- ENVELOPE --- */
+        /* --- MOBILE-PERFECT SCROLL ENVELOPE --- */
         .envelope-flap { transform-origin: top; transition: transform 0.8s ease-in-out; }
         .envelope-container.open .envelope-flap { transform: rotateX(180deg); z-index: 0; }
         
-        .letter-content { max-height: 0px; overflow: hidden; transition: max-height 1s ease-in-out, opacity 0.7s ease, transform 0.8s ease-in-out; opacity: 0; transform: translateY(0); }
-        .envelope-container.open .letter-content { max-height: 800px; opacity: 1; transform: translateY(150px); }
+        .letter-content { 
+            max-height: 0px; 
+            overflow: hidden;
+            transition: max-height 1s ease-in-out, opacity 0.7s ease, transform 0.8s ease-in-out; 
+            opacity: 0; 
+            transform: translateY(0); 
+        }
+        .envelope-container.open .letter-content { 
+            max-height: 800px; 
+            opacity: 1; 
+            transform: translateY(150px); 
+        }
         
         .letter-inner { overflow: hidden; }
         .no-select { user-select: none; -webkit-user-select: none; -webkit-tap-highlight-color: transparent; }
@@ -140,7 +150,7 @@
                         <span class="text-3xl animate-bounce drop-shadow-md">🎣</span>
                     </div>
 
-                    <!-- NEW: THE SOUTHEAST CHEST -->
+                    <!-- THE SOUTHEAST CHEST -->
                     <div id="chest-obj" class="absolute z-10 w-12 h-12 flex items-center justify-center text-4xl drop-shadow-lg transition-transform" style="left: 57%; top: 80%;">
                         🎁
                     </div>
@@ -170,7 +180,7 @@
                         
                         <!-- Box Graphic -->
                         <div id="willow-box-modal" class="relative cursor-pointer transform transition duration-300 hover:scale-105 group w-full flex justify-center" onclick="openWillowModal()">
-                            <img src="image_f703b3.jpg" alt="One Wish Willow" class="w-full max-w-[280px] md:max-w-sm rounded-xl shadow-2xl border-2 border-slate-200">
+                            <img src="onewishwillow.png" alt="One Wish Willow" class="w-full max-w-[280px] md:max-w-sm rounded-xl shadow-2xl">
                             <div class="absolute inset-0 max-w-[280px] md:max-w-sm mx-auto bg-black/0 group-hover:bg-black/20 transition-colors rounded-xl flex items-center justify-center">
                                 <span class="bg-pastel-dark text-white font-bold py-2 px-6 rounded-full shadow-xl opacity-0 group-hover:opacity-100 transition-opacity">Tap to Open</span>
                             </div>
@@ -327,6 +337,7 @@
                     <div class="bg-white/80 backdrop-blur-md rounded-3xl p-6 md:p-8 w-full shadow-xl border border-white flex flex-col items-center">
                         <h3 class="font-heading text-2xl md:text-3xl font-semibold text-center mb-8 md:mb-10 text-pastel-dark">A Letter For You</h3>
                         
+                        <!-- SCROLL TO OPEN ENVELOPE -->
                         <div id="envelope-container" class="envelope-container relative w-full max-w-md group z-20 no-select">
                             <div class="bg-blue-300 w-full h-48 rounded-t-xl absolute top-0 left-0 z-0"></div>
                             <div class="letter-content absolute top-10 left-0 w-full px-4 z-10 drop-shadow-xl pointer-events-none">
@@ -430,8 +441,8 @@
         const dialogueLines = [
             "Hey Kayii! You made it through the fog!",
             "I'm so incredibly proud of you for graduating.",
-            "I've got your training rod ready at the pond over there...",
-            "Show me what you've got!"
+            "I left a graduation gift for you in that chest over there.",
+            "You can open it, or we can just go straight to fishing. Your choice!"
         ];
 
         let chestDialogueActive = false;
@@ -554,17 +565,15 @@
                     let kXPos = kAnimIndex * 33.333; keroSprite.style.backgroundPosition = `${kXPos}% ${kFacing}%`; keroSprite.style.transform = `scaleX(${kScale})`;
                 }
 
-                // UI CONTEXT CHECKS
+                // UI CONTEXT CHECKS (Chest now requires hasTalkedToKero)
                 const isNearKero = (pX < kX + pW + 20 && pX + pW > kX - 20 && pY < kY + pH + 20 && pY + pH > kY - 20);
-                
                 const beach = document.getElementById('beach-patch');
                 const isNearBeach = (pX + pW > beach.offsetLeft && pX < beach.offsetLeft + beach.clientWidth && pY + pH > beach.offsetTop && pY < beach.offsetTop + beach.clientHeight);
-
                 const isNearChest = !chestOpened && (pX + pW > chestObj.offsetLeft - 20 && pX < chestObj.offsetLeft + chestObj.clientWidth + 20 && pY + pH > chestObj.offsetTop - 20 && pY < chestObj.offsetTop + chestObj.clientHeight + 20);
 
                 if (isNearKero && !hasTalkedToKero) {
                     currentAction = "talk"; promptText.innerText = "💬 Talk to Kero"; enableActionBtn("💬 Talk");
-                } else if (isNearChest) {
+                } else if (isNearChest && hasTalkedToKero) {
                     currentAction = "chest"; promptText.innerText = "🎁 Open Gift"; enableActionBtn("🎁 Open");
                 } else if (isNearBeach && hasTalkedToKero) {
                     currentAction = "fish"; promptText.innerText = "🎣 Cast Line"; enableActionBtn("🎣 Cast Line");
@@ -629,7 +638,7 @@
                     wall.style.opacity = '0';
                 });
 
-                instructions.innerText = "Explore the map or go fish!";
+                instructions.innerText = "Open the chest, or head to the beach to fish!";
             }
         }
 
@@ -640,7 +649,6 @@
             } else {
                 chestDialogueActive = false;
                 dialogueBox.classList.add('hidden');
-                // Open the Willow Modal Over the Game
                 const modal = document.getElementById('willow-modal');
                 modal.classList.remove('hidden');
                 modal.classList.add('flex');
@@ -649,7 +657,7 @@
 
         actionBtnUI.addEventListener('click', triggerAction);
 
-        // --- NEW: IN-GAME ONE WISH WILLOW LOGIC ---
+        // --- IN-GAME ONE WISH WILLOW LOGIC ---
         window.openWillowModal = function() {
             document.getElementById('willow-box-modal').classList.add('hidden');
             const stickArea = document.getElementById('willow-stick-modal');
@@ -664,18 +672,15 @@
             const left = document.getElementById('stick-left');
             const right = document.getElementById('stick-right');
             
-            // A gentle, magical snap
             left.style.transform = "rotate(-15deg) translateY(10px) translateX(-5px)";
             right.style.transform = "rotate(15deg) translateY(10px) translateX(5px)";
             
-            // Soft white/pastel flash
             const modal = document.getElementById('willow-modal');
             modal.style.backgroundColor = "rgba(255,255,255,0.9)"; 
             setTimeout(() => {
                 modal.style.backgroundColor = "rgba(15, 23, 42, 0.9)";
             }, 200);
 
-            // Wholesome Wish Granted Message
             setTimeout(() => {
                 const result = document.getElementById('willow-result');
                 result.classList.remove('opacity-0', 'translate-y-4');
@@ -692,13 +697,12 @@
             modal.classList.add('hidden');
             modal.classList.remove('flex');
             
-            // Turn chest into sparkles and disable it
             chestObj.innerText = "✨";
             chestObj.classList.add('opacity-50');
             chestOpened = true;
             
             rpgActive = true;
-            instructions.innerText = "Go to the sandy beach to cast your line!";
+            instructions.innerText = "Now head to the sandy beach to cast your line!";
             requestAnimationFrame(rpgLoop);
         };
 
