@@ -88,7 +88,7 @@
             .mouse-only { display: none !important; }
         }
 
-        /* --- MOBILE-PERFECT SCROLL ENVELOPE --- */
+        /* --- REVERSIBLE MOBILE-PERFECT SCROLL ENVELOPE --- */
         .envelope-flap { transform-origin: top; transition: transform 0.8s ease-in-out; }
         .envelope-container.open .envelope-flap { transform: rotateX(180deg); z-index: 0; }
         
@@ -145,7 +145,7 @@
                         <div class="w-full h-full opacity-30" style="background-image: radial-gradient(circle, #eff6ff 2px, transparent 2.5px); background-size: 30px 15px;"></div>
                     </div>
 
-                    <!-- THE SANDY BEACH FISHING PATCH (Northeast) -->
+                    <!-- THE SANDY BEACH FISHING PATCH -->
                     <div id="beach-patch" class="absolute z-10 rounded-l-3xl border-l-4 border-y-4 border-yellow-400 shadow-inner flex items-center justify-start pl-2 md:pl-4" style="left: 55%; top: 10%; width: 15%; height: 140px; background-color: #fef08a; background-image: radial-gradient(#eab308 1.5px, transparent 1.5px); background-size: 12px 12px;">
                         <span class="text-3xl animate-bounce drop-shadow-md">🎣</span>
                     </div>
@@ -337,7 +337,7 @@
                     <div class="bg-white/80 backdrop-blur-md rounded-3xl p-6 md:p-8 w-full shadow-xl border border-white flex flex-col items-center">
                         <h3 class="font-heading text-2xl md:text-3xl font-semibold text-center mb-8 md:mb-10 text-pastel-dark">A Letter For You</h3>
                         
-                        <!-- SCROLL TO OPEN ENVELOPE -->
+                        <!-- ENVELOPE -->
                         <div id="envelope-container" class="envelope-container relative w-full max-w-md group z-20 no-select">
                             <div class="bg-blue-300 w-full h-48 rounded-t-xl absolute top-0 left-0 z-0"></div>
                             <div class="letter-content absolute top-10 left-0 w-full px-4 z-10 drop-shadow-xl pointer-events-none">
@@ -397,16 +397,19 @@
 
     <!-- Interactive Logic -->
     <script>
-        // --- THE SCROLL INTERSECTION OBSERVER ---
+        // --- THE SCROLL INTERSECTION OBSERVER (UPDATED) ---
         const envContainer = document.getElementById('envelope-container');
         if (envContainer) {
             const envObserver = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         entry.target.classList.add('open');
+                    } else {
+                        // NEW: Closes the envelope when she scrolls away!
+                        entry.target.classList.remove('open');
                     }
                 });
-            }, { threshold: 0.6 }); 
+            }, { threshold: 0.4 }); 
             envObserver.observe(envContainer);
         }
 
@@ -565,7 +568,7 @@
                     let kXPos = kAnimIndex * 33.333; keroSprite.style.backgroundPosition = `${kXPos}% ${kFacing}%`; keroSprite.style.transform = `scaleX(${kScale})`;
                 }
 
-                // UI CONTEXT CHECKS (Chest now requires hasTalkedToKero)
+                // UI CONTEXT CHECKS
                 const isNearKero = (pX < kX + pW + 20 && pX + pW > kX - 20 && pY < kY + pH + 20 && pY + pH > kY - 20);
                 const beach = document.getElementById('beach-patch');
                 const isNearBeach = (pX + pW > beach.offsetLeft && pX < beach.offsetLeft + beach.clientWidth && pY + pH > beach.offsetTop && pY < beach.offsetTop + beach.clientHeight);
@@ -828,4 +831,3 @@
     </script>
 </body>
 </html>
-
