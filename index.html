@@ -453,6 +453,7 @@
         const dialogueName = document.getElementById('dialogue-name');
         
         let hasTalkedToKero = false;
+        let hasCheckedExit8 = false; // NEW FLAG
         let activeDialogue = null; // Object to store current dialogue state
         let currentAction = "none"; 
         let rpgActive = true;
@@ -572,7 +573,9 @@
                 const isNearBeach = (pX + pW > beach.offsetLeft && pX < beach.offsetLeft + beach.clientWidth && pY + pH > beach.offsetTop && pY < beach.offsetTop + beach.clientHeight);
                 const isNearChest = !chestOpened && (pX + pW > chestObj.offsetLeft - 20 && pX < chestObj.offsetLeft + chestObj.clientWidth + 20 && pY + pH > chestObj.offsetTop - 20 && pY < chestObj.offsetTop + chestObj.clientHeight + 20);
                 
-                const isNearExit8 = hasTalkedToKero && (pX + pW > exit8Sign.offsetLeft - 20 && pX < exit8Sign.offsetLeft + exit8Sign.clientWidth + 20 && pY + pH > exit8Sign.offsetTop - 20 && pY < exit8Sign.offsetTop + exit8Sign.clientHeight + 20);
+                // NEW: Collision now also checks !hasCheckedExit8 so it turns off after reading
+                const isNearExit8 = hasTalkedToKero && !hasCheckedExit8 && (pX + pW > exit8Sign.offsetLeft - 20 && pX < exit8Sign.offsetLeft + exit8Sign.clientWidth + 20 && pY + pH > exit8Sign.offsetTop - 20 && pY < exit8Sign.offsetTop + exit8Sign.clientHeight + 20);
+                
                 const isNearSheep = (pX + pW > sheepNpc.offsetLeft - 20 && pX < sheepNpc.offsetLeft + sheepNpc.clientWidth + 20 && pY + pH > sheepNpc.offsetTop - 20 && pY < sheepNpc.offsetTop + sheepNpc.clientHeight + 20);
 
                 if (isNearKero && !hasTalkedToKero) {
@@ -680,7 +683,10 @@
                 });
 
             } else if (currentAction === "exit8") {
-                startDialogue("Signpost", ["There are no visible anomalies. You may proceed to fish."], () => {
+                // NEW: Changed name to Exit 8 Sign, and added the vanishing logic
+                startDialogue("Exit 8 Sign", ["There are no visible anomalies. You may proceed to fish."], () => {
+                    hasCheckedExit8 = true; 
+                    document.getElementById('exit8-sign').classList.add('opacity-0', 'pointer-events-none');
                     instructions.innerText = "No anomalies found. Safe to fish!";
                 });
 
